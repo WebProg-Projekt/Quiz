@@ -1,0 +1,16 @@
+{
+  "name": "my-songbox",
+  "version": "1.0.0",
+  "description": "Beispielanwendung \"My Songbook\" ===============================",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "navigo": "^7.1.2",
+    "parcel-bundler": "^1.10.1",
+    "shelljs": "^0.8.2"
+  }
+}
