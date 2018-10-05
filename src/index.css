@@ -21,6 +21,7 @@ body {
     line-height: 1.6;
     color: var(--font-color);
 }
+
 /*
  * Größere Schrift auf größeren Bildschirmen
  * Vgl. https://getbootstrap.com/docs/4.0/layout/overview/#responsive-breakpoints
@@ -45,10 +46,11 @@ body {
         font-size: 14pt;
     }
 }
+
 /*
  * Flächendeckender Seitenhintergrund auf großen Bildschirmen
  */
-@media (min-width: 80em) {
+@media (min-width: 85em) {
     /* Hintergrundbild hinter dem Hauptbereich der App */
     html {
         /* https://pixabay.com/de/computer-notebook-kaffee-820281/ */
