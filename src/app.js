@@ -1,7 +1,7 @@
 "use strict";
 
 import stylesheet from "./app.css";
-
+import Navigo from "navigo/lib/navigo.js";
 import SongDisplayEdit from "./song-display-edit/song-display-edit.js";
 import SongOverview from "./song-overview/song-overview.js";
 
@@ -16,13 +16,57 @@ class App {
     constructor() {
         this._title = "My Songbook";
         this._currentView = null;
-    }
+
+        // Single Page Router aufsetzen
+        /**Diese Zeilen definieren die URL-Struktur der App,
+        * wobei jedes URL-Pattern mit einer anonymen Lambda-Funktion
+        *(zu erkennen am Doppelpfeil =>) verknüpft ist.
+        *Es liegt nahe, dass der Router die entsprechende Lambda-Funktionen
+        *aufruft, wenn eine URL erkannt wurde, um dadurch den sichtbaren Inhalt
+        * zu wechseln.
+        */
+    this._router = new Navigo();
+    this._currentUrl = "";
+    this._navAborted = false;
+
+    this._router.on({
+        "*":                       () => this.showSongOverview(),
+        "/song/new/":              () => this.showSongDisplayEdit("", "new"),
+        "/song/display/:id/":  params => this.showSongDisplayEdit(params.id, "display"),
+        "/song/edit/:id/":     params => this.showSongDisplayEdit(params.id, "edit"),
+    });
+
+    this._router.hooks({
+        after: (params) => {
+            if (!this._navAborted) {
+                // Navigation durchführen, daher die neue URL merken
+                this._currentUrl = this._router.lastRouteResolved().url;
+            } else {
+                // Navigation abbrechen, daher die URL in der Adresszeile
+                // auf den alten Wert der bisherigen View zurücksetzen
+                this._router.pause(true);
+                this._router.navigate(this._currentUrl);
+                this._router.pause(false);
+
+                this._navAborted = false;
+            }
+        }
+    });
+}
+
 
     /**
      * Ab hier beginnt die Anwendung zu laufen.
      */
-    start() {
-        this.showSongOverview();
+    start () {
+
+        // vor Single Page Router hatten wir -> this.showSongOverview();
+        /*In der start()-Methode müssen wir nun nicht mehr explizit
+        *die Übersichtsseite aufrufen. Stattdessen sagen wir dem Router,
+        *dass er nun dafür verantwortlich ist, die URL, mit der die gesamte App
+        *gestartet wurde, auszuwerten, um die erste View zu ermitteln:
+        */
+        this._router.resolve();
     }
 
     /**
@@ -62,10 +106,17 @@ class App {
         // false zurückliefert. Dadurch erhält sie die Möglichkeit, den Anwender
         // zum Beispiel zu fragen, ob er ungesicherte Daten speichern will,
         // bevor er die Seite verlässt.
-        let goon = () => this._switchVisibleView(view);
+        let newUrl = this._router.lastRouteResolved().url;
+        let goon = () => {
+            // vor Single Page Router -> this._switchVisibleView(view);
+            // ?goon an die URL hängen, weil der Router sonst nicht weiternavigiert
+            this._router.navigate(newUrl + "?goon");
+        }
 
         // Aktuelle View fragen, ob eine neue View aufgerufen werden darf
         if (this._currentView && !this._currentView.onLeave(goon)) {
+
+            this._navAborted = true;  // Single Page Router
             return false;
         }
 
@@ -73,8 +124,8 @@ class App {
         document.title = `${this._title} – ${view.title}`;
 
         this._currentView = view;
-        this._switchVisibleContent(view.onShow());
-        return true;
+        // nach Single Page Router unnötig  this._switchVisibleContent(view.onShow());
+        //return true;
     }
 
     /**
@@ -130,6 +181,9 @@ class App {
                 main.appendChild(element);
             });
         }
+
+        // Navigo an die Links in der View binden
+        this._router.updatePageLinks();
     }
 }
 

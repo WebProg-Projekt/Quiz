@@ -23,25 +23,28 @@ class SongOverview {
      * @return {Object} Darzustellende DOM-Elemente gemäß Beschreibung der
      * Methode App._switchVisibleContent()
      */
+
+    // src/song-overview/song-overview.js:
     onShow() {
         // Anzuzeigende HTML-Elemente ermitteln
         let section = document.querySelector("#song-overview").cloneNode(true);
 
-        let content = {
-            className: "song-overview",
-            topbar: section.querySelectorAll("header > *"),
-            main: section.querySelectorAll("main > *"),
+        return {
+        className: "song-overview",
+        topbar: section.querySelectorAll("header > *"),
+        main: section.querySelectorAll("main > *"),
         };
 
+        //Event Handler nach Single Page Router nicht mehr notwendig
         // Event Handler registrieren
-        let newSongItem = section.querySelector("header .item.new-song");
+        //let newSongItem = section.querySelector("header .item.new-song");
 
-        newSongItem.addEventListener("click", () => {
-            this._app.showSongDisplayEdit("", "new");
-        })
+        //newSongItem.addEventListener("click", () => {
+            //this._app.showSongDisplayEdit("", "new");
+        //})
 
         // Ergebnis zurückliefern
-        return content;
+        //return content;
     }
 
     /**

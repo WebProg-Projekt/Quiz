@@ -4,11 +4,11 @@
   "description": "Beispielanwendung \"My Songbook\" ===============================",
   "main": "index.js",
   "scripts": {
-  "clean": "node scripts/clean.js",
-  "build": "npm run clean && parcel build src/*.html --public-url . --detailed-report --experimental-scope-hoisting",
-  "watch": "npm run clean && parcel watch src/*.html --public-url . --detailed-report --experimental-scope-hoisting",
-  "start": "parcel src/index.html --open"
-},
+    "clean": "node scripts/clean.js",
+    "build": "npm run clean && parcel build src/*.html --public-url . --detailed-report --experimental-scope-hoisting",
+    "watch": "npm run clean && parcel watch src/*.html --public-url . --detailed-report --experimental-scope-hoisting",
+    "start": "parcel src/index.html --open"
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
