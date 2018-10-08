@@ -1,6 +1,9 @@
 "use strict";
 
 import stylesheet from "./app.css";
+import "bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import Navigo from "navigo/lib/navigo.js";
 import SongDisplayEdit from "./song-display-edit/song-display-edit.js";
 import SongOverview from "./song-overview/song-overview.js";
