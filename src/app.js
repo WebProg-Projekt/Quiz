@@ -9,7 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Navigo from "navigo/lib/navigo.js";
 import VocabularyDisplayEdit from "./vocabulary-display-edit/vocabulary-display-edit.js";
 import VocabularyOverview from "./vocabulary-overview/vocabulary-overview.js";
-
+import QuizQuestionView from "./quiz-question-view/quiz-question-view.js"
 /**
  * Hauptklasse der Anwendung. Kümmert sich darum, die Anwendung auszuführen
  * und die angeforderten Bildschirmseiten anzuzeigen.
@@ -92,6 +92,11 @@ class App {
      */
     showVocabularyDisplayEdit(id, mode) {
         let view = new VocabularyDisplayEdit(this, id, mode);
+        this._switchVisibleView(view);
+    }
+
+    showQuizQuestionView () {
+        let view = new QuizQuestionView(.....);
         this._switchVisibleView(view);
     }
 
