@@ -124,8 +124,8 @@ class App {
         document.title = `${this._title} – ${view.title}`;
 
         this._currentView = view;
-        // nach Single Page Router unnötig  this._switchVisibleContent(view.onShow());
-        //return true;
+        this._switchVisibleContent(view.onShow());
+        //?????return true;
     }
 
     /**
