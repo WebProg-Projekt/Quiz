@@ -1,17 +1,22 @@
 "use strict";
 
-import stylesheet from "./song-overview.css";
+import stylesheet from "./vocabulary-display-edit.css";
 
-/**
- * View mit der Übersicht der vorhandenen Songs.
- */
-class SongOverview {
+ /**
+  * View zur Anzeige oder zum Bearbeiten eines Songs.
+  */
+class VocabularyDisplayEdit {
     /**
-     * Konstruktor,
+     * Konstruktor.
+     *
      * @param {Objekt} app Zentrales App-Objekt der Anwendung
+     * @param {String} id   ID des darzustellenden Songs
+     * @param {String} mode "new", "display" oder "edit"
      */
-    constructor(app) {
+    constructor(app, id, mode) {
         this._app = app;
+        this._id = id;
+        this._mode = mode;
     }
 
     /**
@@ -23,24 +28,22 @@ class SongOverview {
      * @return {Object} Darzustellende DOM-Elemente gemäß Beschreibung der
      * Methode App._switchVisibleContent()
      */
-
-    // src/song-overview/song-overview.js:
     onShow() {
         // Anzuzeigende HTML-Elemente ermitteln
-        let section = document.querySelector("#song-overview").cloneNode(true);
+        let section = document.querySelector("#vocabulary-display-edit").cloneNode(true);
 
         return {
-        className: "song-overview",
+        className: "vocabulary-display-edit",
         topbar: section.querySelectorAll("header > *"),
         main: section.querySelectorAll("main > *"),
         };
 
         //Event Handler nach Single Page Router nicht mehr notwendig
         // Event Handler registrieren
-        //let newSongItem = section.querySelector("header .item.new-song");
+        //let overviewItem = section.querySelector("header .item.overview");
 
-        //newSongItem.addEventListener("click", () => {
-            //this._app.showSongDisplayEdit("", "new");
+        //overviewItem.addEventListener("click", () => {
+        //    this._app.showSongOverview();
         //})
 
         // Ergebnis zurückliefern
@@ -55,7 +58,7 @@ class SongOverview {
      * @param  {Function} goon Callback, um den Seitenwechsel zu einem späteren
      * Zeitpunkt fortzuführen, falls wir hier false zurückgeben
      * @return {Boolean} true, wenn der Seitenwechsel erlaubt ist, sonst false
-     */
+    */
     onLeave(goon) {
         return true;
     }
@@ -64,8 +67,15 @@ class SongOverview {
      * @return {String} Titel für die Titelzeile des Browsers
      */
     get title() {
-        return "Übersicht";
+        switch (this._mode) {
+            case "new":
+                return "Song hinzufügen";
+            case "edit":
+                return "Song bearbeiten";
+            default:
+                return "Song anzeigen";
+        }
     }
 }
 
-export default SongOverview;
+export default VocabularyDisplayEdit;
