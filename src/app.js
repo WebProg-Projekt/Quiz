@@ -39,7 +39,7 @@ class App {
         "/vocabulary/new/":              () => this.showVocabularyDisplayEdit("", "new"),
         "/vocabulary/display/:id/":  params => this.showVocabularyDisplayEdit(params.id, "display"),
         "/vocabulary/edit/:id/":     params => this.showVocabularyDisplayEdit(params.id, "edit"),
-        "/quiz":     params => this.sshowQuizQuestionView(),
+        "/quiz":     () => this.showQuizQuestionView(),
     });
 
     this._router.hooks({
