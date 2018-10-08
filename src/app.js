@@ -1,9 +1,11 @@
 "use strict";
 
+//Stylesheets und Bootstrap importieren
 import stylesheet from "./app.css";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+// JavaScript Code importieren
 import Navigo from "navigo/lib/navigo.js";
 import SongDisplayEdit from "./song-display-edit/song-display-edit.js";
 import SongOverview from "./song-overview/song-overview.js";
@@ -17,7 +19,7 @@ class App {
      * Konstruktor.
      */
     constructor() {
-        this._title = "My Songbook";
+        this._title = "VocabuLearn";
         this._currentView = null;
 
         // Single Page Router aufsetzen
@@ -34,9 +36,9 @@ class App {
 
     this._router.on({
         "*":                       () => this.showSongOverview(),
-        "/song/new/":              () => this.showSongDisplayEdit("", "new"),
-        "/song/display/:id/":  params => this.showSongDisplayEdit(params.id, "display"),
-        "/song/edit/:id/":     params => this.showSongDisplayEdit(params.id, "edit"),
+        "/vocabulary/new/":              () => this.showSongDisplayEdit("", "new"),
+        "/vocabulary/display/:id/":  params => this.showSongDisplayEdit(params.id, "display"),
+        "/vocabulary/edit/:id/":     params => this.showSongDisplayEdit(params.id, "edit"),
     });
 
     this._router.hooks({
