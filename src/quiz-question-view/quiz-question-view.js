@@ -14,6 +14,7 @@ class QuizQuestionView {
      */
     constructor(app) {
         this._app = app;
+        
     }
 
     /**
@@ -61,6 +62,8 @@ class QuizQuestionView {
 
     }
 
+
+    showNextSlide() {}
 
 }
 
