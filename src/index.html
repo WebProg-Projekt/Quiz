@@ -162,7 +162,6 @@
                     <!--Frage-->
                     <div class="row">
                         <div class="col jumbotron">
-                            <!-- Question Number -->
                             <div class="row question-number">
 
                             </div>
@@ -175,7 +174,7 @@
                                 <!-- Input sizing bootstrap-->
                                 </input>
                             </div>
-                            <!-- Vielleicht noch ein Progress Bar (Bootstrap einfügen-->
+                        <!-- Vielleicht noch ein Progress Bar (Bootstrap einfügen-->
                         </div>
                     </div>
 
@@ -187,10 +186,12 @@
                     <!--Quiz Buttons-->
                     <div class="row quiz-buttons">
                         <div class="col-6 quit-button">
-                            <button> Abbrechen </button>
+                            <a href="/" data-navigo>
+                                <button> Abbrechen </button>
+                            </a>
                         </div>
-                        <div class="col-6 next-button">
-                            <button> "Prüfen/Weiter <button>
+                        <div class="col-6">
+                            <button class = "next-button" onclick="checkAnswer()"> Prüfen/Weiter <button>
                             <!-- Siehe Submit-Button für Forms und Form Attribute-->
                         </div>
 

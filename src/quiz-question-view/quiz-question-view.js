@@ -9,8 +9,9 @@ class QuizQuestionView {
      * Konstruktor,
      * @param {Objekt} app Zentrales App-Objekt der Anwendung
      */
-    constructor(app) {
+    constructor(app, questions) {
         this._app = app;
+        //this.questions = questions;
     }
 
     /**
@@ -30,15 +31,16 @@ class QuizQuestionView {
         let question = document.querySelector(".question");
         let questionnr = document.querySelector(".question-number")
 
-        let questions = {
-                number: "1",
-                german: "der Hund",
-                english: "dog"
-        };
+        //Event beim Button "Prüfen"  registrieren
+        //let nextbutton = document.querySelector(".next-button").addEventListener("click", checkAnswer);
 
-        question.innerHTML = `${questions["german"]}` ;
-        questionnr.innerHTML = `${questions["number"]}`;
 
+        let questions = this._generateQuiz();
+
+        //_showQuestion(0);
+
+        question.innerHTML = `${questions[0]["german"]}` ;
+        questionnr.innerHTML = `${questions[0]["number"]}`;
 
         return {
         className: "quiz-question-view",
@@ -68,17 +70,63 @@ class QuizQuestionView {
     }
 
     //Quiz erstellen, also 10 Fragen aussuchen
-    /*_generateQuiz() {
-        let questions = {
-                number: "1",
+    _generateQuiz () {
+        return [
+            {
+                number: 1,
                 german: "der Hund",
                 english: "dog"
+            },
+            {
+                number: 2,
+                german: "die Katze",
+                english: "cat"
+            }
+
+        ];
+    }
+
+
+
+
+     checkAnswer() {
+        // Referenz über HTML Elemente für Fragen
+        let question = document.querySelector(".question");
+        let questionnr = document.querySelector(".question-number");
+        //let result = document.querySelector(".result");
+
+        let answer = document.querySelector(".answer").value();
+
+        if (answer === "dog") {
+            //result.innerHTML () = "Richtig!";
         }
+        else {
+            //result.innerHTML () = "Falsch!";
+        }
+
+
+
+
+    }
+
+
+
+
+
+
+    _showQuestion (a) {
+        // Referenz über HTML Elemente für Fragen
+        let question = document.querySelector(".question");
+        let questionnr = document.querySelector(".question-number");
+
+        let questions = this._generateQuiz();
+
+        question.innerHTML = `${questions[a]["german"]}` ;
+        questionnr.innerHTML = `${questions[a]["number"]}`;
+
         return questions;
     }
- */
 
-    showNextSlide() {}
 
 }
 
