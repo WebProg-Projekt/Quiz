@@ -96,10 +96,32 @@ class App {
         this._switchVisibleView(view);
     }
 
+
+
     showQuizQuestionView () {
+        //let questions = this._selectQuestions ();
+        //let view = new QuizQuestionView(this, questions);
         let view = new QuizQuestionView(this);
         this._switchVisibleView(view);
     }
+
+
+    /*_selectQuestions () {
+        return [
+        {
+            number: 1,
+            german: "der Hund",
+            english: "dog"
+        },
+        {
+            number: 2,
+            german: "die Katze",
+            english: "cat"
+        }
+        ];
+    };
+    */
+
 
     /**
      * Hilfsklasse zum Umschalten auf eine neue Seite. Sie ruft zunächst die
