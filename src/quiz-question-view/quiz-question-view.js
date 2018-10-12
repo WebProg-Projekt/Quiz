@@ -4,9 +4,6 @@ import stylesheet from "./quiz-question-view.css";
 
 class QuizQuestionView {
 
-    //einige Fragen als Übergangslösüng, bis wir im Browser tatsaechlich Vokabeln speichern können
-
-
 
     /**
      * Konstruktor,
@@ -28,6 +25,20 @@ class QuizQuestionView {
     onShow () {
         // Anzuzeigende HTML-Elemente ermitteln
         let section = document.querySelector("#quiz-question-view").cloneNode(true);
+
+        // Referenz über HTML Elemente für Fragen
+        let question = document.querySelector(".question");
+        let questionnr = document.querySelector(".question-number")
+
+        let questions = {
+                number: "1",
+                german: "der Hund",
+                english: "dog"
+        };
+
+        question.innerHTML = `${questions["german"]}` ;
+        questionnr.innerHTML = `${questions["number"]}`;
+
 
         return {
         className: "quiz-question-view",
@@ -57,10 +68,17 @@ class QuizQuestionView {
     }
 
     //Quiz erstellen, also 10 Fragen aussuchen
-    generateQuiz () {
-
+    /*_generateQuiz() {
+        let questions = {
+                number: "1",
+                german: "der Hund",
+                english: "dog"
+        }
+        return questions;
     }
+ */
 
+    showNextSlide() {}
 
 }
 
