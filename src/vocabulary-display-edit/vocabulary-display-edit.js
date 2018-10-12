@@ -1,6 +1,7 @@
 "use strict";
 
 import stylesheet from "./vocabulary-display-edit.css";
+import Database from "../database.js";
 
  /**
   * View zur Anzeige oder zum Bearbeiten eines Songs.
@@ -10,7 +11,7 @@ class VocabularyDisplayEdit {
      * Konstruktor.
      *
      * @param {Objekt} app Zentrales App-Objekt der Anwendung
-     * @param {String} id   ID des darzustellenden Songs
+     * @param {String} id   ID der darzustellenden Vokabel
      * @param {String} mode "new", "display" oder "edit"
      */
     constructor(app, id, mode) {
@@ -69,13 +70,48 @@ class VocabularyDisplayEdit {
     get title() {
         switch (this._mode) {
             case "new":
-                return "Song hinzufügen";
+                return "Vokabel hinzufügen";
             case "edit":
-                return "Song bearbeiten";
+                return "Vokabel bearbeiten";
             default:
-                return "Song anzeigen";
+                return "Vokabel anzeigen";
         }
     }
+
+    // Button, zum Abbrechen
+    let interrupt = () => document.getElementById("abbr").addEventListener("click", vocabularyOverview.onShow());
+
+    // Button, um zu speichern
+    let save = () => document.getElementById("sp").addEventListener("click", () =>{
+    // neue VokabelDatenbank ---- wird bei jedem speichern ein neues Objekt der DB erzeugt?
+        let dB = async () => {
+            let vokabeln = new Database.Vokabeln();
+
+
+            // neuen Eintrag speichern
+            let speichern = () => {
+                let deutsch_ = document.getElementById("deutsch").value;
+                let englisch_ = document.getElementById("englisch").value;
+                let notiz_ = document.getElementById("notiz").value;
+
+                vokabeln.saveNew({
+                    deutsch: deutsch_;
+                    englisch: englisch_;
+                    notiz: notiz_;
+                    format: ???
+                    data: ???
+                    }
+                );
+            }
+        }
+        // zurück auf Übersicht! --> Seite wechseln!! wiee
+    }
+
+    //einzelne Vokabel löschen
+    let l = document.getElementById("lösch")
+    l.addEventListener("click", delete(l));
+
+    // Vokabel Bearbeiten
 }
 
 export default VocabularyDisplayEdit;

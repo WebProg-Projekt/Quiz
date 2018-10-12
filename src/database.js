@@ -11,7 +11,7 @@ import Dexie from "dexie/dist/dexie.js";
 let database = new Dexie("VokabuLearn");
 
 database.version(1).stores({
-    songtexts: "++id, deutsch, englisch, notiz",
+    vokabeln: "++id, deutsch, englisch, notiz",
 });
 
 /**
