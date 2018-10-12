@@ -14,6 +14,8 @@ class QuizQuestionView {
         //this.questions = questions;
     }
 
+
+
     /**
      * Von der Klasse App aufgerufene Methode, um die Seite anzuzeigen. Die
      * Methode gibt daher ein passendes Objekt zurück, das an die Methode
@@ -32,15 +34,15 @@ class QuizQuestionView {
         let questionnr = document.querySelector(".question-number")
 
         //Event beim Button "Prüfen"  registrieren
-        //let nextbutton = document.querySelector(".next-button").addEventListener("click", checkAnswer);
+        let nextbutton = document.querySelector(".next-button").addEventListener("click", checkAnswer);
 
 
         let questions = this._generateQuiz();
 
-        //_showQuestion(0);
+        _showQuestion(0);
 
-        question.innerHTML = `${questions[0]["german"]}` ;
-        questionnr.innerHTML = `${questions[0]["number"]}`;
+       question.innerHTML = `${questions[0]["german"]}` ;
+       questionnr.innerHTML = `${questions[0]["number"]}`;
 
         return {
         className: "quiz-question-view",
@@ -104,7 +106,18 @@ class QuizQuestionView {
             //result.innerHTML () = "Falsch!";
         }
 
+        _showQuestion (a) {
+            // Referenz über HTML Elemente für Fragen
+            let question = document.querySelector(".question");
+            let questionnr = document.querySelector(".question-number");
 
+            let questions = this._generateQuiz();
+
+            question.innerHTML = `${questions[a]["german"]}` ;
+            questionnr.innerHTML = `${questions[a]["number"]}`;
+
+            return questions;
+        }
 
 
     }
@@ -114,18 +127,7 @@ class QuizQuestionView {
 
 
 
-    _showQuestion (a) {
-        // Referenz über HTML Elemente für Fragen
-        let question = document.querySelector(".question");
-        let questionnr = document.querySelector(".question-number");
 
-        let questions = this._generateQuiz();
-
-        question.innerHTML = `${questions[a]["german"]}` ;
-        questionnr.innerHTML = `${questions[a]["number"]}`;
-
-        return questions;
-    }
 
 
 }
