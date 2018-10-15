@@ -10,6 +10,8 @@ import Navigo from "navigo/lib/navigo.js";
 import VocabularyDisplayEdit from "./vocabulary-display-edit/vocabulary-display-edit.js";
 import VocabularyOverview from "./vocabulary-overview/vocabulary-overview.js";
 import QuizQuestionView from "./quiz-question-view/quiz-question-view.js"
+import Database from "./database.js";
+
 /**
  * Hauptklasse der Anwendung. Kümmert sich darum, die Anwendung auszuführen
  * und die angeforderten Bildschirmseiten anzuzeigen.
@@ -21,6 +23,7 @@ class App {
     constructor() {
         this._title = "VocabuLearn";
         this._currentView = null;
+        this._vokabeln = new Database.Vokabeln();
 
         // Single Page Router aufsetzen
         /**Diese Zeilen definieren die URL-Struktur der App,
@@ -64,7 +67,9 @@ class App {
     /**
      * Ab hier beginnt die Anwendung zu laufen.
      */
-    start () {
+    async start () {
+        // Vokabeln einfügen, wenn es noch keine gibt
+        await this._initDatabase();
 
         // vor Single Page Router hatten wir -> this.showSongOverview();
         /*In der start()-Methode müssen wir nun nicht mehr explizit
@@ -217,6 +222,82 @@ class App {
 
         // Navigo an die Links in der View binden
         this._router.updatePageLinks();
+    }
+
+    async _initDatabase() {
+        // Vokabeln in Dexie einfügen
+        let vok = await this._vokabeln.search();
+        console.log("Datenbank initialisieren, Anzahl Vokabeln:", vok.length);
+        console.log(vok);
+
+        if (vok.length < 10) {
+            await Promise.all([
+                this._vokabeln.saveNew({
+                    deutsch: "Königin",
+                    englisch: "Queen",
+                    notiz: "Pl: die Königinnen",
+                    format: "html",
+                }),
+                this._vokabeln.saveNew({
+                    deutsch: "König",
+                    englisch: "King",
+                    notiz: "Pl: die Könige",
+                    format: "html",
+                }),
+                this._vokabeln.saveNew({
+                    deutsch: "Prinz",
+                    englisch: "Prince",
+                    notiz: "Pl: die Prinzen",
+                    format: "html",
+                }),
+                this._vokabeln.saveNew({
+                    deutsch: "Hund",
+                    englisch: "Dog",
+                    notiz: "Pl: die Hunde",
+                    format: "html",
+                }),
+                this._vokabeln.saveNew({
+                    deutsch: "Katze",
+                    englisch: "Cat",
+                    notiz: "Pl: die Katzen",
+                    format: "html",
+                }),
+                this._vokabeln.saveNew({
+                    deutsch: "Maus",
+                    englisch: "Mouse",
+                    notiz: "Pl: die Mäuse",
+                    format: "html",
+                }),
+                this._vokabeln.saveNew({
+                    deutsch: "Möhre",
+                    englisch: "Carrot",
+                    notiz: "Pl: die Möhren",
+                    format: "html",
+                }),
+                this._vokabeln.saveNew({
+                    deutsch: "Gurke",
+                    englisch: "Cucumber",
+                    notiz: "Pl: die Gurken",
+                    format: "html",
+                }),
+                this._vokabeln.saveNew({
+                    deutsch: "Chalotte",
+                    englisch: "Onion",
+                    notiz: "Pl: die Chalotten",
+                    format: "html",
+                }),
+                this._vokabeln.saveNew({
+                    deutsch: "Glocke",
+                    englisch: "Bell",
+                    notiz: "Pl: die Glocken",
+                    format: "html",
+                }),
+
+            ]);
+
+            vok = await this._vokabeln.search();
+            console.log("Gespeicherte Vokabeln:", vok);
+        }
     }
 }
 

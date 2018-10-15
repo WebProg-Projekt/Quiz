@@ -5,7 +5,7 @@ import Dexie from "dexie/dist/dexie.js";
 // Datenbankdefinition:
 //
 //   * ++id = Automatisch Hochgezählter Datenbankschlüssel
-//   * englisch, deutsch = Indexfelder für WHERE-Abfragen und die Sortierung
+//   * englisch, deutsch, notiz = Indexfelder für WHERE-Abfragen und die Sortierung
 //   * Alle anderen Felder müssen nicht deklariert werden!
 //   * Vgl. http://dexie.org/docs/API-Reference
 let database = new Dexie("VokabuLearn");
@@ -31,7 +31,6 @@ class Vokabeln {
      *     englisch: "englische Eingabe",
            notiz: "Notiz",
      *     format: "html",
-     *     data: "HTML-String",
      * }
      *
      * @param  {Object}  vokabel Zu speichernde Vokabel
@@ -92,8 +91,8 @@ class Vokabeln {
         query = query.toUpperCase();
 
         let result = database.vokabeln.filter(vokabel => {
-            let deutsch = songtext.deutsch.toUpperCase();
-            let englisch  = songtext.englisch.toUpperCase();
+            let deutsch = vokabel.deutsch.toUpperCase();
+            let englisch  = vokabel.englisch.toUpperCase();
             return deutsch.search(query) > -1 || englisch.search(query) > -1;
         });
 

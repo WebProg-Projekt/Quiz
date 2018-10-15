@@ -19,7 +19,6 @@ class VocabularyDisplayEdit {
         this._id = id;
         this._mode = mode;
         this._vokabeln = new Database.Vokabeln();
-        console.log(this._vokabeln);
     }
 
     /**
@@ -35,12 +34,6 @@ class VocabularyDisplayEdit {
         // Anzuzeigende HTML-Elemente ermitteln
         let section = document.querySelector("#vocabulary-display-edit").cloneNode(true);
 
-        return {
-        className: "vocabulary-display-edit",
-        topbar: section.querySelectorAll("header > *"),
-        main: section.querySelectorAll("main > *"),
-        };
-
         //Event Handler nach Single Page Router nicht mehr notwendig
         // Event Handler registrieren
         //let overviewItem = section.querySelector("header .item.overview");
@@ -51,6 +44,24 @@ class VocabularyDisplayEdit {
 
         // Ergebnis zurückliefern
         //return content;
+
+        //addEventListener für speichern
+        let speichern = document.getElementById("sp");
+        speichern.addEventListener("click", () => this._saveVocab());
+
+
+        //addEventListener für löschen
+        //let del = document.addEventListener("click",() => this._deleteVocab());
+        //addEventListener für bearbeiten
+
+        // SPeichern und Abbrechen sichtbar machen
+        //save.classList.remove("");
+
+        return {
+            className: "vocabulary-display-edit",
+            topbar: section.querySelectorAll("header > *"),
+            main: section.querySelectorAll("main > *"),
+        };
     }
 
     /**
@@ -80,59 +91,45 @@ class VocabularyDisplayEdit {
         }
     }
 
-    // Button, zum Abbrechen
-    abbrechen() {
-    //let abbrechen = () => document.getElementById("abbr").addEventListener("click", vocabularyOverview.onShow());
-    }
     // Button, um zu speichern
-    //saveVocab() {
-        //let save = document.getElementById("sp").addEventListener("click", () => {
-        // neue VokabelDatenbank ---- wird bei jedem speichern ein neues Objekt der DB erzeugt?
-            //let dB = async () => {
-                //let vokabeln = new Database.Vokabeln();
+    _saveVocab() {
+        //let dB = async () => {
 
+            let deutsch1 = document.getElementById("deutsch").value;
+            let englisch1 = document.getElementById("englisch").value;
+            let notiz1 = document.getElementById("notiz").value;
 
-                // neuen Eintrag speichern
-                /*let speichern = () => {
-                    let deutsch_ = document.getElementById("deutsch").value;
-                    let englisch_ = document.getElementById("englisch").value;
-                    let notiz_ = document.getElementById("notiz").value;
+            this._vokabeln.saveNew({
+                deutsch: deutsch1,
+                englisch: englisch1,
+                notiz: notiz1,
+                format: html,
+            });
 
-                    vokabeln.saveNew({
-                            deutsch: deutsch_;
-                            englisch: englisch_;
-                            notiz: notiz_;
-                            format: ???
-                            data: ???
-                            }
-                        );
-                }
-            }
-            // zurück auf Übersicht! --> Seite wechseln!! wiee
-        }
+        //}
     }
+    // zurück auf Übersicht! --> Seite wechseln!! wiee
 
-
-*/
     // Vokabel Bearbeiten
-    editVocab() {
-        // --- vocab Overview muss click-Event hinzufügen
+    _showVocab() {
+        // --- vocab Overview muss click-Event hinzufügen, wenn click auf (overviev .<liste) --> anzeige sicht
 
         let editElement = document.getElementById("edit");
             editElement.classList.remove("hidden");
-        let spElement = document.getElementById("sp");
-            spElement.classList.add("hidden");
-        let deleteElement = document.getElementById("delete");
-            deleteElement.classList.remove("hidden");
-        //let abbrElement = document.getElementById("abbr");
+        let abbrElement = document.getElementById("abbr");
+            abbrElement.classList.remove("hidden");
+
+
+
     }
 
     //einzelne Vokabel löschen
-    deleteVocab() {
+    /*_deleteVocab() {
         alert("Wirklich löschen??");
-        let del = document.getElementById("delete");
-        del.addEventListener("click", Vokabeln.delete()); // --in database.js löschen
-    }
+        // --in database.js löschen --> wie bekomme ich id? und
+        Vokabeln.delete(id); //--> wie rufe ich mit diesem async auf??
+        // zurück auf Übersicht
+    }*/
 }
 
 export default VocabularyDisplayEdit;
