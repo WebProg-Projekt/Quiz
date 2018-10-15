@@ -99,14 +99,14 @@ class App {
 
 
     showQuizQuestionView () {
-        //let questions = this._selectQuestions ();
-        //let view = new QuizQuestionView(this, questions);
-        let view = new QuizQuestionView(this);
+        let questions = this._selectQuestions ();
+        let view = new QuizQuestionView(this, questions);
+        //let view = new QuizQuestionView(this);
         this._switchVisibleView(view);
     }
 
 
-    /*_selectQuestions () {
+    _selectQuestions () {
         return [
         {
             number: 1,
@@ -120,7 +120,7 @@ class App {
         }
         ];
     };
-    */
+
 
 
     /**

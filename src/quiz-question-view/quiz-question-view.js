@@ -11,7 +11,7 @@ class QuizQuestionView {
      */
     constructor(app, questions) {
         this._app = app;
-        //this.questions = questions;
+        this.questions = questions;
     }
 
 
@@ -34,15 +34,15 @@ class QuizQuestionView {
         let questionnr = document.querySelector(".question-number")
 
         //Event beim Button "Prüfen"  registrieren
-        let nextbutton = document.querySelector(".next-button").addEventListener("click", checkAnswer);
+        let nextbutton = document.querySelector(".next-button").addEventListener("click", this.checkAnswer);
 
 
-        let questions = this._generateQuiz();
+        //let questions = this._generateQuiz();
 
-        _showQuestion(0);
+        //this._showQuestion(0);
 
-       question.innerHTML = `${questions[0]["german"]}` ;
-       questionnr.innerHTML = `${questions[0]["number"]}`;
+       question.innerHTML = `${this.questions[0]["german"]}` ;
+       questionnr.innerHTML = `${this.questions[0]["number"]}`;
 
         return {
         className: "quiz-question-view",
@@ -88,9 +88,6 @@ class QuizQuestionView {
         ];
     }
 
-
-
-
      checkAnswer() {
         // Referenz über HTML Elemente für Fragen
         let question = document.querySelector(".question");
@@ -105,7 +102,7 @@ class QuizQuestionView {
         else {
             //result.innerHTML () = "Falsch!";
         }
-
+    }
         _showQuestion (a) {
             // Referenz über HTML Elemente für Fragen
             let question = document.querySelector(".question");
@@ -130,7 +127,7 @@ class QuizQuestionView {
 
 
 
-}
+
 
 
 
