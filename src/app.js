@@ -101,12 +101,9 @@ class App {
         this._switchVisibleView(view);
     }
 
-
-
     showQuizQuestionView () {
         let questions = this._selectQuestions ();
         let view = new QuizQuestionView(this, questions);
-        //let view = new QuizQuestionView(this);
         this._switchVisibleView(view);
     }
 

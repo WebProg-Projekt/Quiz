@@ -24,7 +24,6 @@ class VocabularyOverview {
      * Methode App._switchVisibleContent()
      */
 
-    // src/song-overview/song-overview.js:
     onShow() {
         // Anzuzeigende HTML-Elemente ermitteln
         let section = document.querySelector("#vocabulary-overview").cloneNode(true);

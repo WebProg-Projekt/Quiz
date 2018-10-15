@@ -18,7 +18,7 @@
                 <div class="top left">
                     <div class="item inactive">
                         <b>
-                            Beispiel einer Browser App: My Songbook
+                            Eine Browser App: VocabuLearn
                         </b>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
         </section>
 
         <!-- ====================== -->
-        <!-- View: Vorhandene Songs -->
+        <!-- View: Vorhandene Vocabeln -->
         <!-- ====================== -->
         <section id="vocabulary-overview" class="hidden">
             <!-- Topbar -->
@@ -52,12 +52,16 @@
                         </a>
                     </div>
                     <div class="item">
-                        Sortierung nach Titel
+                        Sortierung deutsch
+                    </div>
+                    <div class="item">
+                        Sortierung englisch
                     </div>
                     <div class="item">
                         <a href="/quiz/" data-navigo>
                             Quiz starten
                         </a>
+                    </div>
                 </div>
                 <div class="right">
                     <input placeholder="Suchen" />
@@ -70,7 +74,11 @@
                 <div class='container-fluid'>
                     <div class='row'>
                         <div class='col-md-6'>
-                            Linker Bereich
+                            <ul>
+                              <li>cat</li>
+                              <li>dog</li>
+                              <li>horse</li>
+                            </ul>
                         </div>
                         <div class='col-md-6'>
                             Rechter Bereich
@@ -82,7 +90,7 @@
         </section>
 
         <!-- ================================== -->
-        <!-- View: Song hinzufügen und speichern -->
+        <!-- View: Vokabel hinzufügen und speichern -->
         <!-- ================================== -->
         <section id="vocabulary-display-edit" class="hidden">
             <!-- Topbar -->
@@ -168,6 +176,9 @@
             </header>
                 <!-- Hauptbereich -->
             <main>
+
+
+
                 <div class="container padding">
 
                     <!--Frage-->
@@ -181,7 +192,7 @@
 
                             </div>
                             <div class="row">
-                                <input type="text" name="answer" required>
+                                <input type="text" class="answer" required>
                                 <!-- Input sizing bootstrap-->
                                 </input>
                             </div>
@@ -191,23 +202,27 @@
 
                     <!--Ergebnis-->
                     <div class="row result">
-                        Ergebnis
                     </div>
 
                     <!--Quiz Buttons-->
                     <div class="row quiz-buttons">
-                        <div class="col-6 quit-button">
+                        <div class="col-4 quit-button">
                             <a href="/" data-navigo>
                                 <button> Abbrechen </button>
                             </a>
                         </div>
-                        <div class="col-6">
-                            <button class = "next-button"> Prüfen/Weiter <button>
+                        <div class="col-4">
+                            <button class ="submit-button"> Prüfen </button>
+                            <!-- muss nach erstem mal disabled werden-->
+                        </div>
+                        <div class="col-4">
+                            <button class = "next-button"> Weiter </button>
                             <!-- Siehe Submit-Button für Forms und Form Attribute-->
                         </div>
 
                     </div>
                 </div>
+
             </main>
 
 
