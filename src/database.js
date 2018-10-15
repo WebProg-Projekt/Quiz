@@ -101,7 +101,7 @@ class Vokabeln {
     }
 }
 
-export default
+export default {
     database,
-    vokabeln,
+    Vokabeln,
 };
