@@ -42,18 +42,22 @@
         <!-- ====================== -->
         <!-- View: Vorhandene Songs -->
         <!-- ====================== -->
-        <section id="song-overview" class="hidden">
+        <section id="vocabulary-overview" class="hidden">
             <!-- Topbar -->
             <header>
                 <div class="left">
                     <div class="item">
-                        <a href="/song/new/" data-navigo>
+                        <a href="/vocabulary/new/" data-navigo>
                             Song hinzufügen
                         </a>
                     </div>
                     <div class="item">
                         Sortierung nach Titel
                     </div>
+                    <div class="item">
+                        <a href="/quiz/" data-navigo>
+                            Quiz starten
+                        </a>
                 </div>
                 <div class="right">
                     <input placeholder="Suchen" />
@@ -62,16 +66,25 @@
 
             <!-- Hauptbereich -->
             <main>
-                <div class="padding">
-                    Übersicht
+
+                <div class='container-fluid'>
+                    <div class='row'>
+                        <div class='col-md-6'>
+                            Linker Bereich
+                        </div>
+                        <div class='col-md-6'>
+                            Rechter Bereich
+                        </div>
+                    </div>
                 </div>
+
             </main>
         </section>
 
         <!-- ================================== -->
-        <!-- View: Song anzeigen und bearbeiten -->
+        <!-- View: Song hinzufügen und speichern -->
         <!-- ================================== -->
-        <section id="song-display-edit" class="hidden">
+        <section id="vocabulary-display-edit" class="hidden">
             <!-- Topbar -->
             <header>
                 <div class="left">
@@ -88,10 +101,114 @@
 
             <!-- Hauptbereich -->
             <main>
-                <div class="padding">
-                    Song anzeigen/bearbeiten
+                <div class="container padding">
+                    Vokabel anzeigen und bearbeiten
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- input-Überschrift -->
+                            <label for="inputD">deutsche Eingabe</label>
+                            <!-- input -->
+                            <input  type="text" class="form-control" id="deutsch" placeholder="Bitte  etwas  eingeben...">
+                        </div>
+                        <div class="col-md-6">
+                            <!-- input-Überschrift -->
+                            <label for="inputE">englische Einagbe</label>
+                            <!-- input -->
+                            <input  type="text" class="form-control" id="englisch" placeholder="Bitte  etwas  eingeben...">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- input-Überschrift -->
+                            <label for="input1">Notiz</label>
+                            <!-- input -->
+                            <input  type="text" class="form-control" id="notiz" placeholder="z.B. Genus, Plural, Steigerungsform, ...">
+                        </div>
+                    </div>
+                    <!-- Buttons -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button class="btn btn-primary btn-lg" type="submit" id="abbr" onclick="abbrechen()">Abbrechen</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-primary btn-lg" type="submit" id="sp" onclick="saveVocab()">Speichern</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-primary btn-lg hidden" type="submit" id="delete" onclick="deleteVocab()">Abbrechen</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-primary btn-lg hidden" type="submit" id="edit" onclick="editVocab()">Speichern</button>
+                        </div>
+                    </div>
                 </div>
             </main>
         </section>
+
+        <!-- ====================== -->
+        <!-- View: Anzeige der Quizfrage -->
+        <!-- ====================== -->
+        <section id="quiz-question-view" class="hidden">
+
+            <!-- Topbar -->
+            <header>
+                <div class="left">
+                    <!-- Leer -->
+                </div>
+                <div class="right">
+                    <div class="item">
+                        <a href="/" data-navigo>
+                            Zurück zur Übersicht
+                        </a>
+                    </div>
+                </div>
+            </header>
+                <!-- Hauptbereich -->
+            <main>
+                <div class="container padding">
+
+                    <!--Frage-->
+                    <div class="row">
+                        <div class="col jumbotron">
+                            <div class="row question-number">
+
+                            </div>
+                            <!-- Frage -->
+                            <div class="row question">
+
+                            </div>
+                            <div class="row">
+                                <input type="text" name="answer" required>
+                                <!-- Input sizing bootstrap-->
+                                </input>
+                            </div>
+                        <!-- Vielleicht noch ein Progress Bar (Bootstrap einfügen-->
+                        </div>
+                    </div>
+
+                    <!--Ergebnis-->
+                    <div class="row result">
+                        Ergebnis
+                    </div>
+
+                    <!--Quiz Buttons-->
+                    <div class="row quiz-buttons">
+                        <div class="col-6 quit-button">
+                            <a href="/" data-navigo>
+                                <button> Abbrechen </button>
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <button class = "next-button"> Prüfen/Weiter <button>
+                            <!-- Siehe Submit-Button für Forms und Form Attribute-->
+                        </div>
+
+                    </div>
+                </div>
+            </main>
+
+
+
+        </section>
+
     </body>
 </html>

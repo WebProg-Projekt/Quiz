@@ -1,10 +1,15 @@
 "use strict";
 
+//Stylesheets und Bootstrap importieren
 import stylesheet from "./app.css";
-import Navigo from "navigo/lib/navigo.js";
-import SongDisplayEdit from "./song-display-edit/song-display-edit.js";
-import SongOverview from "./song-overview/song-overview.js";
+import "bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
+// JavaScript Code importieren
+import Navigo from "navigo/lib/navigo.js";
+import VocabularyDisplayEdit from "./vocabulary-display-edit/vocabulary-display-edit.js";
+import VocabularyOverview from "./vocabulary-overview/vocabulary-overview.js";
+import QuizQuestionView from "./quiz-question-view/quiz-question-view.js"
 /**
  * Hauptklasse der Anwendung. Kümmert sich darum, die Anwendung auszuführen
  * und die angeforderten Bildschirmseiten anzuzeigen.
@@ -14,7 +19,7 @@ class App {
      * Konstruktor.
      */
     constructor() {
-        this._title = "My Songbook";
+        this._title = "VocabuLearn";
         this._currentView = null;
 
         // Single Page Router aufsetzen
@@ -30,10 +35,11 @@ class App {
     this._navAborted = false;
 
     this._router.on({
-        "*":                       () => this.showSongOverview(),
-        "/song/new/":              () => this.showSongDisplayEdit("", "new"),
-        "/song/display/:id/":  params => this.showSongDisplayEdit(params.id, "display"),
-        "/song/edit/:id/":     params => this.showSongDisplayEdit(params.id, "edit"),
+        "*":                       () => this.showVocabularyOverview(),
+        "/vocabulary/new/":              () => this.showVocabularyDisplayEdit("", "new"),
+        "/vocabulary/display/:id/":  params => this.showVocabularyDisplayEdit(params.id, "display"),
+        "/vocabulary/edit/:id/":     params => this.showVocabularyDisplayEdit(params.id, "edit"),
+        "/quiz":     () => this.showQuizQuestionView(),
     });
 
     this._router.hooks({
@@ -73,8 +79,8 @@ class App {
      * Aufruf der Übersichtsseite der vorhandenen Songs.
      * @return {Boolean} Flag, ob die neue Seite aufgerufen werden konnte
      */
-    showSongOverview() {
-        let view = new SongOverview(this);
+    showVocabularyOverview() {
+        let view = new VocabularyOverview(this);
         this._switchVisibleView(view);
     }
 
@@ -85,10 +91,37 @@ class App {
      * @param  {String} mode "new", "display" oder "edit"
      * @return {Boolean} Flag, ob die neue Seite aufgerufen werden konnte
      */
-    showSongDisplayEdit(id, mode) {
-        let view = new SongDisplayEdit(this, id, mode);
+    showVocabularyDisplayEdit(id, mode) {
+        let view = new VocabularyDisplayEdit(this, id, mode);
         this._switchVisibleView(view);
     }
+
+
+
+    showQuizQuestionView () {
+        let questions = this._selectQuestions ();
+        let view = new QuizQuestionView(this, questions);
+        //let view = new QuizQuestionView(this);
+        this._switchVisibleView(view);
+    }
+
+
+    _selectQuestions () {
+        return [
+        {
+            number: 1,
+            german: "der Hund",
+            english: "dog"
+        },
+        {
+            number: 2,
+            german: "die Katze",
+            english: "cat"
+        }
+        ];
+    };
+
+
 
     /**
      * Hilfsklasse zum Umschalten auf eine neue Seite. Sie ruft zunächst die
