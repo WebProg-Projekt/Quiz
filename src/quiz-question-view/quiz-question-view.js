@@ -37,6 +37,10 @@ class QuizQuestionView {
         let submitbutton = section.querySelector(".submit-button");
         submitbutton.addEventListener("click", () => this._checkAnswer());
 
+        //Event beim Button "Weiter" registrieren
+        let nextbutton = section.querySelector(".next-button");
+        nextbutton.addEventListener("click", () => this._showNextQuestion());
+
         question.innerHTML = `${this.questions[0]["german"]}` ;
         questionnr.innerHTML = `${this.questions[0]["number"]}`;
 
@@ -89,6 +93,24 @@ class QuizQuestionView {
            result.innerHTML = "Falsch!";
         }
     }
+
+    // zeigt die naecste Frage, wenn sie geprüft wurde
+    _showNextQuestion () {
+        let number = document.querySelector(".question-number").innerText;
+        let question = document.querySelector(".question");
+        let questionnr = document.querySelector(".question-number");
+
+        if (number < 10) {
+            question.innerHTML = `${this.questions[number]["german"]}` ;
+            questionnr.innerHTML = `${this.questions[number]["number"]}`;
+        }
+
+
+
+    }
+
+
+
 }
 
 
