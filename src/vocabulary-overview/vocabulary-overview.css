@@ -1,8 +1,17 @@
 /*
- * Dieses Stylesheet darf nur Selektoren beinhalten, die mit .song-overview
+ * Dieses Stylesheet darf nur Selektoren beinhalten, die mit .vocabulary-overview
  * beginnen. Denn wir wollen nicht, dass hier Eigenschaften aus anderen Bereichen
  * der Anwendung überschrieben werden.
  */
-.song-overview main {
-   color: orangered !important;
+.vocabulary-overview main {
+   color: black !important;
+   font-size: 12pt !important;
+}
+
+.vocabulary-overview ul {
+  margin-top: 5em;
+  list-style: none;
+  float: left;
+  font-weight: normal;
+  text-align: left;
 }
