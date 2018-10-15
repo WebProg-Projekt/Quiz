@@ -164,6 +164,9 @@
             </header>
                 <!-- Hauptbereich -->
             <main>
+
+
+
                 <div class="container padding">
 
                     <!--Frage-->
@@ -177,7 +180,7 @@
 
                             </div>
                             <div class="row">
-                                <input type="text" name="answer" required>
+                                <input type="text" class="answer" required>
                                 <!-- Input sizing bootstrap-->
                                 </input>
                             </div>
@@ -192,18 +195,23 @@
 
                     <!--Quiz Buttons-->
                     <div class="row quiz-buttons">
-                        <div class="col-6 quit-button">
+                        <div class="col-4 quit-button">
                             <a href="/" data-navigo>
                                 <button> Abbrechen </button>
                             </a>
                         </div>
-                        <div class="col-6">
-                            <button class = "next-button"> Prüfen/Weiter <button>
+                        <div class="col-4">
+                            <button class ="submit-button"> Prüfen </button>
+                            <!-- muss nach erstem mal disabled werden-->
+                        </div>
+                        <div class="col-4">
+                            <button class = "next-button"> Weiter </button>
                             <!-- Siehe Submit-Button für Forms und Form Attribute-->
                         </div>
 
                     </div>
                 </div>
+
             </main>
 
 

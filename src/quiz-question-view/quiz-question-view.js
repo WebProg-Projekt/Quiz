@@ -30,19 +30,15 @@ class QuizQuestionView {
         let section = document.querySelector("#quiz-question-view").cloneNode(true);
 
         // Referenz über HTML Elemente für Fragen
-        let question = document.querySelector(".question");
-        let questionnr = document.querySelector(".question-number")
+        let question = section.querySelector(".question");
+        let questionnr = section.querySelector(".question-number")
 
         //Event beim Button "Prüfen"  registrieren
-        let nextbutton = document.querySelector(".next-button").addEventListener("click", this.checkAnswer);
+        let submitbutton = section.querySelector(".submit-button");
+        submitbutton.addEventListener("click", () => this._checkAnswer());
 
-
-        //let questions = this._generateQuiz();
-
-        //this._showQuestion(0);
-
-       question.innerHTML = `${this.questions[0]["german"]}` ;
-       questionnr.innerHTML = `${this.questions[0]["number"]}`;
+        question.innerHTML = `${this.questions[0]["german"]}` ;
+        questionnr.innerHTML = `${this.questions[0]["number"]}`;
 
         return {
         className: "quiz-question-view",
@@ -71,53 +67,31 @@ class QuizQuestionView {
         return "Quiz";
     }
 
-    //Quiz erstellen, also 10 Fragen aussuchen
-    _generateQuiz () {
-        return [
-            {
-                number: 1,
-                german: "der Hund",
-                english: "dog"
-            },
-            {
-                number: 2,
-                german: "die Katze",
-                english: "cat"
-            }
+    /*Vergleicht die vom Anwender angegebene Antwort mit der richtigen Antwort
+    * zeigt das Ergebnis an
+    */
+    _checkAnswer() {
+        // Referenz über HTML Elemente für das Ergebnis, die angegebene Antwort
+        let result = document.querySelector(".result");
+        let answer = document.querySelector(".answer").value;
 
-        ];
-    }
+        //Questionnummer ermitteln
+        let questionnr = document.querySelector(".question-number").innerText;
 
-     checkAnswer() {
-        // Referenz über HTML Elemente für Fragen
-        let question = document.querySelector(".question");
-        let questionnr = document.querySelector(".question-number");
-        //let result = document.querySelector(".result");
+        let submitbutton = document.querySelector(".submit-button");
+        submitbutton.disabled = true;
 
-        let answer = document.querySelector(".answer").value();
-
-        if (answer === "dog") {
-            //result.innerHTML () = "Richtig!";
+        //Antworten vergleichen und Ergebnis anzeigen
+        if (answer === this.questions[questionnr-1]["english"]) {
+                result.innerHTML = "Richtig!";
         }
         else {
-            //result.innerHTML () = "Falsch!";
+           result.innerHTML = "Falsch!";
         }
     }
-        _showQuestion (a) {
-            // Referenz über HTML Elemente für Fragen
-            let question = document.querySelector(".question");
-            let questionnr = document.querySelector(".question-number");
-
-            let questions = this._generateQuiz();
-
-            question.innerHTML = `${questions[a]["german"]}` ;
-            questionnr.innerHTML = `${questions[a]["number"]}`;
-
-            return questions;
-        }
+}
 
 
-    }
 
 
 
