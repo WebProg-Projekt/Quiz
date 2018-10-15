@@ -96,13 +96,26 @@ class QuizQuestionView {
 
     // zeigt die naecste Frage, wenn sie geprüft wurde
     _showNextQuestion () {
+        // Referenzen über HTML Elemente
         let number = document.querySelector(".question-number").innerText;
         let question = document.querySelector(".question");
         let questionnr = document.querySelector(".question-number");
+        let answer = document.querySelector(".answer");
+        let submitbutton = document.querySelector(".submit-button");
+        let result = document.querySelector(".result");
 
+
+        //Prüft ob die letzte (zehnte) Frage angezeigt wird,
+        //Wenn nicht zeigt die naechste Frage
         if (number < 10) {
             question.innerHTML = `${this.questions[number]["german"]}` ;
             questionnr.innerHTML = `${this.questions[number]["number"]}`;
+
+        //Submit Button aktiv machen,
+        //den Inhalt des Inputfelds und das Ergebnis der vorherigen Frage löschen
+        submitbutton.disabled = false;
+        answer.value =" ";
+        result.innerHTML =" ";
         }
 
 
