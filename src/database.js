@@ -75,7 +75,7 @@ class Vokabeln {
      * @return {Promise} Asynchrones Promise-Objekt mit der Vokabel
      */
     async getById(id) {
-        return database.vokabel.get(id);
+        return database.vokabeln.get(id);
     }
 
         /** Suchfunktion:
