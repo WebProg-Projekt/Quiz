@@ -11,7 +11,8 @@ class QuizQuestionView {
      */
     constructor(app, questions) {
         this._app = app;
-        this.questions = questions;
+        this._questions = questions;
+        this._score = 0;
     }
 
     /**
@@ -40,8 +41,8 @@ class QuizQuestionView {
         nextbutton.addEventListener("click", () => this._showNextQuestion());
 
         // Die erste Frage und die Fragennummer anzeigen
-        question.innerHTML = `${this.questions[0]["german"]}` ;
-        questionnr.innerHTML = `${this.questions[0]["number"]}`;
+        question.innerHTML = `${this._questions[0]["german"]}` ;
+        questionnr.innerHTML = `${this._questions[0]["number"]}`;
 
         return {
         className: "quiz-question-view",
@@ -70,8 +71,9 @@ class QuizQuestionView {
         return "Quiz";
     }
 
-    /*Vergleicht die vom Anwender angegebene Antwort mit der richtigen Antwort
-    * und zeigt das Ergebnis an
+    /*Vergleicht die vom Anwender angegebene Antwort mit der richtigen Antwort,
+    * zeigt, ob die Antwort richtig oder falsch war
+    * passt die Score an
     */
     _checkAnswer() {
         // Referenz über HTML Elemente für das Ergebnis und die angegebene Antwort
@@ -90,15 +92,20 @@ class QuizQuestionView {
         answerfield.disabled = true;
 
         //Antworten vergleichen und Ergebnis anzeigen
-        if (answer === this.questions[questionnr-1]["english"]) {
+        if (answer === this._questions[questionnr-1]["english"]) {
                 result.innerHTML = "Richtig!";
+                this._score ++;
+                console.log(this._score);
         }
         else {
-           result.innerHTML = `Falsch! Die rictige Antwort ist: ${this.questions[questionnr-1]["english"]}` ;
+           result.innerHTML = `Falsch! Die rictige Antwort ist: ${this._questions[questionnr-1]["english"]}` ;
         }
     }
 
-    // zeigt die naecste Frage, wenn die aktuelle Frage geprüft wurde
+    /* zeigt die naecste Frage:
+     - wenn die aktuelle Frage geprüft wurde und
+     - wenn die bereits angezeigte Frage nicht die zehnte Frage ist.
+    */
     _showNextQuestion () {
         // Referenzen über HTML Elemente
         let number = document.querySelector(".question-number").innerText;
@@ -108,24 +115,30 @@ class QuizQuestionView {
         let submitbutton = document.querySelector(".submit-button");
         let result = document.querySelector(".result");
 
+        /* Erst mal wird geprüft ob die Antwort schon geprüft wurde.
+            - Wenn nicht, wird der Anwender aufgefordert, seine Antwort zu überprüfen.
+            - Wenn ja, wird geprüft ob die letzte (zehnte) Frage angezeigt wird,
+            wenn nicht wird  die naechste Frage angezeigt.
+        */
+        if (submitbutton.disabled) {
+            if (number < 10) {
+                question.innerHTML = `${this._questions[number]["german"]}` ;
+                questionnr.innerHTML = `${this._questions[number]["number"]}`;
 
-        /*Prüft ob die letzte (zehnte) Frage angezeigt wird,
-        Wenn nicht zeigt die naechste Frage*/
-        if (number < 10) {
-            question.innerHTML = `${this.questions[number]["german"]}` ;
-            questionnr.innerHTML = `${this.questions[number]["number"]}`;
-
-        /*Submit Button aktiv machen,
-        den Inhalt des Inputfelds und das Ergebnis der vorherigen Frage löschen,
-        Eingabefeld für die Frage wieder aktivieren*/
-        submitbutton.disabled = false;
-
-        answer.value =" ";
-        result.innerHTML =" ";
-
-        let answerfield = document.querySelector(".answer");
-        answerfield.disabled = false;
+                /*Submit Button aktiv machen,
+                den Inhalt des Inputfelds und das Ergebnis der vorherigen Frage löschen,
+                Eingabefeld für die Frage wieder aktivieren*/
+                submitbutton.disabled = false;
+                answer.value ="";
+                result.innerHTML =" ";
+                let answerfield = document.querySelector(".answer");
+                answerfield.disabled = false;
+            }
         }
+        else {
+            alert ("Bitte prüfen Sie erst Ihre Antwort");
+        }
+
 
 
 
