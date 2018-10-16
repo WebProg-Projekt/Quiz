@@ -61,6 +61,16 @@ class App {
             }
         }
     });
+
+    /*
+     Load Chance
+     (Chance ist eine Bibliothek, die die Generierung zufällige unique Nummer ermöglicht)
+     */
+    var Chance = require('chance');
+
+    // Instantiate Chance so it can be used
+    var chance = new Chance();
+
 }
 
 
@@ -283,26 +293,42 @@ class App {
     // Sucht 10 verschiedene Fragen aus der Datenbank und liefert als JSON zurück
     _selectQuestions () {
 
+        /* 10 zufällige und unique Nummer zwischen 0- vok.length generieren
+        und in einem Array speichern*/
+        let randomIDs = chance.unique (chance.integer, 10, { min: 1, max: 10});
+        console.log(randomIDs);
 
 
-        //10 verschiedenen Nummer zwischen 0- vok.length generieren
+        /*let erste = this._vokabeln.getById(randomIDs[0]);
+        console.log("Erste Random Vokabel - Objekt", erste);
+        console.log(erste["englisch"]);*/
 
-        //nach Vokabeln aus der Datenbank mittels der generierten Nummer suchen
-        let  v = this._vokabeln.getById("1");
-        //console.log(v);
-        // in einem JSON-Objekt speichern
+        /* Ein leeres Array generieren,
+        Wörter nach zufaellig gewaehlten IDs suchen und in das Leere Array speichern
+        */
+        let questions = [];
+        randomIDs.forEach( id => {
+            let vocabulary = this._vokabeln.getById(id);
+            questions.push(vocabulary);
+        });
 
-        //zurückgeben
+
+        //Fragen ausgeben
         return [
         {
             number: 1,
-            german: "der Hund",
+            german: "Hund",
             english: "dog"
         },
         {
             number: 2,
             german: "die Katze",
             english: "cat"
+        },
+        {
+            number: 3,
+            german: "Keller",
+            english: "basement"
         }
     ];
 
