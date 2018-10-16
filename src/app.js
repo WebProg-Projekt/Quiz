@@ -108,23 +108,6 @@ class App {
     }
 
 
-    _selectQuestions () {
-        return [
-        {
-            number: 1,
-            german: "der Hund",
-            english: "dog"
-        },
-        {
-            number: 2,
-            german: "die Katze",
-            english: "cat"
-        }
-        ];
-    };
-
-
-
     /**
      * Hilfsklasse zum Umschalten auf eine neue Seite. Sie ruft zunächst die
      * Methode onLeave() der gerade sichtbaren View auf und prüft damit, ob
@@ -296,6 +279,37 @@ class App {
             console.log("Gespeicherte Vokabeln:", vok);
         }
     }
+
+    // Sucht 10 verschiedene Fragen aus der Datenbank und liefert als JSON zurück
+    _selectQuestions () {
+
+
+
+        //10 verschiedenen Nummer zwischen 0- vok.length generieren
+
+        //nach Vokabeln aus der Datenbank mittels der generierten Nummer suchen
+        let  v = this._vokabeln.getById("1");
+        //console.log(v);
+        // in einem JSON-Objekt speichern
+
+        //zurückgeben
+        return [
+        {
+            number: 1,
+            german: "der Hund",
+            english: "dog"
+        },
+        {
+            number: 2,
+            german: "die Katze",
+            english: "cat"
+        }
+    ];
+
+    };
+
+
+
 }
 
 export default App;
