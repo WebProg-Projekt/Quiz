@@ -298,10 +298,11 @@ class App {
         let randomIDs = chance.unique (chance.integer, 10, { min: 1, max: 10});
         console.log(randomIDs);
 
+        //length??
 
-        /*let erste = this._vokabeln.getById(randomIDs[0]);
+        let erste = this._vokabeln.getById(randomIDs[0]);
         console.log("Erste Random Vokabel - Objekt", erste);
-        console.log(erste["englisch"]);*/
+        console.log(erste["englisch"]);
 
         /* Ein leeres Array generieren,
         Wörter nach zufaellig gewaehlten IDs suchen und in das Leere Array speichern
