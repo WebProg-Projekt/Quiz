@@ -63,7 +63,6 @@ class Vokabeln {
     /**
      * Löscht alle Songtexte!
      * @return {Promise} Asynchrones Promise-Objekt
-
     async clear() {
         return database.songtexts.clear();
     }
