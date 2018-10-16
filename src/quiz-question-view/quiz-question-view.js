@@ -4,17 +4,15 @@ import stylesheet from "./quiz-question-view.css";
 
 class QuizQuestionView {
 
-
     /**
      * Konstruktor,
      * @param {Objekt} app Zentrales App-Objekt der Anwendung
+     * @param {Objekt} questions 10 zufällig ausgewählte Fragen für die Quiz
      */
     constructor(app, questions) {
         this._app = app;
         this.questions = questions;
     }
-
-
 
     /**
      * Von der Klasse App aufgerufene Methode, um die Seite anzuzeigen. Die
@@ -29,18 +27,19 @@ class QuizQuestionView {
         // Anzuzeigende HTML-Elemente ermitteln
         let section = document.querySelector("#quiz-question-view").cloneNode(true);
 
-        // Referenz über HTML Elemente für Fragen
+        // Referenz über HTML Elemente für die Anzeige der Frage und der Fragennummer
         let question = section.querySelector(".question");
         let questionnr = section.querySelector(".question-number")
 
-        //Event beim Button "Prüfen"  registrieren
+        //Eventlistener beim Button "Prüfen" registrieren
         let submitbutton = section.querySelector(".submit-button");
         submitbutton.addEventListener("click", () => this._checkAnswer());
 
-        //Event beim Button "Weiter" registrieren
+        //Eventlistener beim Button "Weiter" registrieren
         let nextbutton = section.querySelector(".next-button");
         nextbutton.addEventListener("click", () => this._showNextQuestion());
 
+        // Die erste Frage und die Fragennummer anzeigen
         question.innerHTML = `${this.questions[0]["german"]}` ;
         questionnr.innerHTML = `${this.questions[0]["number"]}`;
 
@@ -72,29 +71,34 @@ class QuizQuestionView {
     }
 
     /*Vergleicht die vom Anwender angegebene Antwort mit der richtigen Antwort
-    * zeigt das Ergebnis an
+    * und zeigt das Ergebnis an
     */
     _checkAnswer() {
-        // Referenz über HTML Elemente für das Ergebnis, die angegebene Antwort
+        // Referenz über HTML Elemente für das Ergebnis und die angegebene Antwort
         let result = document.querySelector(".result");
         let answer = document.querySelector(".answer").value;
 
-        //Questionnummer ermitteln
+        //Fragennummer der angezeigten Frage ermitteln
         let questionnr = document.querySelector(".question-number").innerText;
 
+        // Button "Prüfen" deaktivieren, damit eine Frage nur einmal geprüft werden kann
         let submitbutton = document.querySelector(".submit-button");
         submitbutton.disabled = true;
+
+        // Eingabefeld für die Frage deaktivieren
+        let answerfield = document.querySelector(".answer");
+        answerfield.disabled = true;
 
         //Antworten vergleichen und Ergebnis anzeigen
         if (answer === this.questions[questionnr-1]["english"]) {
                 result.innerHTML = "Richtig!";
         }
         else {
-           result.innerHTML = "Falsch!";
+           result.innerHTML = `Falsch! Die rictige Antwort ist: ${this.questions[questionnr-1]["english"]}` ;
         }
     }
 
-    // zeigt die naecste Frage, wenn sie geprüft wurde
+    // zeigt die naecste Frage, wenn die aktuelle Frage geprüft wurde
     _showNextQuestion () {
         // Referenzen über HTML Elemente
         let number = document.querySelector(".question-number").innerText;
@@ -105,17 +109,22 @@ class QuizQuestionView {
         let result = document.querySelector(".result");
 
 
-        //Prüft ob die letzte (zehnte) Frage angezeigt wird,
-        //Wenn nicht zeigt die naechste Frage
+        /*Prüft ob die letzte (zehnte) Frage angezeigt wird,
+        Wenn nicht zeigt die naechste Frage*/
         if (number < 10) {
             question.innerHTML = `${this.questions[number]["german"]}` ;
             questionnr.innerHTML = `${this.questions[number]["number"]}`;
 
-        //Submit Button aktiv machen,
-        //den Inhalt des Inputfelds und das Ergebnis der vorherigen Frage löschen
+        /*Submit Button aktiv machen,
+        den Inhalt des Inputfelds und das Ergebnis der vorherigen Frage löschen,
+        Eingabefeld für die Frage wieder aktivieren*/
         submitbutton.disabled = false;
+
         answer.value =" ";
         result.innerHTML =" ";
+
+        let answerfield = document.querySelector(".answer");
+        answerfield.disabled = false;
         }
 
 
