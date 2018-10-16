@@ -34,28 +34,22 @@ class VocabularyDisplayEdit {
         // Anzuzeigende HTML-Elemente ermitteln
         let section = document.querySelector("#vocabulary-display-edit").cloneNode(true);
 
-        //Event Handler nach Single Page Router nicht mehr notwendig
-        // Event Handler registrieren
-        //let overviewItem = section.querySelector("header .item.overview");
-
-        //overviewItem.addEventListener("click", () => {
-        //    this._app.showSongOverview();
-        //})
-
-        // Ergebnis zurückliefern
-        //return content;
-
-        //addEventListener für speichern
+        //addEventListener für speichern --> section.getElementById?????
         let speichern = document.getElementById("sp");
         speichern.addEventListener("click", () => this._saveVocab());
 
-
         //addEventListener für löschen
         //let del = document.addEventListener("click",() => this._deleteVocab());
+
         //addEventListener für bearbeiten
 
         // SPeichern und Abbrechen sichtbar machen
-        //save.classList.remove("");
+        let a = document.getElementById("abbrechen");
+        a.classList.add("hidden");
+
+        //let input1 = document.getElementById("englisch");
+        //input1.attr("disabled");
+
 
         return {
             className: "vocabulary-display-edit",
@@ -106,6 +100,8 @@ class VocabularyDisplayEdit {
                 format: html,
             });
 
+            router.navigate('/');
+
         //}
     }
     // zurück auf Übersicht! --> Seite wechseln!! wiee
@@ -119,6 +115,9 @@ class VocabularyDisplayEdit {
         let abbrElement = document.getElementById("abbr");
             abbrElement.classList.remove("hidden");
 
+        //Felder ausgrauen
+        document.getElementById('inputFelder').setAttribute('disabled','disabled', 'disabled');
+
 
 
     }
@@ -127,7 +126,7 @@ class VocabularyDisplayEdit {
     /*_deleteVocab() {
         alert("Wirklich löschen??");
         // --in database.js löschen --> wie bekomme ich id? und
-        Vokabeln.delete(id); //--> wie rufe ich mit diesem async auf??
+        Vokabeln.delete(id);
         // zurück auf Übersicht
     }*/
 }
