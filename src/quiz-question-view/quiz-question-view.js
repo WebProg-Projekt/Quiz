@@ -12,6 +12,7 @@ class QuizQuestionView {
     constructor(app, questions) {
         this._app = app;
         this._questions = questions;
+        console.log(this._questions);
         this._score = 0;
     }
 
@@ -41,8 +42,8 @@ class QuizQuestionView {
         nextbutton.addEventListener("click", () => this._showNextQuestion());
 
         // Die erste Frage und die Fragennummer anzeigen
-        question.innerHTML = `${this._questions[0]["german"]}` ;
-        questionnr.innerHTML = `${this._questions[0]["number"]}`;
+        question.innerHTML = `${this._questions[0]["deutsch"]}` ;
+        questionnr.innerHTML = `${this._questions[0]["nummer"]}`;
 
         return {
         className: "quiz-question-view",
@@ -76,29 +77,41 @@ class QuizQuestionView {
     * passt die Score an
     */
     _checkAnswer() {
-        // Referenz über HTML Elemente für das Ergebnis und die angegebene Antwort
+        // Referenz über HTML Elemente
         let result = document.querySelector(".result");
         let answer = document.querySelector(".answer").value;
+        let submitbutton = document.querySelector(".submit-button");
+        let answerfield = document.querySelector(".answer");
 
         //Fragennummer der angezeigten Frage ermitteln
         let questionnr = document.querySelector(".question-number").innerText;
 
-        // Button "Prüfen" deaktivieren, damit eine Frage nur einmal geprüft werden kann
-        let submitbutton = document.querySelector(".submit-button");
-        submitbutton.disabled = true;
-
-        // Eingabefeld für die Frage deaktivieren
-        let answerfield = document.querySelector(".answer");
-        answerfield.disabled = true;
-
-        //Antworten vergleichen und Ergebnis anzeigen
-        if (answer === this._questions[questionnr-1]["english"]) {
-                result.innerHTML = "Richtig!";
-                this._score ++;
-                console.log(this._score);
+        //Prüfen ob eine Antwort eingegeben wurde
+        if (!answer) {
+            alert("Bitte geben Sie Ihre Antwort ein!");
         }
-        else {
-           result.innerHTML = `Falsch! Die rictige Antwort ist: ${this._questions[questionnr-1]["english"]}` ;
+        else  {
+            // Button "Prüfen" deaktivieren, damit eine Frage nur einmal geprüft werden kann
+            submitbutton.disabled = true;
+
+            // Eingabefeld für die Frage deaktivieren
+            answerfield.disabled = true;
+
+            answer = answer.toLowerCase();
+            answer = answer.trim();
+            this._questions[questionnr-1]["english"] = this._questions[questionnr-1]["english"].toLowerCase();
+            this._questions[questionnr-1]["english"] = this._questions[questionnr-1]["english"].trim();
+
+
+            //Antworten vergleichen und Ergebnis anzeigen
+            if (answer === this._questions[questionnr-1]["english"]) {
+                    result.innerHTML = "Richtig!";
+                    this._score ++;
+                    console.log(this._score);
+                }
+            else {
+                result.innerHTML = `Falsch! Die rictige Antwort ist: ${this._questions[questionnr-1]["english"]}` ;
+            }
         }
     }
 
@@ -122,8 +135,8 @@ class QuizQuestionView {
         */
         if (submitbutton.disabled) {
             if (number < 10) {
-                question.innerHTML = `${this._questions[number]["german"]}` ;
-                questionnr.innerHTML = `${this._questions[number]["number"]}`;
+                question.innerHTML = `${this._questions[number]["deutsch"]}` ;
+                questionnr.innerHTML = `${this._questions[number]["nummer"]}`;
 
                 /*Submit Button aktiv machen,
                 den Inhalt des Inputfelds und das Ergebnis der vorherigen Frage löschen,
