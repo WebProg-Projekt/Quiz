@@ -34,22 +34,24 @@ class VocabularyDisplayEdit {
         // Anzuzeigende HTML-Elemente ermitteln
         let section = document.querySelector("#vocabulary-display-edit").cloneNode(true);
 
-        //addEventListener für speichern --> section.getElementById?????
-        let speichern = document.getElementById("sp");
+        //addEventListener für speichern --> nur: section.querySelector
+        let speichern = section.querySelector(".save");
         speichern.addEventListener("click", () => this._saveVocab());
 
-        //addEventListener für löschen
-        //let del = document.addEventListener("click",() => this._deleteVocab());
+        //EventListener für löschen
+        let del = section.querySelector(".delete");
+        del.addEventListener("click",() => this._deleteVocab());
 
-        //addEventListener für bearbeiten
+//TEST
+        let input = section.querySelector(".form-control");
+        input.disabled = true;
 
-        // SPeichern und Abbrechen sichtbar machen
-        let a = document.getElementById("abbrechen");
-        a.classList.add("hidden");
 
-        //let input1 = document.getElementById("englisch");
-        //input1.attr("disabled");
+        //EventListener für anzuzeigen
+        //let show = document.addEventListener("click",() => this._showVocab());
 
+        //EventListener für bearbeiten
+        //let edit = document.addEventListener("click",() => this._editVocab());
 
         return {
             className: "vocabulary-display-edit",
@@ -89,18 +91,27 @@ class VocabularyDisplayEdit {
     _saveVocab() {
         //let dB = async () => {
 
-            let deutsch1 = document.getElementById("deutsch").value;
-            let englisch1 = document.getElementById("englisch").value;
-            let notiz1 = document.getElementById("notiz").value;
+            let deutsch = document.getElementById("deutsch").value;
+            let englisch = document.getElementById("englisch").value;
+            let notiz = document.getElementById("notiz").value;
+
+            //Schleife, um jeden Wert durchzugehen und auf bereits vorhandene Vokabel zu überprüfen
+            /*for (int i = 0; i <= database.length-1; i++){
+                if (database.vokabeln.[i]."deutsch" === deutsch){ // Zurgriff ???
+                    alert("Vokabel bereits vorhanden!");
+                    //aus methode rausspringen
+                    this._app.showVocabularyOverview();
+                }
+            }*/
 
             this._vokabeln.saveNew({
-                deutsch: deutsch1,
-                englisch: englisch1,
-                notiz: notiz1,
-                format: html,
+                deutsch: deutsch,
+                englisch: englisch,
+                notiz: notiz,
+                //format: html,
             });
 
-            router.navigate('/');
+            this._app.showVocabularyOverview();
 
         //}
     }
@@ -110,25 +121,37 @@ class VocabularyDisplayEdit {
     _showVocab() {
         // --- vocab Overview muss click-Event hinzufügen, wenn click auf (overviev .<liste) --> anzeige sicht
 
-        let editElement = document.getElementById("edit");
-            editElement.classList.remove("hidden");
-        let abbrElement = document.getElementById("abbr");
-            abbrElement.classList.remove("hidden");
+        //Button anzeigen/verstecken
+        let lösch = document.querySelector(".delete");
+        del.classList.remove("invisible");
 
-        //Felder ausgrauen
-        document.getElementById('inputFelder').setAttribute('disabled','disabled', 'disabled');
+        let edit = document.querySelector(".edit");
+        edit.classList.remove("invisible");
+
+        let save = document.querySelector(".save");
+        save.classList.add("invisible");
 
 
+        //inputFelder.disabled = true;
+        let input = document.querySelector(".form-control");
+        //input.disabled = true;
+        //input.setAttribute('disabled','disabled','disabled');
 
     }
 
     //einzelne Vokabel löschen
-    /*_deleteVocab() {
+    async _deleteVocab() {
         alert("Wirklich löschen??");
+
         // --in database.js löschen --> wie bekomme ich id? und
-        Vokabeln.delete(id);
+         delete(4);
+         let vok = await this._vokabeln.search();
+         console.log("Datenbank initialisieren, Anzahl Vokabeln:", vok.length);
+         console.log(vok);
+
         // zurück auf Übersicht
-    }*/
+        this._app.showVocabularyOverview();
+    }
 }
 
 export default VocabularyDisplayEdit;
