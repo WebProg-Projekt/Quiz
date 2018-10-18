@@ -13,6 +13,9 @@ html, body {
     padding: 0;
     margin: 0;
     height: 100%;
+
+
+
 }
 
 body {
@@ -54,10 +57,11 @@ body {
     /* Hintergrundbild hinter dem Hauptbereich der App */
     html {
         /* https://pixabay.com/de/computer-notebook-kaffee-820281/ */
-        background-image: url(background.jpg);
+        background-image: url(literature.jpg);2
         background-attachment: fixed;
         background-size: cover;
-        background-position: center;
+        background-position: right;
+
     }
 
     /* Hauptbereich der App vergrößern */
