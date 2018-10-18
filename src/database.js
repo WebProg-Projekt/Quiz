@@ -82,7 +82,7 @@ class Vokabeln {
      * Gibt eine Liste mit allen Vokabeln zurück, deren deutsche oder englische
      * Bedeutung den gesuchten Wert enthalten.
      *
-     * @param  {String}  query Gesuchter Titel oder Künstler
+     * @param  {String}  query Gesuchte deutsche oder englische Bedeutung
      * @return {Promise} Asynchrones Promise-Objekt mit dem Suchergebnis
      */
     async search(query) {

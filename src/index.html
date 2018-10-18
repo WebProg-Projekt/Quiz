@@ -18,7 +18,7 @@
                 <div class="top left">
                     <div class="item inactive">
                         <b>
-                            Eine Browser App: VocabuLearn
+                            VocabuLearn
                         </b>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                         </a>
                     </div>
                     <div class="item">
-                        Sortierung deutsch
+                        Sortierung
                     </div>
                     <div class="item">
                         Sortierung englisch
@@ -111,26 +111,26 @@
             <main>
                 <div class="container padding" >
                     Vokabel anzeigen und bearbeiten
-                    <div class="row">
+                    <div class="row" >
                         <div class="col-md-6">
                             <!-- input-Überschrift -->
                             <label for="inputD">deutsche Eingabe</label>
                             <!-- input -->
-                            <input  type="text" class="form-control" id="deutsch" placeholder="Bitte  etwas  eingeben...">
+                            <input  type="text" class="form-control deutsch" id="inputD" placeholder="Bitte  etwas  eingeben...">
                         </div>
                         <div class="col-md-6">
                             <!-- input-Überschrift -->
                             <label for="inputE">englische Einagbe</label>
                             <!-- input -->
-                            <input  type="text" class="form-control" id="englisch" placeholder="Bitte  etwas  eingeben...">
+                            <input  type="text" class="form-control englisch" id="inputE" placeholder="Bitte  etwas  eingeben...">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <!-- input-Überschrift -->
-                            <label for="input1">Notiz</label>
+                            <label for="inputN">Notiz</label>
                             <!-- input -->
-                            <input  type="text" class="form-control" id="notiz" placeholder="z.B. Genus, Plural, Steigerungsform, ...">
+                            <input  type="text" class="form-control notiz" id="inputN" placeholder="z.B. Genus, Plural, Steigerungsform, ...">
                         </div>
                     </div>
                     <!-- Buttons -->
@@ -140,15 +140,17 @@
                                 <button class="btn btn-primary btn-lg quit" type="submit">Abbrechen</button>
                             </a>
                         </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-primary btn-lg save" type="submit" >Speichern</button>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <button class="btn btn-primary btn-lg save" type="submit" >Speichern</button>
-                    </div>
+                    <div class="row">
+                        <div class="col-md-6 ">
+                            <button class="btn btn-primary btn-lg invisible delete" type="submit">Löschen</button>
+                        </div>
                         <div class="col-md-6 ">
                             <button class="btn btn-primary btn-lg invisible edit"  type="submit" >Bearbeiten</button>
                         </div>
-                        <div class="col-md-6 ">
-                            <button class="btn btn-primary btn-lg invisible delete" type="submit">Löschen</button>
                     </div>
                 </div>
             </main>
