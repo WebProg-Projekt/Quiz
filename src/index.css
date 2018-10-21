@@ -8,14 +8,23 @@
  * anderen importiert werden.
  */
 @import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC:700');
 
 html, body {
     padding: 0;
     margin: 0;
     height: 100%;
+    box-shadow: 30px 50px 50px silver;
 
+}
 
-
+header {
+    font-family: 'Amatic SC', cursive;
+    font-weight: bold;
+    font-size: 15pt;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 }
 
 body {
@@ -23,6 +32,7 @@ body {
     font-size: 11pt;
     line-height: 1.6;
     color: var(--font-color);
+
 }
 
 /*
@@ -57,10 +67,10 @@ body {
     /* Hintergrundbild hinter dem Hauptbereich der App */
     html {
         /* https://pixabay.com/de/computer-notebook-kaffee-820281/ */
-        background-image: url(literature.jpg);2
+        background-image: url(paper.jpg);
         background-attachment: fixed;
         background-size: cover;
-        background-position: right;
+        background-position: center;
 
     }
 
@@ -69,6 +79,8 @@ body {
         display: flex;
         align-items: stretch;
         justify-content: center;
+
+        
     }
 
     body > * {
@@ -81,6 +93,13 @@ body {
  */
 .hidden {
     display: none;
+}
+
+.visible {
+  visibility: visible;
+}
+.invisible {
+  visibility: hidden;
 }
 
 .padding {
