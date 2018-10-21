@@ -304,8 +304,6 @@ class App {
         let randomIDs = chance.unique (chance.integer, 4, { min: 1, max: vok.length});
         console.log(randomIDs);
 
-
-
         //let erste = await this._vokabeln.getById(randomIDs[0]);
         //console.log("Erste Random Vokabel - Objekt", erste);
         //console.log(erste["englisch"]);
@@ -314,17 +312,19 @@ class App {
         Wörter nach zufaellig gewaehlten IDs suchen und in das Leere Array speichern
         */
         let questions = [];
-        randomIDs.forEach( id => {
-        //randomIDs.forEach( async (id) => {
-            let vocabulary = this._vokabeln.getById(id);
-            //let vocabulary = await this._vokabeln.getById(id);
-            //console.log(id, vocabulary);
-            //console.log(vocabulary["deutsch"]);
-            //questions.push(vocabulary);
+        //randomIDs.forEach( id => {
+        randomIDs.forEach( async (id) => {
+            //let vocabulary = this._vokabeln.getById(id);
+            let vocabulary = await this._vokabeln.getById(id);
+//!!! Nach der 318. Zeile springt er zu 324 und führt 320-322 gaanz zum Schluss!!! Deshalb ist das Array in 326 leer!!
+            console.log(id, vocabulary);
+            console.log(vocabulary["deutsch"]);
+            questions.push(vocabulary);
         });
 
-        //console.log(questions);
-        //console.log(questions[0]["deutsch"]);
+
+        console.log(questions);
+        console.log(questions[0]);
 
         //return questions;
 

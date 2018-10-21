@@ -1,0 +1,18 @@
+/*
+ * Dieses Stylesheet darf nur Selektoren beinhalten, die mit .quiz-question-view
+ * beginnen. Denn wir wollen nicht, dass hier Eigenschaften aus anderen Bereichen
+ * der Anwendung überschrieben werden.
+ */
+ .quiz-question-view main {
+    color: orchid !important;
+ }
+
+ .quiz-question-view main #quiz-box {
+     border-style: ridge;
+     border-radius: 10px;
+     padding: 15px;
+     border: 15px;
+ }
+.quiz-question-view main question-number {
+    color: tomato;
+}
