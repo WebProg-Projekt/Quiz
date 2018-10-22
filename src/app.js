@@ -95,8 +95,8 @@ class App {
      * @return {Boolean} Flag, ob die neue Seite aufgerufen werden konnte
      */
     showVocabularyOverview() {
-        let view = new VocabularyOverview(this);
-        this._switchVisibleView(view, this._vokabeln);
+        let view = new VocabularyOverview(this, this._vokabeln);
+        this._switchVisibleView(view);
     }
 
     /**
@@ -131,34 +131,34 @@ class App {
      * @return {Boolean} Flag, ob die neue Seite aufgerufen werden konnte
      */
      async _switchVisibleView(view) {
-     // Callback, mit dem die noch sichtbare View den Seitenwechsel zu einem
-     // späteren Zeitpunkt fortführen kann, wenn sie in der Methode onLeave()
-     // false zurückliefert. Dadurch erhält sie die Möglichkeit, den Anwender
-     // zum Beispiel zu fragen, ob er ungesicherte Daten speichern will,
-     // bevor er die Seite verlässt.
-     let newUrl = this._router.lastRouteResolved().url;
-     let goon = () => {
-         // ?goon an die URL hängen, weil der Router sonst nicht weiternavigiert
-         this._router.navigate(newUrl + "?goon");
-     }
-
-     // Aktuelle View fragen, ob eine neue View aufgerufen werden darf
-     if (this._currentView) {
-         let goonAllowed = await this._currentView.onLeave(goon);
-
-         if (!goonAllowed) {
-             this._navAborted = true;
-             return false;
+         // Callback, mit dem die noch sichtbare View den Seitenwechsel zu einem
+         // späteren Zeitpunkt fortführen kann, wenn sie in der Methode onLeave()
+         // false zurückliefert. Dadurch erhält sie die Möglichkeit, den Anwender
+         // zum Beispiel zu fragen, ob er ungesicherte Daten speichern will,
+         // bevor er die Seite verlässt.
+         let newUrl = this._router.lastRouteResolved().url;
+         let goon = () => {
+             // ?goon an die URL hängen, weil der Router sonst nicht weiternavigiert
+             this._router.navigate(newUrl + "?goon");
          }
+
+         // Aktuelle View fragen, ob eine neue View aufgerufen werden darf
+         if (this._currentView) {
+             let goonAllowed = await this._currentView.onLeave(goon);
+
+             if (!goonAllowed) {
+                 this._navAborted = true;
+                 return false;
+             }
+         }
+
+         // Alles klar, aktuelle View nun wechseln
+         document.title = `${this._title} – ${view.title}`;
+
+         this._currentView = view;
+         this._switchVisibleContent(await view.onShow());
+         return true;
      }
-
-     // Alles klar, aktuelle View nun wechseln
-     document.title = `${this._title} – ${view.title}`;
-
-     this._currentView = view;
-     this._switchVisibleContent(await view.onShow());
-     return true;
- }
 
     /**
      * Auswechseln des sichtbaren Inhalts der App. Hierfür muss der Methode

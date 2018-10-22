@@ -25,7 +25,7 @@ class QuizQuestionView {
      * @return {Object} Darzustellende DOM-Elemente gemäß Beschreibung der
      * Methode App._switchVisibleContent()
      */
-    onShow () {
+    async onShow () {
         // Anzuzeigende HTML-Elemente ermitteln
         let section = document.querySelector("#quiz-question-view").cloneNode(true);
 
@@ -61,7 +61,7 @@ class QuizQuestionView {
      * Zeitpunkt fortzuführen, falls wir hier false zurückgeben
      * @return {Boolean} true, wenn der Seitenwechsel erlaubt ist, sonst false
     */
-    onLeave(goon) {
+    async onLeave(goon) {
         return true;
     }
 

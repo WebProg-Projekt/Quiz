@@ -25,23 +25,19 @@ class VocabularyOverview {
      * Methode App._switchVisibleContent()
      */
 
-    onShow() {
+    async onShow() {
         // Anzuzeigende HTML-Elemente ermitteln
         let section = document.querySelector("#vocabulary-overview").cloneNode(true);
+    	  let ulElement = section.querySelector("#Liste");
 
-        //Vokabeln auslesen aufrufen
-        let anzeigen;
-        this.anzeigen._onRead();
-        //Vokabeln dynamisch anzeigen
-        let liElement = document.createElement("li"); //ID !
-        let ulElement = document.getElementById("Liste");
-        ulElement.appendChild(liElement)
-        //anzeigen = document.querySelectorAll("Liste");
+        //Vokabeln auslesen und anzeigen
+        let vokabeln = await this._vokabeln.search("");
+        this._showVokabeln(vokabeln, ulElement);
 
         return {
-        className: "vocabulary-overview",
-        topbar: section.querySelectorAll("header > *"),
-        main: section.querySelectorAll("main > *"),
+          className: "vocabulary-overview",
+          topbar: section.querySelectorAll("header > *"),
+          main: section.querySelectorAll("main > *"),
         };
 
         //Event Handler nach Single Page Router nicht mehr notwendig
@@ -65,7 +61,7 @@ class VocabularyOverview {
      * Zeitpunkt fortzuführen, falls wir hier false zurückgeben
      * @return {Boolean} true, wenn der Seitenwechsel erlaubt ist, sonst false
      */
-    onLeave(goon) {
+    async onLeave(goon) {
         return true;
     }
 
@@ -76,9 +72,19 @@ class VocabularyOverview {
         return "Übersicht";
     }
 
-    // Datenbankinformationen auszulesen
-    onRead(){
-        anzeigen = this._anzeigen.getById();
+    /**
+     * List mit Vokabeln anzeigen.
+     */
+    _showVokabeln(vokabeln, ulElement) {
+      return; // TODO: Methode ausprogrammieren
+
+      ulElement.innerHTML = "";
+
+      vokabeln.forEach(vokabel => {
+        let liElement = document.createElement("li");
+        liElement.textContent = `${vokabel.deutsch} (${vokabel.englisch})`;
+        ulElement.appendChild(liElement);
+      });
     }
 
 }
