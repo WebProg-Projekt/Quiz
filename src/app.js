@@ -38,11 +38,11 @@ class App {
     this._navAborted = false;
 
     this._router.on({
-        "*":                       () => this.showVocabularyOverview(),
+        "*":                             () => this.showVocabularyOverview(),
         "/vocabulary/new/":              () => this.showVocabularyDisplayEdit("", "new"),
         "/vocabulary/display/:id/":  params => this.showVocabularyDisplayEdit(params.id, "display"),
         "/vocabulary/edit/:id/":     params => this.showVocabularyDisplayEdit(params.id, "edit"),
-        "/quiz":     () => this.showQuizQuestionView(),
+        "/quiz":                         () => this.showQuizQuestionView(),
     });
 
     this._router.hooks({
@@ -111,8 +111,10 @@ class App {
         this._switchVisibleView(view);
     }
 
-    showQuizQuestionView () {
-        let questions = this._selectQuestions ();
+    async showQuizQuestionView () {
+    //showQuizQuestionView () {
+        //let questions = await this._selectQuestions ();
+        let questions = await this._selectQuestions ();
         let view = new QuizQuestionView(this, questions);
         this._switchVisibleView(view);
     }
@@ -128,33 +130,35 @@ class App {
      * @param  {Object} view View-Objekt mit einer onShow()-Methode
      * @return {Boolean} Flag, ob die neue Seite aufgerufen werden konnte
      */
-    _switchVisibleView(view) {
-        // Callback, mit dem die noch sichtbare View den Seitenwechsel zu einem
-        // späteren Zeitpunkt fortführen kann, wenn sie in der Methode onLeave()
-        // false zurückliefert. Dadurch erhält sie die Möglichkeit, den Anwender
-        // zum Beispiel zu fragen, ob er ungesicherte Daten speichern will,
-        // bevor er die Seite verlässt.
-        let newUrl = this._router.lastRouteResolved().url;
-        let goon = () => {
-            // vor Single Page Router -> this._switchVisibleView(view);
-            // ?goon an die URL hängen, weil der Router sonst nicht weiternavigiert
-            this._router.navigate(newUrl + "?goon");
-        }
+     async _switchVisibleView(view) {
+     // Callback, mit dem die noch sichtbare View den Seitenwechsel zu einem
+     // späteren Zeitpunkt fortführen kann, wenn sie in der Methode onLeave()
+     // false zurückliefert. Dadurch erhält sie die Möglichkeit, den Anwender
+     // zum Beispiel zu fragen, ob er ungesicherte Daten speichern will,
+     // bevor er die Seite verlässt.
+     let newUrl = this._router.lastRouteResolved().url;
+     let goon = () => {
+         // ?goon an die URL hängen, weil der Router sonst nicht weiternavigiert
+         this._router.navigate(newUrl + "?goon");
+     }
 
-        // Aktuelle View fragen, ob eine neue View aufgerufen werden darf
-        if (this._currentView && !this._currentView.onLeave(goon)) {
+     // Aktuelle View fragen, ob eine neue View aufgerufen werden darf
+     if (this._currentView) {
+         let goonAllowed = await this._currentView.onLeave(goon);
 
-            this._navAborted = true;  // Single Page Router
-            return false;
-        }
+         if (!goonAllowed) {
+             this._navAborted = true;
+             return false;
+         }
+     }
 
-        // Alles klar, aktuelle View nun wechseln
-        document.title = `${this._title} – ${view.title}`;
+     // Alles klar, aktuelle View nun wechseln
+     document.title = `${this._title} – ${view.title}`;
 
-        this._currentView = view;
-        this._switchVisibleContent(view.onShow());
-        //?????return true;
-    }
+     this._currentView = view;
+     this._switchVisibleContent(await view.onShow());
+     return true;
+ }
 
     /**
      * Auswechseln des sichtbaren Inhalts der App. Hierfür muss der Methode
@@ -291,47 +295,62 @@ class App {
     }
 
     // Sucht 10 verschiedene Fragen aus der Datenbank und liefert als JSON zurück
-    _selectQuestions () {
+    //_selectQuestions () {
+     async _selectQuestions () {
+        //let vok =  this._vokabeln.search();
+        let vok = await this._vokabeln.search();
 
         /* 10 zufällige und unique Nummer zwischen 0- vok.length generieren
         und in einem Array speichern*/
-        let randomIDs = chance.unique (chance.integer, 10, { min: 1, max: 10});
+        //let randomIDs = chance.unique (chance.integer, 4, { min: 1, max: 10});
+        let randomIDs = chance.unique (chance.integer, 4, { min: 1, max: vok.length});
         console.log(randomIDs);
 
-        //length??
 
-        let erste = this._vokabeln.getById(randomIDs[0]);
-        console.log("Erste Random Vokabel - Objekt", erste);
-        console.log(erste["englisch"]);
+
+        //let erste = await this._vokabeln.getById(randomIDs[0]);
+        //console.log("Erste Random Vokabel - Objekt", erste);
+        //console.log(erste["englisch"]);
 
         /* Ein leeres Array generieren,
         Wörter nach zufaellig gewaehlten IDs suchen und in das Leere Array speichern
         */
         let questions = [];
         randomIDs.forEach( id => {
+        //randomIDs.forEach( async (id) => {
             let vocabulary = this._vokabeln.getById(id);
-            questions.push(vocabulary);
+            //let vocabulary = await this._vokabeln.getById(id);
+            //console.log(id, vocabulary);
+            //console.log(vocabulary["deutsch"]);
+            //questions.push(vocabulary);
         });
 
+        //console.log(questions);
+        //console.log(questions[0]["deutsch"]);
+
+        //return questions;
 
         //Fragen ausgeben
         return [
         {
-            number: 1,
-            german: "Hund",
+            nummer: 1,
+            deutsch: "Hund",
             english: "dog"
         },
         {
-            number: 2,
-            german: "die Katze",
+            nummer: 2,
+            deutsch: "die Katze",
             english: "cat"
         },
         {
-            number: 3,
-            german: "Keller",
+            nummer: 3,
+            deutsch: "Keller",
             english: "basement"
         }
     ];
+
+
+
 
     };
 
