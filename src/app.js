@@ -96,7 +96,7 @@ class App {
      */
     showVocabularyOverview() {
         let view = new VocabularyOverview(this);
-        this._switchVisibleView(view);
+        this._switchVisibleView(view, this._vokabeln);
     }
 
     /**

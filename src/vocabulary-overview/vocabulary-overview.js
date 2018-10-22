@@ -10,8 +10,9 @@ class VocabularyOverview {
      * Konstruktor,
      * @param {Objekt} app Zentrales App-Objekt der Anwendung
      */
-    constructor(app) {
+    constructor(app, vokabeln) {
         this._app = app;
+        this._vokabeln = vokabeln;
     }
 
     /**
@@ -27,6 +28,15 @@ class VocabularyOverview {
     onShow() {
         // Anzuzeigende HTML-Elemente ermitteln
         let section = document.querySelector("#vocabulary-overview").cloneNode(true);
+
+        //Vokabeln auslesen aufrufen
+        let anzeigen;
+        this.anzeigen._onRead();
+        //Vokabeln dynamisch anzeigen
+        let liElement = document.createElement("li"); //ID !
+        let ulElement = document.getElementById("Liste");
+        ulElement.appendChild(liElement)
+        //anzeigen = document.querySelectorAll("Liste");
 
         return {
         className: "vocabulary-overview",
@@ -65,6 +75,12 @@ class VocabularyOverview {
     get title() {
         return "Übersicht";
     }
+
+    // Datenbankinformationen auszulesen
+    onRead(){
+        anzeigen = this._anzeigen.getById();
+    }
+
 }
 
 export default VocabularyOverview;
