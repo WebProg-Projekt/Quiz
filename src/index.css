@@ -75,18 +75,21 @@ body {
     }
 
     /* Hauptbereich der App vergrößern */
-    body {
+    /*body {
         display: flex;
         align-items: stretch;
         justify-content: center;
 
-        
+
     }
+
 
     body > * {
         flex: 1;
-    }
+    }*/
+
 }
+
 
 /*
  * Häufig benötigte Hilfsklassen

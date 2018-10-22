@@ -44,7 +44,7 @@ class QuizQuestionView {
 
         // Die erste Frage und die Fragennummer anzeigen
         question.innerHTML = `${this._questions[0]["deutsch"]}` ;
-        questionNr.innerHTML = `${this._questionnr}`;
+        questionNr.innerHTML = `Frage ${this._questionnr}`;
 
         return {
         className: "quiz-question-view",
@@ -133,9 +133,10 @@ class QuizQuestionView {
             Nach dem 10. Frage wird die Score angezeigt.
         */
         if (submitbutton.disabled) {
-            if (number < 3) {
+            if (this._questionnr < 10) {
+                this._questionnr++;
                 question.innerHTML = `${this._questions[this._questionnr-1]["deutsch"]}` ;
-                questionNr.innerHTML = `${this._questionnr}`;
+                questionNr.innerHTML = `Frage ${this._questionnr}`;
 
                 /*Submit Button aktiv machen,
                 den Inhalt des Inputfelds und das Ergebnis der vorherigen Frage löschen,
@@ -145,7 +146,6 @@ class QuizQuestionView {
                 result.innerHTML =" ";
                 let answerfield = document.querySelector(".answer");
                 answerfield.disabled = false;
-                this._questionnr++;
             }
             else {
                 this._questionnr++;

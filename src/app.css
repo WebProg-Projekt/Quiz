@@ -91,6 +91,7 @@
     font-size: 300%;
     font-weight: bold;
     text-align: center;
+    padding: 10px;
 }
 
 /*
@@ -144,13 +145,15 @@
     }
 
     /* Nur den Bereich unterhalb der Toolbar scrollen */
-    #app {
+    /*#app {
         display: flex;
         flex-direction: column;
     }
+
 
     #app > main {
         flex: 1;
         overflow: auto;
     }
+    */
 }

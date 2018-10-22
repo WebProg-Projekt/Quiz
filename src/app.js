@@ -301,7 +301,7 @@ class App {
 
         /* 10 zufällige und unique Nummer zwischen 0- vok.length generieren
         und in einem Array speichern*/
-        let randomIDs = chance.unique (chance.integer, 4, { min: 1, max: vok.length});
+        let randomIDs = chance.unique (chance.integer, 10, { min: 1, max: vok.length});
         console.log(randomIDs);
 
         /* Ein leeres Array generieren,
