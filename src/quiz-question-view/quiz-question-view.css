@@ -3,16 +3,39 @@
  * beginnen. Denn wir wollen nicht, dass hier Eigenschaften aus anderen Bereichen
  * der Anwendung überschrieben werden.
  */
+ @import url('https://fonts.googleapis.com/css?family=Amatic+SC:700');
+
+
  .quiz-question-view main {
-    color: orchid !important;
+    color: white !important;
+    font-size: 100%;
+    font-family: 'Amatic SC', cursive;
+    font-weight: bold;
  }
 
- .quiz-question-view main #quiz-box {
-     border-style: ridge;
+ .quiz-question-view main #quiz-box{
+     border-style: groove;
      border-radius: 10px;
      padding: 15px;
-     border: 15px;
+     border-width: 5px;
+     border-color: var(--header-normal-background-color);
+     background-color: var(--header-normal-background-color);
+
+ }
+
+ .quiz-question-view .question {
+
  }
 .quiz-question-view main question-number {
     color: tomato;
+}
+
+.quiz-question-view .answer {
+
+}
+.quiz-question-view .quiz,
+.quiz-question-view .submit,
+.quiz-question-view .next {
+    color: white;
+
 }

@@ -90,13 +90,6 @@
                 <div class="left">
                     <!-- Leer -->
                 </div>
-                <div class="right">
-                    <div class="item">
-                        <a href="/" data-navigo>
-                            Zurück zur Übersicht
-                        </a>
-                    </div>
-                </div>
             </header>
 
             <!-- Hauptbereich -->
@@ -163,23 +156,15 @@
                 <div class="left">
                     <!-- Leer -->
                 </div>
-                <div class="right">
-                    <div class="item">
-                        <a href="/" data-navigo>
-                            Zurück zur Übersicht
-                        </a>
-                    </div>
-                </div>
             </header>
                 <!-- Hauptbereich -->
             <main>
 
 
-
+            <!-- FRAGEN-MODUS -->
                 <div class="container padding" id="quiz-box">
-
                     <!--Frage-->
-                    <div class="row">
+                    <div class="row question">
                         <div class="col">
                             <div class="row question-number">
 
@@ -205,21 +190,30 @@
                     <div class="row quiz-buttons">
                         <div class="col-4 quit-button">
                             <a href="/" data-navigo>
-                                <button> <a href="/" data-navigo>
+                                <button class="btn-lg quit" href="/" data-navigo>
                                     Abbrechen
-                                </a> </button>
+                                </button>
                             </a>
                         </div>
                         <div class="col-4">
-                            <button class ="submit-button"> Prüfen </button>
+                            <button class ="btn-lg submit-button"> Prüfen </button>
                             <!-- muss nach erstem mal disabled werden-->
                         </div>
                         <div class="col-4">
-                            <button class = "next-button"> Weiter </button>
+                            <button class = "btn-lg next-button"> Weiter </button>
                             <!-- Siehe Submit-Button für Forms und Form Attribute-->
                         </div>
 
                     </div>
+                </div>
+
+                <!-- SCORE-MODUS -->
+                <div class="container padding hidden" id="score-box">
+                    <h1> HERZLICHEN GLÜCKWUNSCH</h1>
+                    <img src="tenor.gif"> </img>
+
+                    <!-- Score -->
+                    <p class="score">  </p>
                 </div>
 
             </main>
