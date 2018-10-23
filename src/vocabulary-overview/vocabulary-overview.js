@@ -10,8 +10,9 @@ class VocabularyOverview {
      * Konstruktor,
      * @param {Objekt} app Zentrales App-Objekt der Anwendung
      */
-    constructor(app) {
+    constructor(app, vokabeln) {
         this._app = app;
+        this._vokabeln = vokabeln;
     }
 
     /**
@@ -24,14 +25,19 @@ class VocabularyOverview {
      * Methode App._switchVisibleContent()
      */
 
-    onShow() {
+    async onShow() {
         // Anzuzeigende HTML-Elemente ermitteln
         let section = document.querySelector("#vocabulary-overview").cloneNode(true);
+    	  let ulElement = section.querySelector("#Liste");
+
+        //Vokabeln auslesen und anzeigen
+        let vokabeln = await this._vokabeln.search("");
+        this._showVokabeln(vokabeln, ulElement);
 
         return {
-        className: "vocabulary-overview",
-        topbar: section.querySelectorAll("header > *"),
-        main: section.querySelectorAll("main > *"),
+          className: "vocabulary-overview",
+          topbar: section.querySelectorAll("header > *"),
+          main: section.querySelectorAll("main > *"),
         };
 
         //Event Handler nach Single Page Router nicht mehr notwendig
@@ -55,7 +61,7 @@ class VocabularyOverview {
      * Zeitpunkt fortzuführen, falls wir hier false zurückgeben
      * @return {Boolean} true, wenn der Seitenwechsel erlaubt ist, sonst false
      */
-    onLeave(goon) {
+    async onLeave(goon) {
         return true;
     }
 
@@ -65,6 +71,22 @@ class VocabularyOverview {
     get title() {
         return "Übersicht";
     }
+
+    /**
+     * List mit Vokabeln anzeigen.
+     */
+    _showVokabeln(vokabeln, ulElement) {
+      return; // TODO: Methode ausprogrammieren
+
+      ulElement.innerHTML = "";
+
+      vokabeln.forEach(vokabel => {
+        let liElement = document.createElement("li");
+        liElement.textContent = `${vokabel.deutsch} (${vokabel.englisch})`;
+        ulElement.appendChild(liElement);
+      });
+    }
+
 }
 
 export default VocabularyOverview;
