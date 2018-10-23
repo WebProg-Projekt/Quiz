@@ -11,6 +11,8 @@
     font-size: 100%;
     font-family: 'Amatic SC', cursive;
     font-weight: bold;
+    background-image: none;
+
  }
 
  .quiz-question-view main #quiz-box{

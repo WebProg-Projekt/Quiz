@@ -28,11 +28,13 @@ header {
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-size: 100%;
+    font-family: 'Amatic SC', cursive;
+    font-weight: bold;
     font-size: 11pt;
     line-height: 1.6;
     color: var(--font-color);
-
+    background-image: url(literature.jpg);
 }
 
 /*
@@ -65,17 +67,18 @@ body {
  */
 @media (min-width: 85em) {
     /* Hintergrundbild hinter dem Hauptbereich der App */
-    html {
-        /* https://pixabay.com/de/computer-notebook-kaffee-820281/ */
+    /*html {
+        /* https://pixabay.com/de/computer-notebook-kaffee-820281/
         background-image: url(paper.jpg);
         background-attachment: fixed;
         background-size: cover;
         background-position: center;
 
     }
+    */
 
     /* Hauptbereich der App vergrößern */
-    /*body {
+    body {
         display: flex;
         align-items: stretch;
         justify-content: center;
@@ -86,7 +89,7 @@ body {
 
     body > * {
         flex: 1;
-    }*/
+    }
 
 }
 
