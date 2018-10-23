@@ -23,6 +23,9 @@
      border-color: var(--header-normal-background-color);
      background-color: var(--header-normal-background-color);
 
+    height: 800px;
+    margin-top: 20%;
+    margin-bottom: 20%;
  }
 
 
@@ -36,4 +39,11 @@
 .quiz-question-view .next {
     color: white;
 
+}
+@media screen and (min-width: 85em) {
+    .quiz-question-view main #quiz-box{
+        height: 400px;
+        margin-top: 10%;
+        margin-bottom: 10%;
+    }
 }
