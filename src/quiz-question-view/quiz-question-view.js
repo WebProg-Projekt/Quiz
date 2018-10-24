@@ -84,6 +84,9 @@ class QuizQuestionView {
         let submitbutton = document.querySelector(".submit-button");
         let answerfield = document.querySelector(".answer");
 
+        result.classList.remove("false");
+        result.classList.remove("true");
+
         //Prüfen ob eine Antwort eingegeben wurde
         if (!answer) {
             alert("Bitte geben Sie Ihre Antwort ein!");
@@ -91,8 +94,9 @@ class QuizQuestionView {
         else  {
             // Button "Prüfen" deaktivieren, damit eine Frage nur einmal geprüft werden kann
             submitbutton.disabled = true;
+            submitbutton.classList.add("invisible");
 
-            // Eingabefeld für die Frage deaktivieren
+            //Eingabefeld für die Frage deaktivieren
             answerfield.disabled = true;
 
             answer = answer.toLowerCase();
@@ -102,11 +106,13 @@ class QuizQuestionView {
 
             //Antworten vergleichen und Ergebnis anzeigen
             if (answer === this._questions[this._questionnr-1]["englisch"]) {
+                    result.classList.add("richtig");
                     result.innerHTML = "Richtig!";
                     this._score ++;
                     console.log(this._score);
                 }
             else {
+                result.classList.add("false");
                 result.innerHTML = `Falsch! Die rictige Antwort ist: ${this._questions[this._questionnr-1]["englisch"]}` ;
             }
         }
@@ -142,6 +148,7 @@ class QuizQuestionView {
                 den Inhalt des Inputfelds und das Ergebnis der vorherigen Frage löschen,
                 Eingabefeld für die Frage wieder aktivieren*/
                 submitbutton.disabled = false;
+                submitbutton.classList.remove("invisible");
                 answer.value ="";
                 result.innerHTML =" ";
                 let answerfield = document.querySelector(".answer");
