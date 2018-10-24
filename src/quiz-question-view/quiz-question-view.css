@@ -25,9 +25,9 @@
      border-style: groove;
      border-radius: 10px;
      border-width: 5px;
-     border-color: var(--header-normal-background-color);
-     /*background-color: var(--header-normal-background-color);*/
-     background-image: url(wood.jpg!d);
+     /*border-color: var(--header-normal-background-color);
+     background-color: var(--header-normal-background-color);*/
+     background-image: url(wood.jpg);
 
      height: 1200px;
      margin-top: 20%;
