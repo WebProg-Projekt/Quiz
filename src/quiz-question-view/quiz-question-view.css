@@ -1,0 +1,87 @@
+/*
+ * Dieses Stylesheet darf nur Selektoren beinhalten, die mit .quiz-question-view
+ * beginnen. Denn wir wollen nicht, dass hier Eigenschaften aus anderen Bereichen
+ * der Anwendung überschrieben werden.
+ */
+ @import url('https://fonts.googleapis.com/css?family=Amatic+SC:700');
+
+
+ .quiz-question-view main {
+    color: white !important;
+    font-size: 100%;
+    font-family: 'Amatic SC', cursive;
+    font-weight: bold;
+    background-image: none;
+
+ }
+
+ .quiz-question-view main #quiz-box{
+     padding-left: 5%;
+     padding-right: 5%;
+     padding-top: 10%;
+     padding-bottom: 10%;
+
+     border-style: groove;
+     border-radius: 10px;
+     border-width: 5px;
+     border-color: var(--header-normal-background-color);
+     background-color: var(--header-normal-background-color);
+
+     height: 1000px;
+     margin-top: 20%;
+     margin-bottom: 20%;
+ }
+
+
+ .quiz-question-view .question-number {
+     font-size: 50pt;
+ }
+ .quiz-question-view .question {
+     font-size: 80pt;
+
+ }
+ .quiz-question-view .result {
+     font-size: 50pt;
+ }
+
+.quiz-question-view .answer {
+    width: 100%;
+    margin-top: 40px;
+}
+.quiz-question-view .quiz,
+.quiz-question-view .submit,
+.quiz-question-view .next {
+    color: white;
+
+}
+@media screen and (min-width: 85em) {
+    .quiz-question-view main #quiz-box{
+        height: 400px;
+        margin-top: 10%;
+        margin-bottom: 10%;
+        padding: 10px;
+    }
+
+    .quiz-question-view .question-number {
+
+
+    }
+    .quiz-question-view .question {
+
+
+
+    }
+    .quiz-question-view .answer {
+
+    }
+
+    .quiz-question-view .answer {
+    }
+
+    .quiz-question-view .quiz,
+    .quiz-question-view .submit,
+    .quiz-question-view .next {
+        color: white;
+
+    }
+}

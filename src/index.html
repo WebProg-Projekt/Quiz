@@ -15,19 +15,11 @@
             <!-- Topbar -->
             <header>
                 <!-- Obere Zeile (fester Inhalt) -->
-                <div class="top left">
+                <div class="top">
                     <div class="item inactive">
                         <b>
                             VocabuLearn
                         </b>
-                    </div>
-                </div>
-                <div class="top right">
-                    <div class="item">
-                        <a href="https://github.com/DennisSchulmeister/dhbwka-wwi-webprog-my-songbook" target="_blank">GitHub</a>
-                    </div>
-                    <div class="item">
-                        <a href="https://www.wpvs.de/browser-app/" target="_blank">Programmieranleitung</a>
                     </div>
                 </div>
 
@@ -92,13 +84,6 @@
             <header>
                 <div class="left">
                     <!-- Leer -->
-                </div>
-                <div class="right">
-                    <div class="item">
-                        <a href="/" data-navigo>
-                            Zurück zur Übersicht
-                        </a>
-                    </div>
                 </div>
             </header>
 
@@ -166,32 +151,24 @@
                 <div class="left">
                     <!-- Leer -->
                 </div>
-                <div class="right">
-                    <div class="item">
-                        <a href="/" data-navigo>
-                            Zurück zur Übersicht
-                        </a>
-                    </div>
-                </div>
             </header>
                 <!-- Hauptbereich -->
             <main>
 
 
-
-                <div class="container padding">
-
+            <!-- FRAGEN-MODUS -->
+                <div class="container padding" id="quiz-box">
                     <!--Frage-->
                     <div class="row">
-                        <div class="col jumbotron">
-                            <div class="row question-number">
+                        <div class="col">
+                            <div class="question-number">
 
                             </div>
                             <!-- Frage -->
-                            <div class="row question">
+                            <div class="question">
 
                             </div>
-                            <div class="row">
+                            <div>
                                 <input type="text" class="answer" required>
                                 <!-- Input sizing bootstrap-->
                                 </input>
@@ -201,26 +178,37 @@
                     </div>
 
                     <!--Ergebnis-->
-                    <div class="row result">
+                    <div class="result">
                     </div>
 
                     <!--Quiz Buttons-->
                     <div class="row quiz-buttons">
                         <div class="col-4 quit-button">
                             <a href="/" data-navigo>
-                                <button> Abbrechen </button>
+                                <button class="btn-lg quit" href="/" data-navigo>
+                                    Abbrechen
+                                </button>
                             </a>
                         </div>
                         <div class="col-4">
-                            <button class ="submit-button"> Prüfen </button>
+                            <button class ="btn-lg submit-button"> Prüfen </button>
                             <!-- muss nach erstem mal disabled werden-->
                         </div>
                         <div class="col-4">
-                            <button class = "next-button"> Weiter </button>
+                            <button class = "btn-lg next-button"> Weiter </button>
                             <!-- Siehe Submit-Button für Forms und Form Attribute-->
                         </div>
 
                     </div>
+                </div>
+
+                <!-- SCORE-MODUS -->
+                <div class="container padding hidden" id="score-box">
+                    <h1> HERZLICHEN GLÜCKWUNSCH</h1>
+                    <img src="tenor.gif"> </img>
+
+                    <!-- Score -->
+                    <p class="score">  </p>
                 </div>
 
             </main>

@@ -14,6 +14,7 @@ class QuizQuestionView {
         this._questions = questions;
         console.log(this._questions);
         this._score = 0;
+        this._questionnr = 1;
     }
 
     /**
@@ -31,7 +32,7 @@ class QuizQuestionView {
 
         // Referenz über HTML Elemente für die Anzeige der Frage und der Fragennummer
         let question = section.querySelector(".question");
-        let questionnr = section.querySelector(".question-number")
+        let questionNr = section.querySelector(".question-number")
 
         //Eventlistener beim Button "Prüfen" registrieren
         let submitbutton = section.querySelector(".submit-button");
@@ -43,7 +44,7 @@ class QuizQuestionView {
 
         // Die erste Frage und die Fragennummer anzeigen
         question.innerHTML = `${this._questions[0]["deutsch"]}` ;
-        questionnr.innerHTML = `${this._questions[0]["nummer"]}`;
+        questionNr.innerHTML = `Frage ${this._questionnr}`;
 
         return {
         className: "quiz-question-view",
@@ -83,9 +84,6 @@ class QuizQuestionView {
         let submitbutton = document.querySelector(".submit-button");
         let answerfield = document.querySelector(".answer");
 
-        //Fragennummer der angezeigten Frage ermitteln
-        let questionnr = document.querySelector(".question-number").innerText;
-
         //Prüfen ob eine Antwort eingegeben wurde
         if (!answer) {
             alert("Bitte geben Sie Ihre Antwort ein!");
@@ -99,18 +97,17 @@ class QuizQuestionView {
 
             answer = answer.toLowerCase();
             answer = answer.trim();
-            this._questions[questionnr-1]["english"] = this._questions[questionnr-1]["english"].toLowerCase();
-            this._questions[questionnr-1]["english"] = this._questions[questionnr-1]["english"].trim();
-
+            this._questions [this._questionnr-1]["englisch"] = this._questions [this._questionnr-1]["englisch"].toLowerCase();
+            this._questions [this._questionnr-1]["englisch"] = this._questions [this._questionnr-1]["englisch"].trim();
 
             //Antworten vergleichen und Ergebnis anzeigen
-            if (answer === this._questions[questionnr-1]["english"]) {
+            if (answer === this._questions[this._questionnr-1]["englisch"]) {
                     result.innerHTML = "Richtig!";
                     this._score ++;
                     console.log(this._score);
                 }
             else {
-                result.innerHTML = `Falsch! Die rictige Antwort ist: ${this._questions[questionnr-1]["english"]}` ;
+                result.innerHTML = `Falsch! Die rictige Antwort ist: ${this._questions[this._questionnr-1]["englisch"]}` ;
             }
         }
     }
@@ -123,20 +120,23 @@ class QuizQuestionView {
         // Referenzen über HTML Elemente
         let number = document.querySelector(".question-number").innerText;
         let question = document.querySelector(".question");
-        let questionnr = document.querySelector(".question-number");
+        let questionNr = document.querySelector(".question-number");
         let answer = document.querySelector(".answer");
         let submitbutton = document.querySelector(".submit-button");
         let result = document.querySelector(".result");
+
 
         /* Erst mal wird geprüft ob die Antwort schon geprüft wurde.
             - Wenn nicht, wird der Anwender aufgefordert, seine Antwort zu überprüfen.
             - Wenn ja, wird geprüft ob die letzte (zehnte) Frage angezeigt wird,
             wenn nicht wird  die naechste Frage angezeigt.
+            Nach dem 10. Frage wird die Score angezeigt.
         */
         if (submitbutton.disabled) {
-            if (number < 10) {
-                question.innerHTML = `${this._questions[number]["deutsch"]}` ;
-                questionnr.innerHTML = `${this._questions[number]["nummer"]}`;
+            if (this._questionnr < 10) {
+                this._questionnr++;
+                question.innerHTML = `${this._questions[this._questionnr-1]["deutsch"]}` ;
+                questionNr.innerHTML = `Frage ${this._questionnr}`;
 
                 /*Submit Button aktiv machen,
                 den Inhalt des Inputfelds und das Ergebnis der vorherigen Frage löschen,
@@ -147,25 +147,37 @@ class QuizQuestionView {
                 let answerfield = document.querySelector(".answer");
                 answerfield.disabled = false;
             }
+            else {
+                this._questionnr++;
+                this._showScore();
+            }
         }
         else {
             alert ("Bitte prüfen Sie erst Ihre Antwort");
         }
 
+    }
 
+    //Zeigt die Score an
+    _showScore () {
+        //Referenz über HTML-Elemente
+        let quizbox = document.querySelector("#quiz-box");
+        let scorebox = document.getElementById("score-box");
+
+        console.log(quizbox);
+        console.log(scorebox);
+        let score= document.querySelector(".score");
+        score.innerHTML = `Ihr Ergebnis ist: ${this._score} `;
+
+        //wechseln zwischen Fragen und Score
+        quizbox.classList.add("hidden");
+        scorebox.classList.remove("hidden");
 
 
     }
 
 
-
 }
-
-
-
-
-
-
 
 
 
