@@ -4,9 +4,6 @@
  * Anwendung überschrieben werden.
  */
 #app {
-    /*background-color: white;
-    */
-    /*background-image: url(paper.jpg);*/
     background-image: url(literature.jpg);
     flex: 1;
 
