@@ -29,6 +29,7 @@
 .vocabulary-overview li {
     border: 0px solid var(--overview-heading-background-color);
     border-bottom-width: 1px;
+    width: 300%;
 }
 
 .vocabulary-overview .entry:hover {
@@ -40,12 +41,12 @@
     padding: 0 0.5rem 0 0.5rem;
 }
 
-.vocabulary-overview .section-title {
+.vocabulary-overview .section-deutsch {
     background: var(--overview-heading-background-color);
     color: var(--overview-heading-font-color);
     font-weight: bold;
 }
 
-.vocabulary-overview .song-artist {
+.vocabulary-overview .vokabeln-englisch {
     font-size: 75%;
 }
