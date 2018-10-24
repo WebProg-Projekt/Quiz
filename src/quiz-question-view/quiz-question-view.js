@@ -176,10 +176,7 @@ class QuizQuestionView {
         score.innerHTML = `Ihr Ergebnis ist: ${this._score} `;
 
         //wechseln zwischen Fragen und Score
-<<<<<<< HEAD
-=======
         quizbox.classList.remove("vis");
->>>>>>> a1a4d7c18961693743539904b3dbd946e206922e
         quizbox.classList.add("hidden");
         scorebox.classList.remove("hidden");
 
