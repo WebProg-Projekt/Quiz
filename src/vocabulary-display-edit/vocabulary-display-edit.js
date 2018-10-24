@@ -35,11 +35,9 @@ class VocabularyDisplayEdit {
         let section = document.querySelector("#vocabulary-display-edit").cloneNode(true);
 
         //EventListener für anzeigen
-        //let show = section.addEventListener("click",() => this._showVocab());
+        //let show = document.querySelector(".test");
+        //show.addEventListener("click",() => this._showVocab());
 
-        //EventListener für löschen
-        let del = section.querySelector(".delete");
-        del.addEventListener("click",() => this._deleteVocab());
 
         //EventListener für bearbeiten
         //let edit = document.addEventListener("click",() => this._editVocab());
@@ -48,11 +46,75 @@ class VocabularyDisplayEdit {
         let upd = section.querySelector(".update");
         upd.addEventListener("click",() => this._updateVocab());
 
+        let abbrechen = section.querySelector(".quit");
+        abbrechen.addEventListener("click", ()=> this._app.showVocabularyOverview());
+
         //addEventListener für speichern --> nur: section.querySelector
         let speichern = section.querySelector(".save");
         speichern.addEventListener("click", () => this._saveVocab());
 
+        //der "display"-mode wird in onShow der Klasse Overview ausgerufen
+        //edit-mode aufrufen
+        let edit = section.querySelector(".edit");
+        edit.addEventListener("click", () => this._app.showVocabularyDisplayEdit(1, "edit"));
 
+        console.log(this._mode);
+
+        if (this._mode === "display") {
+            let lösch = section.querySelector(".delete");
+            lösch.classList.remove("invisible");
+
+            let save = section.querySelector(".save");
+            save.classList.add("invisible");
+
+            let edit = section.querySelector(".edit");
+            edit.classList.remove("invisible");
+
+            //Eingabefelder ausgrauen
+            let deutsch = section.querySelector(".deutsch");
+            let englisch = section.querySelector(".englisch");
+            let notiz = section.querySelector(".notiz");
+
+            englisch.disabled = true;
+            deutsch.disabled = true;
+            notiz.disabled = true;
+
+            //Beschriftung des Placeholders im label neu setzen
+            //section.querySelector(".deutsch").placeholder = "BlaBLa";
+            //let deutsch = section.querySelector(".deutsch");
+            //let vokabel = await this._vokabeln.getById("2");
+            //console.log(vokabel);
+            //deutsch.placeholder = vokabel["deutsch"];
+
+            //EventListener für löschen
+            let del = section.querySelector(".delete");
+            del.addEventListener("click",() => this._deleteVocab());
+
+            //get title()
+
+
+        }
+
+        if (this._mode === "edit"){
+            //let upd = section.querySelector(".update");
+            upd.classList.remove("invisible");
+
+            let save = section.querySelector(".save");
+            save.classList.add("invisible");
+
+
+
+            //let quit = section.querySelector(".quit");
+            //quit.addEventListener("click",() => this._app.navigate("/"));
+
+
+            //Inputfelder befüllen mit bisherigem Wert aus dexie
+            //let deutsch = section.querySelector(".deutsch");
+            //let vokabel = await this._vokabeln.search (1);
+            //deutsch.value = vokabel ["deutsch"];
+
+            //database.[id].deutsch ; --> muss String sein
+        }
 
 //TEST
 
@@ -92,36 +154,17 @@ class VocabularyDisplayEdit {
 
     _editVocab(){
 
-        let edit = document.querySelector(".edit");
-        edit.classList.add("invisible");
 
-        let upd = document.querySelector(".update");
-        upd.classList.remove("invisible");
 
-        let del = document.querySelector(".delete");
-        del.classList.add("invisible");
 
-        let sp = document.querySelector(".save");
-        sp.classList.add("invisible");
-
-        //Inputfelder befüllen mit bisherigem Wert aus dexie
-        //document.querySelector(".deutsch").value = database.[id].deutsch ; --> muss String sein
 
     }
     _updateVocab(){
-        //Update-Button einblenden
-        let update = section.querySelector(".update");
-        update.classList.remove("invisible");
-
-        //Save-Button ausblenen
-        let save = section.querySelector(".save");
-        save.classList.add("invisible");
-
         // aktuelle Werte nehmen und updaten
-        let deutsch = document.getElementById("deutsch").value;
-        let englisch = document.getElementById("englisch").value;
-        let notiz = document.getElementById("notiz").value;
-
+        let deutsch = document.querySelector(".deutsch").value;
+        let englisch = document.querySelector(".englisch").value;
+        let notiz = document.querySelector(".notiz").value;
+        //console.log(value);
         /*
         this._vokabeln.update(
             {
@@ -131,7 +174,11 @@ class VocabularyDisplayEdit {
                 notiz: notiz,
                 //format: html,
             }
-        );*/
+        );
+        */
+        // aus JS auf andere Seite leiten
+        this._app.navigate("/");
+
     }
 
     // Button, um zu speichern
@@ -160,10 +207,9 @@ class VocabularyDisplayEdit {
                     notiz: notiz,
                     //format: html,
                 });
-                this._app.showVocabularyOverview();
-                // zurück auf Übersicht
-                //this._app.showVocabularyOverview();
-                // danach ist seite inaktiv?!
+
+                // aus JS auf andere Seite leiten
+                this._app.navigate("/");
 
             } else {
                 alert("alle angaben ausfüllen");
@@ -177,45 +223,39 @@ class VocabularyDisplayEdit {
         // --- vocab Overview muss click-Event hinzufügen, wenn click auf (overviev .<liste) --> anzeige sicht
         // übergabe der id
 
-        //Button anzeigen/verstecken
-        let del = document.querySelector(".delete");
-        del.classList.remove("invisible");
-
-        let edit = document.querySelector(".edit");
-        edit.classList.remove("invisible");
-
-        let save = document.querySelector(".save");
-        save.classList.add("invisible");
-
-        //Eingabefelder ausgrauen
-        let deutsch = document.querySelector(".deutsch");
-        let englisch = document.querySelector(".englisch");
-        let notiz = document.querySelector(".notiz");
-
-        englisch.disabled = true;
-        deutsch.disabled = true;
-        notiz.disabled = true;
-
-        //Beschriftung des Placeholders im label neu setzen
-        document.querySelector(".deutsch").placeholder = "BlaBLa";
-
 
     }
 
     //einzelne Vokabel löschen
     async _deleteVocab() {
 
-        alert("Wirklich löschen??");
+        //EventListener, ursprüngl. in Overview
+        //let test = section.querySelector(".test");
+        //test.addEventListener("click", () => this._app.showVocabularyDisplayEdit(1, "display"));
 
-        // --in database.js löschen --> wie bekomme ich id?
+        //alert("Wirklich löschen??");
+
          //let id = wie bekomme ich denn Info über Vokabel hinter Button??
-         delete(4);
+        // let id = document.querySelector("...").id = "?";
+
+         //mit search wird ein array erzeugt, mit gleichennamigen Vokabeln
+         let voc = await this._vokabeln.search("ydf");
+         console.log(voc);
+
+         for (let i=0; i<=voc.length; i++ ) {
+             let id = voc[0]["id"];
+             this._vokabeln.delete(id);
+         }
+         console.log(voc);
+
          let vok = await this._vokabeln.search();
          console.log("Datenbank initialisieren, Anzahl Vokabeln:", vok.length);
          console.log(vok);
 
+         //this._app.navigate("/");
+         this._app.showVocabularyOverview();
         // zurück auf Übersicht
-        this._app.showVocabularyOverview();
+        //this._app.navigate("/");
     }
 }
 

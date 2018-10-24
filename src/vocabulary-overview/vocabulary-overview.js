@@ -1,6 +1,7 @@
 "use strict";
 
 import stylesheet from "./vocabulary-overview.css";
+import VocabularyDisplayEdit from "../vocabulary-display-edit/vocabulary-display-edit.js";
 
 /**
  * View mit der Übersicht der vorhandenen Songs.

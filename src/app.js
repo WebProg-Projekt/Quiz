@@ -42,6 +42,7 @@ class App {
         "/vocabulary/new/":              () => this.showVocabularyDisplayEdit("", "new"),
         "/vocabulary/display/:id/":  params => this.showVocabularyDisplayEdit(params.id, "display"),
         "/vocabulary/edit/:id/":     params => this.showVocabularyDisplayEdit(params.id, "edit"),
+
         "/quiz":                         () => this.showQuizQuestionView(),
     });
 
@@ -117,6 +118,13 @@ class App {
         let questions = await this._selectQuestions ();
         let view = new QuizQuestionView(this, questions);
         this._switchVisibleView(view);
+    }
+
+    /**
+     * Aus JavaScript heraus auf eine neue Seite navigieren.
+     */
+    navigate(url) {
+        this._router.navigate(url);
     }
 
 
