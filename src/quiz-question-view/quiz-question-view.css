@@ -15,27 +15,38 @@
 
  }
 
- .quiz-question-view main #quiz-box{
+ .quiz-question-view main #quiz-box,
+  .quiz-question-view main #score-box {
      padding-left: 5%;
      padding-right: 5%;
      padding-top: 10%;
      padding-bottom: 10%;
 
-     display: grid;
-     flex-direction: row;
-     align-items: center;
-
      border-style: groove;
      border-radius: 10px;
      border-width: 5px;
-     border-color: var(--header-normal-background-color);
-     background-color: var(--header-normal-background-color);
+     /*border-color: var(--header-normal-background-color);
+     background-color: var(--header-normal-background-color);*/
+     background-image: url(wood.jpg);
 
      height: 1200px;
      margin-top: 20%;
      margin-bottom: 20%;
  }
 
+/*Wenn quiz-box die Klasse vis hat - also visible sein soll
+display:grid für Alignment*/
+.quiz-question-view .vis {
+    /*Aligment der Elemente im QuizBox*/
+    display: grid;
+    flex-direction: row;
+    align-items: center;
+}
+
+/*Wenn quiz-box oder score-box die Klasse hidden hat -  display:none */
+.quiz-question-view .hidden {
+    display: none;
+}
 
  .quiz-question-view .question-number {
      font-size: 70pt;
@@ -48,6 +59,17 @@
      font-size: 50pt;
  }
 
+/*Wenn die Antowort falsch ist*/
+ .quiz-question-view .false {
+     color:#f70c23;
+ }
+
+ /*Wenn die Antowort richtig ist*/
+ .quiz-question-view .true {
+     color: #04f90f;
+ }
+
+
 .quiz-question-view .answer {
     width: 100%;
     height: 150px;
@@ -55,6 +77,7 @@
     font-size: 60pt;
 }
 .quiz-question-view .quiz-buttons{
+    /*die Buttons am ende des QuizBox anzuzeigen*/
     align-self: flex-end;
 }
 
@@ -70,6 +93,15 @@
 
 }
 
+
+
+.quiz-question-view .congrats {
+
+}
+
+
+
+/*Für kleinere Bildschirme*/
 @media screen and (min-width: 85em) {
     .quiz-question-view main #quiz-box{
         height: 500px;
