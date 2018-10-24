@@ -84,7 +84,6 @@ class QuizQuestionView {
         let submitbutton = document.querySelector(".submit-button");
         let answerfield = document.querySelector(".answer");
 
-        result.classList.remove("false");
         result.classList.remove("true");
 
         //Prüfen ob eine Antwort eingegeben wurde
@@ -106,14 +105,14 @@ class QuizQuestionView {
 
             //Antworten vergleichen und Ergebnis anzeigen
             if (answer === this._questions[this._questionnr-1]["englisch"]) {
-                    result.classList.add("richtig");
+                    result.classList.add("true");
                     result.innerHTML = "Richtig!";
                     this._score ++;
                     console.log(this._score);
                 }
             else {
-                result.classList.add("false");
-                result.innerHTML = `Falsch! Die rictige Antwort ist: ${this._questions[this._questionnr-1]["englisch"]}` ;
+                result.innerHTML = `<p class="false">Falsch! </p>
+                                    <p>Die rictige Antwort ist: ${this._questions[this._questionnr-1]["englisch"]}</p>` ;
             }
         }
     }
@@ -177,6 +176,7 @@ class QuizQuestionView {
         score.innerHTML = `Ihr Ergebnis ist: ${this._score} `;
 
         //wechseln zwischen Fragen und Score
+        quizbox.classList.remove("vis");
         quizbox.classList.add("hidden");
         scorebox.classList.remove("hidden");
 
