@@ -4,9 +4,11 @@
  * Anwendung überschrieben werden.
  */
 #app {
-    background-color: white;
+    background-image: url(literature.jpg);
     flex: 1;
+
 }
+
 
 /*
  * Kopfbereich über dem Inhalt
@@ -25,7 +27,7 @@
 }
 
 #app header > .top {
-    font-size: 80%;
+    font-size: 100%;
 
     border: 0px solid var(--header-active-background-color);
     border-bottom-width: 1px;
@@ -77,11 +79,8 @@
  * Hauptinhalt
  */
 #app main {
-    /*
-     * Temporärer Inhalt, solange es noch keinen richtigen Inhalt gibt
-     * Bild: https://pixabay.com/de/handwerker-baustelle-arbeiter-3094035/
-     */
-    background-image: url(paper.jpg);2
+
+    /*background-image: url(paper.jpg);*/
     background-size: 100% auto;
     background-position: bottom center;
     background-repeat: no-repeat;
@@ -91,6 +90,7 @@
     font-size: 300%;
     font-weight: bold;
     text-align: center;
+    /*padding: 10px;*/
 }
 
 /*
@@ -100,12 +100,13 @@
 @media screen and (min-width: 85em) {
     /* Rahmen um den Hauptbereich zeichnen */
     #app {
-        max-width: 80em;
-        margin-top: 2em;
+        /*max-width: 80em;
+        /*margin-top: 2em;
         margin-bottom: 2em;
 
         border: 1px solid rgba(32,32,32, 0.2);
         box-shadow: 1px 1px 3px rgba(0,0,0, 0.1);
+        */
     }
 
     /* Topbar- und Toolbar-Inhalte nebeneinander */
@@ -144,13 +145,16 @@
     }
 
     /* Nur den Bereich unterhalb der Toolbar scrollen */
-    #app {
+    /*#app {
         display: flex;
         flex-direction: column;
     }
+
 
     #app > main {
         flex: 1;
         overflow: auto;
     }
+*/
+
 }

@@ -96,7 +96,7 @@ class App {
      * @return {Boolean} Flag, ob die neue Seite aufgerufen werden konnte
      */
     showVocabularyOverview() {
-        let view = new VocabularyOverview(this);
+        let view = new VocabularyOverview(this, this._vokabeln);
         this._switchVisibleView(view);
     }
 
@@ -139,34 +139,34 @@ class App {
      * @return {Boolean} Flag, ob die neue Seite aufgerufen werden konnte
      */
      async _switchVisibleView(view) {
-     // Callback, mit dem die noch sichtbare View den Seitenwechsel zu einem
-     // späteren Zeitpunkt fortführen kann, wenn sie in der Methode onLeave()
-     // false zurückliefert. Dadurch erhält sie die Möglichkeit, den Anwender
-     // zum Beispiel zu fragen, ob er ungesicherte Daten speichern will,
-     // bevor er die Seite verlässt.
-     let newUrl = this._router.lastRouteResolved().url;
-     let goon = () => {
-         // ?goon an die URL hängen, weil der Router sonst nicht weiternavigiert
-         this._router.navigate(newUrl + "?goon");
-     }
-
-     // Aktuelle View fragen, ob eine neue View aufgerufen werden darf
-     if (this._currentView) {
-         let goonAllowed = await this._currentView.onLeave(goon);
-
-         if (!goonAllowed) {
-             this._navAborted = true;
-             return false;
+         // Callback, mit dem die noch sichtbare View den Seitenwechsel zu einem
+         // späteren Zeitpunkt fortführen kann, wenn sie in der Methode onLeave()
+         // false zurückliefert. Dadurch erhält sie die Möglichkeit, den Anwender
+         // zum Beispiel zu fragen, ob er ungesicherte Daten speichern will,
+         // bevor er die Seite verlässt.
+         let newUrl = this._router.lastRouteResolved().url;
+         let goon = () => {
+             // ?goon an die URL hängen, weil der Router sonst nicht weiternavigiert
+             this._router.navigate(newUrl + "?goon");
          }
+
+         // Aktuelle View fragen, ob eine neue View aufgerufen werden darf
+         if (this._currentView) {
+             let goonAllowed = await this._currentView.onLeave(goon);
+
+             if (!goonAllowed) {
+                 this._navAborted = true;
+                 return false;
+             }
+         }
+
+         // Alles klar, aktuelle View nun wechseln
+         document.title = `${this._title} – ${view.title}`;
+
+         this._currentView = view;
+         this._switchVisibleContent(await view.onShow());
+         return true;
      }
-
-     // Alles klar, aktuelle View nun wechseln
-     document.title = `${this._title} – ${view.title}`;
-
-     this._currentView = view;
-     this._switchVisibleContent(await view.onShow());
-     return true;
- }
 
     /**
      * Auswechseln des sichtbaren Inhalts der App. Hierfür muss der Methode
@@ -303,43 +303,35 @@ class App {
     }
 
     // Sucht 10 verschiedene Fragen aus der Datenbank und liefert als JSON zurück
-    //_selectQuestions () {
      async _selectQuestions () {
         //let vok =  this._vokabeln.search();
         let vok = await this._vokabeln.search();
 
         /* 10 zufällige und unique Nummer zwischen 0- vok.length generieren
         und in einem Array speichern*/
-        //let randomIDs = chance.unique (chance.integer, 4, { min: 1, max: 10});
-        let randomIDs = chance.unique (chance.integer, 4, { min: 1, max: vok.length});
+        let randomIDs = chance.unique (chance.integer, 10, { min: 1, max: vok.length});
         console.log(randomIDs);
-
-
-
-        //let erste = await this._vokabeln.getById(randomIDs[0]);
-        //console.log("Erste Random Vokabel - Objekt", erste);
-        //console.log(erste["englisch"]);
 
         /* Ein leeres Array generieren,
         Wörter nach zufaellig gewaehlten IDs suchen und in das Leere Array speichern
         */
         let questions = [];
-        randomIDs.forEach( id => {
-        //randomIDs.forEach( async (id) => {
-            let vocabulary = this._vokabeln.getById(id);
-            //let vocabulary = await this._vokabeln.getById(id);
-            //console.log(id, vocabulary);
-            //console.log(vocabulary["deutsch"]);
-            //questions.push(vocabulary);
-        });
 
-        //console.log(questions);
-        //console.log(questions[0]["deutsch"]);
+        for (let i = 0; i < randomIDs.length; i++) {
+            let id = randomIDs[i];
+            let vocabulary = await this._vokabeln.getById(id);
+            console.log(id, vocabulary);
+            console.log(vocabulary["deutsch"]);
+            questions.push(vocabulary);
+        }
 
-        //return questions;
+        console.log(questions);
+        console.log(questions[0]);
+
+        return questions;
 
         //Fragen ausgeben
-        return [
+        /*return [
         {
             nummer: 1,
             deutsch: "Hund",
@@ -356,6 +348,7 @@ class App {
             english: "basement"
         }
     ];
+    */
 
 
 

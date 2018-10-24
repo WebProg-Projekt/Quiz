@@ -69,7 +69,7 @@ class Vokabeln {
     */
 
 
-        /**
+     /**
      * Vorhandene Vokabel anhand ihrer ID auslesen.
      * @param  {String}  id ID der zu lesenden Vokabel
      * @return {Promise} Asynchrones Promise-Objekt mit der Vokabel
@@ -78,7 +78,7 @@ class Vokabeln {
         return database.vokabeln.get(id);
     }
 
-        /** Suchfunktion:
+     /** Suchfunktion:
      * Gibt eine Liste mit allen Vokabeln zurück, deren deutsche oder englische
      * Bedeutung den gesuchten Wert enthalten.
      *
@@ -97,6 +97,56 @@ class Vokabeln {
 
         return result.toArray();
     }
+
+
+
+    /**
+    * Diese Methode greift auf die Datenbank zu und sucht die gespeicherten
+    * Vokabeln. Optional kann ein Suchbegriff mitgegeben werden, der innerhalb
+    * des deutschen oder des englischen vorkommen muss. Ebenso kann
+    * einer von folgenden Werten mitgegeben werden, um die Ergebnisliste zu
+    * sortieren:
+    *
+    *   * "deutsch": Sortierung nach deutsch
+    *   * "englisch": Sortierung nach englisch
+    *
+    * @param  {String} query Suchbegriff (optional)
+    * @param  {String} sort Sortierung (optional)
+    * @return {Array} Liste der gefundenen vokabeln
+    */
+    async searchVokabeln(query, sort) {
+        // Vokabeln suchen
+        let vokabeln = new Vokabeln();
+        let result = await vokabeln.search(query);
+
+        // Ergebnis sortieren
+        result.sort((lhs, rhs) => {
+            let resultEnglisch = lhs.englisch.localeCompare(rhs.englisch);
+            let resultDeutsch = lhs.deutsch.localeCompare(rhs.deutsch);
+
+            if (sort === "englisch") {
+                // Sortierung nach Englisch und Songtitel
+                if (resultEnglisch != 0) {
+                    return resultEnglisch;
+                } else {
+                    return resultDeutsch;
+                }
+            } else {
+                // Sortierung nach Deutsch und Künstler
+                if (resultDeutsch != 0) {
+                    return resultDeutsch;
+                } else {
+                    return resultEnglisch;
+                }
+            }
+        });
+
+        return result;
+    }
+
+
+
+
 }
 
 export default {
