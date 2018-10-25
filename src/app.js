@@ -96,6 +96,7 @@ class App {
      * @return {Boolean} Flag, ob die neue Seite aufgerufen werden konnte
      */
     showVocabularyOverview() {
+        this._vokabeln = new Database.Vokabeln();
         let view = new VocabularyOverview(this, this._vokabeln);
         this._switchVisibleView(view);
     }

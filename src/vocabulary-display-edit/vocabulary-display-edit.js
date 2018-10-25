@@ -75,6 +75,13 @@ class VocabularyDisplayEdit {
             let englisch = section.querySelector(".englisch");
             let notiz = section.querySelector(".notiz");
 
+            let vok = await this._vokabeln.getById(this._id);
+            console.log(vok);
+
+            englisch.value = await vok["englisch"];
+            deutsch.value = await vok["deutsch"];
+            notiz.value = await vok["notiz"];
+
             englisch.disabled = true;
             deutsch.disabled = true;
             notiz.disabled = true;
@@ -88,7 +95,10 @@ class VocabularyDisplayEdit {
 
             //EventListener für löschen
             let del = section.querySelector(".delete");
-            del.addEventListener("click",() => this._deleteVocab());
+            del.addEventListener("click",() => this._deleteVocab(this._id));
+
+            //Eventlistener für Bearbeiten
+            edit.addEventListener("click", () => this._editVocab(this._id));
 
             //get title()
 
@@ -152,32 +162,47 @@ class VocabularyDisplayEdit {
         }
     }
 
-    _editVocab(){
+    async _editVocab(id){
 
+        let deutsch = document.querySelector(".deutsch");
+        let englisch = document.querySelector(".englisch");
+        let notiz = document.querySelector(".notiz");
 
+        let vok = await this._vokabeln.getById(id);
 
+        englisch.value = await vok["englisch"];
+        deutsch.value = await vok["deutsch"];
+        notiz.value = await vok["notiz"];
 
+        englisch.disabled = false;
+        deutsch.disabled = false;
+        notiz.disabled = false;
 
+        let update = document.querySelector(".update");
+        update.addEventListener("click", () => _updateVocab());
     }
+
+
     _updateVocab(){
         // aktuelle Werte nehmen und updaten
         let deutsch = document.querySelector(".deutsch").value;
         let englisch = document.querySelector(".englisch").value;
         let notiz = document.querySelector(".notiz").value;
         //console.log(value);
-        /*
+
+
         this._vokabeln.update(
             {
-                id: //....,
-                deutsch: deutsch,
-                englisch: englisch,
-                notiz: notiz,
+                id: `${this._id}`,
+                deutsch: `${deutsch}`,
+                englisch: `${englisch}`,
+                notiz: `${notiz}`,
                 //format: html,
             }
         );
-        */
         // aus JS auf andere Seite leiten
-        this._app.navigate("/");
+        //this._app.navigate("/");
+        this._app.showVocabularyOverview();
 
     }
 
@@ -209,7 +234,8 @@ class VocabularyDisplayEdit {
                 });
 
                 // aus JS auf andere Seite leiten
-                this._app.navigate("/");
+                this._app.showVocabularyOverview();
+                //this._app.navigate("/");
 
             } else {
                 alert("alle angaben ausfüllen");
@@ -227,7 +253,7 @@ class VocabularyDisplayEdit {
     }
 
     //einzelne Vokabel löschen
-    async _deleteVocab() {
+    async _deleteVocab(id) {
 
         //EventListener, ursprüngl. in Overview
         //let test = section.querySelector(".test");
@@ -239,7 +265,7 @@ class VocabularyDisplayEdit {
         // let id = document.querySelector("...").id = "?";
 
          //mit search wird ein array erzeugt, mit gleichennamigen Vokabeln
-         let voc = await this._vokabeln.search("ydf");
+        /* let voc = await this._vokabeln.search("");
          console.log(voc);
 
          for (let i=0; i<=voc.length; i++ ) {
@@ -250,9 +276,10 @@ class VocabularyDisplayEdit {
 
          let vok = await this._vokabeln.search();
          console.log("Datenbank initialisieren, Anzahl Vokabeln:", vok.length);
-         console.log(vok);
+         console.log(vok);*/
 
          //this._app.navigate("/");
+         this._vokabeln.delete(id);
          this._app.showVocabularyOverview();
         // zurück auf Übersicht
         //this._app.navigate("/");
