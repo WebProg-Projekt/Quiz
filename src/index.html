@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang = "de">
     <head>
         <meta charset="utf-8" />
         <title>Vokabeltrainer</title>
@@ -18,7 +18,13 @@
                 <div class="top">
                     <div class="item inactive">
                         <b>
-                            VocabuLearn
+                            <a>
+                                VocabuLearn
+                            </a>
+                            <a>
+                                <img src="Logo.png" alt="Logo">
+                            </a>
+
                         </b>
                     </div>
                 </div>
@@ -40,7 +46,7 @@
                 <div class="left">
                     <div class="item">
                         <a href="/vocabulary/new/" data-navigo>
-                            Song hinzufügen
+                            Vokabel hinzufügen
                         </a>
                     </div>
                     <div class="item">
@@ -89,18 +95,18 @@
 
             <!-- Hauptbereich -->
             <main>
-                <div class="container padding" >
-                    Vokabel anzeigen und bearbeiten
+                <div class="container" >
+                    Vokabel bearbeiten
                     <div class="row" >
-                        <div class="col-md-6">
+                        <div class="col-sm-12 col-md-6">
                             <!-- input-Überschrift -->
                             <label for="inputD">deutsche Eingabe</label>
                             <!-- input -->
                             <input  type="text" class="form-control deutsch" id="inputD" placeholder="Bitte  etwas  eingeben..." required>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-sm-12 col-md-6">
                             <!-- input-Überschrift -->
-                            <label for="inputE">englische Einagbe</label>
+                            <label for="inputE">englische Eingabe</label>
                             <!-- input -->
                             <input  type="text" class="form-control englisch" id="inputE" placeholder="Bitte  etwas  eingeben..." required>
                         </div>
@@ -157,7 +163,7 @@
 
 
             <!-- FRAGEN-MODUS -->
-                <div class="container padding vis" id="quiz-box">
+                <div class="container vis" id="quiz-box">
                     <!--Frage-->
                     <div class="row q-qn-a">
                         <div class="col">

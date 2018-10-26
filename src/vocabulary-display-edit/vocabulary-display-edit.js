@@ -235,7 +235,7 @@ class VocabularyDisplayEdit {
 
                 // aus JS auf andere Seite leiten
                 this._app.showVocabularyOverview();
-                //this._app.navigate("/");
+                this._app.navigate("/");
 
             } else {
                 alert("alle angaben ausfüllen");

@@ -5,10 +5,12 @@
  */
 #app {
     background-image: url(literature.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% auto;
     flex: 1;
 
 }
-
 
 /*
  * Kopfbereich über dem Inhalt
