@@ -4,7 +4,7 @@
  * Anwendung überschrieben werden.
  */
 #app {
-    background-image: url(literature.jpg);
+
     flex: 1;
 
 }
@@ -16,6 +16,7 @@
 #app header {
     background-color: var(--header-normal-background-color);
     color: var(--header-normal-font-color);
+    height: max-content;
 }
 
 #app header > *,
@@ -80,10 +81,9 @@
  */
 #app main {
 
-    /*background-image: url(paper.jpg);*/
+    background-image: url(literature.jpg);
     background-size: 100% auto;
-    background-position: bottom center;
-    background-repeat: no-repeat;
+    
 
     color: rgb(255, 246, 23);
     /*text-shadow: 1px 1px 2px black;*/
@@ -91,6 +91,7 @@
     font-weight: bold;
     text-align: center;
     /*padding: 10px;*/
+
 }
 
 /*

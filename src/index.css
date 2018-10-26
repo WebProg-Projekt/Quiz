@@ -13,9 +13,12 @@
 html, body {
     padding: 0;
     margin: 0;
-    height: 100%;
-    /*box-shadow: 30px 50px 50px silver;*/
+    min-height: 100%;
+    width: 100%;
+    /*display: flex;
+    justify-content: center;
 
+    /*box-shadow: 30px 50px 50px silver;*/
 }
 
 header {
@@ -34,7 +37,16 @@ body {
     font-size: 11pt;
     line-height: 1.6;
     color: var(--font-color);
-    background-image: url(literature.jpg);
+    
+
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
 }
 
 /*
@@ -82,15 +94,11 @@ body {
         display: flex;
         align-items: stretch;
         justify-content: center;
-
-
     }
-
 
     body > * {
         flex: 1;
     }
-
 }
 
 
