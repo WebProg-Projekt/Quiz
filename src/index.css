@@ -14,7 +14,7 @@
 html, body {
     padding: 0;
     margin: 0;
-    min-height: 100%;
+    height: 100%;
 
 }
 
@@ -25,6 +25,11 @@ body {
     font-size: 11pt;
     line-height: 1.5;
     color: black;
+    min-height: 100%;
+
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
 }
 
 
@@ -33,9 +38,6 @@ header {
     font-weight: bold;
     font-size: 15pt;
 }
-
-
-
 
  /* Größere Schrift auf größeren Bildschirmen*/
 @media screen and (min-width: 768px) {
@@ -72,12 +74,13 @@ header {
     }
 
 
-    /* Hauptbereich der App vergrößern */
+    /* Hauptbereich der App vergrößern
     body {
         display: flex;
         align-items: stretch;
         justify-content: center;
     }
+    */
 
     body > * {
         flex: 1;
