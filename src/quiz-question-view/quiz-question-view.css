@@ -13,6 +13,11 @@
     font-weight: bold;
     background-image: none;
 
+    display: flex;
+    justify-content: center;
+    /*align-items: center;*/
+    min-height: 100%;
+
  }
 
  .quiz-question-view main #quiz-box,
@@ -29,7 +34,7 @@
      background-color: var(--header-normal-background-color);*/
      background-image: url(wood.jpg);
 
-     height: 1200px;
+
      margin-top: 20%;
      margin-bottom: 20%;
  }
@@ -49,14 +54,14 @@ display:grid für Alignment*/
 }
 
  .quiz-question-view .question-number {
-     font-size: 70pt;
+
  }
  .quiz-question-view .question {
-    font-size: 150pt;
+
 
  }
  .quiz-question-view .result {
-     font-size: 50pt;
+
  }
 
 /*Wenn die Antowort falsch ist*/
@@ -72,9 +77,8 @@ display:grid für Alignment*/
 
 .quiz-question-view .answer {
     width: 100%;
-    height: 150px;
-    margin-top: 40px;
-    font-size: 60pt;
+
+
 }
 .quiz-question-view .quiz-buttons{
     /*die Buttons am ende des QuizBox anzuzeigen*/
@@ -89,7 +93,7 @@ display:grid für Alignment*/
     background-color: white;
     width: 90%;
     height: 100%;
-    font-size: 30pt;
+
 
 }
 
