@@ -4,9 +4,7 @@
  * Anwendung überschrieben werden.
  */
 #app {
-    background-image: url(literature.jpg);
     flex: 1;
-
 }
 
 
@@ -14,22 +12,26 @@
  * Kopfbereich über dem Inhalt
  */
 #app header {
-    background-color: var(--header-normal-background-color);
-    color: var(--header-normal-font-color);
+    background-color: rgb(165, 64, 91);
+    color: rgba(255,255,255, 0.8);
+    height: max-content;
 }
 
 #app header > *,
 #app header input,
 #app header .item {
+    /*Displays an element as a block element (like <p>).
+    It starts on a new line, and takes up the whole width*/
     display: block;
+    /*The width and height properties (and min/max properties)
+    includes content, padding and border*/
     box-sizing: border-box;
     width: 100%;
 }
 
 #app header > .top {
     font-size: 100%;
-
-    border: 0px solid var(--header-active-background-color);
+    border: 0px solid rgba(255,255,255, 0.2);
     border-bottom-width: 1px;
 }
 
@@ -39,7 +41,8 @@
 }
 
 #app header > .bottom {
-    border: 0px solid var(--header-active-background-color);
+    border: 0px solid rgba(255,255,255, 0.2);
+    /* Border für die "suche"*/
     border-bottom-width: 1px;
 }
 
@@ -48,10 +51,11 @@
     padding: 1rem 0.5rem 1rem 0.5rem;
 }
 
+/* hover: Select and style a link when you mouse over it*/
 #app header .active,
 #app header .item:not(.inactive):hover {
-    background-color: var(--header-active-background-color);
-    color: var(--header-active-font-color);
+    background-color: rgba(255,255,255, 0.2);
+    color: rgba(255,255,255, 0.9);
 }
 
 #app header .item:not(.inactive) {
@@ -60,18 +64,18 @@
 
 #app header a,
 #app header a:visited {
-    color: var(--header-normal-font-color);
+    color: rgba(255,255,255, 0.8);
     text-decoration: none;
 }
 
 #app header a:hover {
-    color: var(--header-active-font-color);
+    color: rgba(255,255,255, 0.9);
     text-decoration: underline;
 }
 
 #app header input {
     background: none;
-    color: var(--header-normal-font-color);
+    color: rgba(255,255,255, 0.8);
     border: 0;
 }
 
@@ -79,18 +83,9 @@
  * Hauptinhalt
  */
 #app main {
-
-    /*background-image: url(paper.jpg);*/
+    background-image: url(literature.jpg);
     background-size: 100% auto;
     background-position: bottom center;
-    background-repeat: no-repeat;
-
-    color: rgb(255, 246, 23);
-    /*text-shadow: 1px 1px 2px black;*/
-    font-size: 300%;
-    font-weight: bold;
-    text-align: center;
-    /*padding: 10px;*/
 }
 
 /*
@@ -98,16 +93,6 @@
  * Hintergrundbild eingeschaltet wird
  */
 @media screen and (min-width: 85em) {
-    /* Rahmen um den Hauptbereich zeichnen */
-    #app {
-        /*max-width: 80em;
-        /*margin-top: 2em;
-        margin-bottom: 2em;
-
-        border: 1px solid rgba(32,32,32, 0.2);
-        box-shadow: 1px 1px 3px rgba(0,0,0, 0.1);
-        */
-    }
 
     /* Topbar- und Toolbar-Inhalte nebeneinander */
     #app header {
@@ -136,8 +121,8 @@
         display: flex;
         justify-content: flex-start;
 
-        background-color: var(--header-active-background-color);
-        color: var(--header-active-font-color);
+        background-color: rgba(255,255,255, 0.2);
+        color: rgba(255,255,255, 0.9);
     }
 
     #app header .item {
@@ -145,7 +130,7 @@
     }
 
     /* Nur den Bereich unterhalb der Toolbar scrollen */
-    /*#app {
+    #app {
         display: flex;
         flex-direction: column;
     }
@@ -155,6 +140,6 @@
         flex: 1;
         overflow: auto;
     }
-*/
+
 
 }

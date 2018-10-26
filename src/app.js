@@ -42,6 +42,7 @@ class App {
         "/vocabulary/new/":              () => this.showVocabularyDisplayEdit("", "new"),
         "/vocabulary/display/:id/":  params => this.showVocabularyDisplayEdit(params.id, "display"),
         "/vocabulary/edit/:id/":     params => this.showVocabularyDisplayEdit(params.id, "edit"),
+
         "/quiz":                         () => this.showQuizQuestionView(),
     });
 
@@ -95,6 +96,7 @@ class App {
      * @return {Boolean} Flag, ob die neue Seite aufgerufen werden konnte
      */
     showVocabularyOverview() {
+        this._vokabeln = new Database.Vokabeln();
         let view = new VocabularyOverview(this, this._vokabeln);
         this._switchVisibleView(view);
     }
@@ -117,6 +119,13 @@ class App {
         let questions = await this._selectQuestions ();
         let view = new QuizQuestionView(this, questions);
         this._switchVisibleView(view);
+    }
+
+    /**
+     * Aus JavaScript heraus auf eine neue Seite navigieren.
+     */
+    navigate(url) {
+        this._router.navigate(url);
     }
 
 
@@ -295,13 +304,14 @@ class App {
     }
 
     // Sucht 10 verschiedene Fragen aus der Datenbank und liefert als JSON zurück
-     async _selectQuestions () {
+    async _selectQuestions () {
         //let vok =  this._vokabeln.search();
-        let vok = await this._vokabeln.search();
+        let vocs = await this._vokabeln.search();
 
         /* 10 zufällige und unique Nummer zwischen 0- vok.length generieren
         und in einem Array speichern*/
-        let randomIDs = chance.unique (chance.integer, 10, { min: 1, max: vok.length});
+        console.log(vocs.length);
+        let randomIDs = chance.unique (chance.integer, 10, { min: 0, max: vocs.length-1});
         console.log(randomIDs);
 
         /* Ein leeres Array generieren,
@@ -311,7 +321,7 @@ class App {
 
         for (let i = 0; i < randomIDs.length; i++) {
             let id = randomIDs[i];
-            let vocabulary = await this._vokabeln.getById(id);
+            let vocabulary = vocs[id];
             console.log(id, vocabulary);
             console.log(vocabulary["deutsch"]);
             questions.push(vocabulary);
@@ -321,32 +331,7 @@ class App {
         console.log(questions[0]);
 
         return questions;
-
-        //Fragen ausgeben
-        /*return [
-        {
-            nummer: 1,
-            deutsch: "Hund",
-            english: "dog"
-        },
-        {
-            nummer: 2,
-            deutsch: "die Katze",
-            english: "cat"
-        },
-        {
-            nummer: 3,
-            deutsch: "Keller",
-            english: "basement"
-        }
-    ];
-    */
-
-
-
-
     };
-
 
 
 }
