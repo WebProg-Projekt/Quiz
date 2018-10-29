@@ -125,14 +125,14 @@ class Vokabeln {
             let resultDeutsch = lhs.deutsch.localeCompare(rhs.deutsch);
 
             if (sort === "englisch") {
-                // Sortierung nach Englisch und Songtitel
+                // Sortierung nach Englisch
                 if (resultEnglisch != 0) {
                     return resultEnglisch;
                 } else {
                     return resultDeutsch;
                 }
             } else {
-                // Sortierung nach Deutsch und Künstler
+                // Sortierung nach Deutsch
                 if (resultDeutsch != 0) {
                     return resultDeutsch;
                 } else {

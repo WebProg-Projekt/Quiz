@@ -17,6 +17,6 @@ html {
     --header-active-font-color:       rgba(255,255,255, 0.9);
 
     --overview-heading-background-color: white;
-    --overview-heading-font-color:       rgb(78,81,116);
+    --overview-heading-font-color:       black;
     --overview-list-hover-color:         rgba(0,0,0, 0.05);
 }
