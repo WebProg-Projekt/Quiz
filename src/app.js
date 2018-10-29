@@ -82,7 +82,7 @@ class App {
         // Vokabeln einfügen, wenn es noch keine gibt
         await this._initDatabase();
 
-        // vor Single Page Router hatten wir -> this.showSongOverview();
+        // vor Single Page Router hatten wir -> this.showVocabularyOverview();
         /*In der start()-Methode müssen wir nun nicht mehr explizit
         *die Übersichtsseite aufrufen. Stattdessen sagen wir dem Router,
         *dass er nun dafür verantwortlich ist, die URL, mit der die gesamte App
@@ -92,7 +92,7 @@ class App {
     }
 
     /**
-     * Aufruf der Übersichtsseite der vorhandenen Songs.
+     * Aufruf der Übersichtsseite der vorhandenen Vokabeln.
      * @return {Boolean} Flag, ob die neue Seite aufgerufen werden konnte
      */
     showVocabularyOverview() {
@@ -102,9 +102,9 @@ class App {
     }
 
     /**
-     * Aufruf der Detailseite zur Anzeige oder zum Bearbeiten eines Songs.
+     * Aufruf der Detailseite zur Anzeige oder zum Bearbeiten einer Vokabel.
      *
-     * @param  {String} id Song-ID
+     * @param  {String} id Vokabel-ID
      * @param  {String} mode "new", "display" oder "edit"
      * @return {Boolean} Flag, ob die neue Seite aufgerufen werden konnte
      */
@@ -228,7 +228,7 @@ class App {
     }
 
     async _initDatabase() {
-        // Vokabeln in Dexie einfügen
+        // 10 Startvokabeln in Dexie einfügen
         let vok = await this._vokabeln.search();
         console.log("Datenbank initialisieren, Anzahl Vokabeln:", vok.length);
         console.log(vok);

@@ -4,8 +4,9 @@ import stylesheet from "./vocabulary-display-edit.css";
 import Database from "../database.js";
 
  /**
-  * View zur Anzeige oder zum Bearbeiten eines Songs.
-  */
+  * View zur Eingabe einer neuen Vokabel, Anzeige oder zum Bearbeiten einer Vokabel.
+  * "Default-View" ist der Mode "new" zur Anlage einer neuen Vokabel.
+*/
 class VocabularyDisplayEdit {
     /**
      * Konstruktor.
@@ -34,29 +35,17 @@ class VocabularyDisplayEdit {
         // Anzuzeigende HTML-Elemente ermitteln
         let section = document.querySelector("#vocabulary-display-edit").cloneNode(true);
 
-        //EventListener für anzeigen
-        //let show = document.querySelector(".test");
-        //show.addEventListener("click",() => this._showVocab());
-
-
-        //EventListener für bearbeiten
-        //let edit = document.addEventListener("click",() => this._editVocab());
-
-        //EventListener für aktualisieren
-        let upd = section.querySelector(".update");
-        upd.addEventListener("click",() => this._updateVocab());
-
         let abbrechen = section.querySelector(".quit");
         abbrechen.addEventListener("click", ()=> this._app.showVocabularyOverview());
 
-        //addEventListener für speichern --> nur: section.querySelector
-        let speichern = section.querySelector(".save");
-        speichern.addEventListener("click", () => this._saveVocab());
+        //addEventListener, um neue Vokabel zu speichern
+        let save = section.querySelector(".save");
+        save.addEventListener("click", () => this._saveVocab());
 
         //der "display"-mode wird in onShow der Klasse Overview ausgerufen
         //edit-mode aufrufen
         let edit = section.querySelector(".edit");
-        edit.addEventListener("click", () => this._app.showVocabularyDisplayEdit(1, "edit"));
+        edit.addEventListener("click", () => this._app.showVocabularyDisplayEdit(this._id, "edit"));
 
         console.log(this._mode);
 
@@ -64,10 +53,8 @@ class VocabularyDisplayEdit {
             let lösch = section.querySelector(".delete");
             lösch.classList.remove("invisible");
 
-            let save = section.querySelector(".save");
             save.classList.add("invisible");
 
-            let edit = section.querySelector(".edit");
             edit.classList.remove("invisible");
 
             //Eingabefelder ausgrauen
@@ -75,55 +62,39 @@ class VocabularyDisplayEdit {
             let englisch = section.querySelector(".englisch");
             let notiz = section.querySelector(".notiz");
 
+            //in Variable vok wird Vokabel-Objekt gespeichert, das anhand id aus overview übergeben wurde
             let vok = await this._vokabeln.getById(this._id);
             console.log(vok);
 
+            //der Wert der Eingabefelder wird mit entprechendem Wert aus Vokabel-Objekt bestückt
             englisch.value = await vok["englisch"];
             deutsch.value = await vok["deutsch"];
             notiz.value = await vok["notiz"];
 
+            // Eingabefelder sind inaktiv
             englisch.disabled = true;
             deutsch.disabled = true;
             notiz.disabled = true;
 
-            //Beschriftung des Placeholders im label neu setzen
-            //section.querySelector(".deutsch").placeholder = "BlaBLa";
-            //let deutsch = section.querySelector(".deutsch");
-            //let vokabel = await this._vokabeln.getById("2");
-            //console.log(vokabel);
-            //deutsch.placeholder = vokabel["deutsch"];
-
-            //EventListener für löschen
+            //EventListener für löschen-Button --- methode _deleteVocab wird aufgerufen
             let del = section.querySelector(".delete");
-            del.addEventListener("click",() => this._deleteVocab(this._id));
+            del.addEventListener("click", () => this._deleteVocab(this._id));
 
             //Eventlistener für Bearbeiten
             edit.addEventListener("click", () => this._editVocab(this._id));
 
-            //get title()
-
-
         }
 
         if (this._mode === "edit"){
-            //let upd = section.querySelector(".update");
+            let upd = section.querySelector(".update");
             upd.classList.remove("invisible");
 
             let save = section.querySelector(".save");
             save.classList.add("invisible");
 
+            //EventListener für bearbeiten
+            // --> Methode _editVocab wird schon in display aufgerufen
 
-
-            //let quit = section.querySelector(".quit");
-            //quit.addEventListener("click",() => this._app.navigate("/"));
-
-
-            //Inputfelder befüllen mit bisherigem Wert aus dexie
-            //let deutsch = section.querySelector(".deutsch");
-            //let vokabel = await this._vokabeln.search (1);
-            //deutsch.value = vokabel ["deutsch"];
-
-            //database.[id].deutsch ; --> muss String sein
         }
 
 //TEST
@@ -164,33 +135,42 @@ class VocabularyDisplayEdit {
 
     async _editVocab(id){
 
+        //
         let deutsch = document.querySelector(".deutsch");
         let englisch = document.querySelector(".englisch");
         let notiz = document.querySelector(".notiz");
 
+        //in vok wird Vokabel-Objekt aus dexie geschrieben --> anhand id in getById
         let vok = await this._vokabeln.getById(id);
 
+        //die Eingabefelder werden mit werten aus aktuellem Vokabel-objekt bestückt
         englisch.value = await vok["englisch"];
         deutsch.value = await vok["deutsch"];
         notiz.value = await vok["notiz"];
 
+        //Eingabefelder wieder aktivieren
         englisch.disabled = false;
         deutsch.disabled = false;
         notiz.disabled = false;
 
+        //EventListener für Aktualisieren-Button registrieren
+        //--> Aufruf der Methode _updateVocab mit Übergabe der aktuellen id
         let update = document.querySelector(".update");
-        update.addEventListener("click", () => _updateVocab());
+        update.addEventListener("click", () => this._updateVocab(this._id));
     }
 
 
     _updateVocab(){
-        // aktuelle Werte nehmen und updaten
+        // aktuelle Werte aus Eingabefeld entnehmen
         let deutsch = document.querySelector(".deutsch").value;
         let englisch = document.querySelector(".englisch").value;
         let notiz = document.querySelector(".notiz").value;
         //console.log(value);
 
-
+        // Bereits vorhandene Vokabel aktualisieren mit dynamischer Übergabe
+        // Methode muss ein Vokabel-Objekt übergeben werden, id muss gleich sein
+        // anhand dieser sucht methode Objekt und aktualisiert daten
+        //--> ${}, um Werte in HTML zu schreiben
         this._vokabeln.update(
             {
                 id: `${this._id}`,
@@ -200,7 +180,7 @@ class VocabularyDisplayEdit {
                 //format: html,
             }
         );
-        // aus JS auf andere Seite leiten
+        // zurück zur Übersicht
         //this._app.navigate("/");
         this._app.showVocabularyOverview();
 
@@ -216,16 +196,6 @@ class VocabularyDisplayEdit {
 
                 // zurück zu input!!
 
-
-                //Schleife, um jeden Wert durchzugehen und auf bereits vorhandene Vokabel zu überprüfen
-                /*for (int i = 0; i <= database.length-1; i++){
-                    if (database.vokabeln.[i]."deutsch" === deutsch){ // Zurgriff ???
-                        alert("Vokabel bereits vorhanden!");
-                        //aus methode rausspringen
-                        this._app.showVocabularyOverview();
-                    }
-                }*/
-
                 this._vokabeln.saveNew({
                     deutsch: deutsch,
                     englisch: englisch,
@@ -238,51 +208,26 @@ class VocabularyDisplayEdit {
                 this._app.navigate("/");
 
             } else {
-                alert("alle angaben ausfüllen");
+                alert("Bitte alle Angaben ausfüllen!♥");
             }
-
-
     }
 
-    // Vokabel Bearbeiten
-    _showVocab() {
-        // --- vocab Overview muss click-Event hinzufügen, wenn click auf (overviev .<liste) --> anzeige sicht
-        // übergabe der id
-
-
-    }
-
-    //einzelne Vokabel löschen
+    //Vorhandene Vokabel anhand ihrer ID löschen. --> Methode aus Dexie
+    // id wird im eventListener übergeben
     async _deleteVocab(id) {
 
-        //EventListener, ursprüngl. in Overview
-        //let test = section.querySelector(".test");
-        //test.addEventListener("click", () => this._app.showVocabularyDisplayEdit(1, "display"));
 
-        //alert("Wirklich löschen??");
+        //TEsT um zu sehen, dass tatsächlich Voc gelöscht werden
+         //let vok = await this._vokabeln.search();
+         //console.log("Datenbank initialisieren, Anzahl Vokabeln:", vok.length);
+         //console.log(vok);
 
-         //let id = wie bekomme ich denn Info über Vokabel hinter Button??
-        // let id = document.querySelector("...").id = "?";
 
-         //mit search wird ein array erzeugt, mit gleichennamigen Vokabeln
-        /* let voc = await this._vokabeln.search("");
-         console.log(voc);
-
-         for (let i=0; i<=voc.length; i++ ) {
-             let id = voc[0]["id"];
-             this._vokabeln.delete(id);
-         }
-         console.log(voc);
-
-         let vok = await this._vokabeln.search();
-         console.log("Datenbank initialisieren, Anzahl Vokabeln:", vok.length);
-         console.log(vok);*/
-
-         //this._app.navigate("/");
          this._vokabeln.delete(id);
+
+         //zurück zur Übersicht
          this._app.showVocabularyOverview();
-        // zurück auf Übersicht
-        //this._app.navigate("/");
+         //this._app.navigate("/");
     }
 }
 
