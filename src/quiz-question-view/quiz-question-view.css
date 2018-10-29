@@ -23,50 +23,72 @@
     min-height: 100%;
  }
 
+/* Allgemeines Style für quiz-box und score-box*/
  .quiz-question-view main #quiz-box,
-  .quiz-question-view main #score-box {
-     padding-left: 5%;
-     padding-right: 5%;
-     padding-top: 10%;
-     padding-bottom: 10%;
+ .quiz-question-view main #score-box {
 
+     /*Padding und Margin*/
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 15%;
+    margin-bottom: 15%;
+
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 10%;
+    padding-bottom: 10%;
+
+    /*Border-Style*/
      border-style: groove;
      border-radius: 10px;
      border-width: 5px;
-     /*border-color: var(--header-normal-background-color);
-     background-color: var(--header-normal-background-color);*/
      background-image: url(wood.jpg);
+     background-size: 100% auto;
 
-
-     margin-top: 20%;
-     margin-bottom: 20%;
+     /*Text-Alignment*/
+     text-align: center;
  }
 
 /*Wenn quiz-box die Klasse vis hat - also visible sein soll
 display:grid für Alignment*/
-.quiz-question-view #quiz-box .vis {
+.quiz-question-view #quiz-box.vis,
+.quiz-question-view #score-box.vis {
     /*Aligment der Elemente im QuizBox*/
     display: grid;
     flex-direction: row;
     align-items: center;
 }
 
-/*Wenn quiz-box oder score-box die Klasse hidden hat -  display:none */
-.quiz-question-view .hidden {
-    display: none;
+
+.quiz-question-view .leo {
+        width: 100%;
+}
+.quiz-question-view .score {
+        font-size: 45pt;
 }
 
+.quiz-question-view .zurück {
+        width: 100%;
+        align-self: flex-end;
+}
+
+
+
  .quiz-question-view .question-number {
+     font-size: 35pt;
 
  }
  .quiz-question-view .question {
+     font-size: 60pt;
+ }
 
-
+ .quiz-question-view .answer {
+     font-size: 30pt;
+     width: 100%;
  }
  .quiz-question-view .result {
-
+     font-size: 25pt;
  }
-
 /*Wenn die Antowort falsch ist*/
  .quiz-question-view .false {
      color:#f70c23;
@@ -78,11 +100,6 @@ display:grid für Alignment*/
  }
 
 
-.quiz-question-view .answer {
-    width: 100%;
-
-
-}
 .quiz-question-view .quiz-buttons{
     /*die Buttons am ende des QuizBox anzuzeigen*/
     align-self: flex-end;
@@ -94,10 +111,8 @@ display:grid für Alignment*/
 .quiz-question-view .next-button {
     color: black;
     background-color: white;
-    width: 90%;
+    width: 100%;
     height: 100%;
-
-
 }
 
 

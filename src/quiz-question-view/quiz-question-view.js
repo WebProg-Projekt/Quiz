@@ -86,6 +86,7 @@ class QuizQuestionView {
 
         //Vorbereitung für die neue Frage
         result.classList.remove("true");
+        result.classList.remove("invisible");
 
         //Prüfen ob eine Antwort eingegeben wurde
         if (!answer) {
@@ -180,6 +181,8 @@ class QuizQuestionView {
         quizbox.classList.remove("vis");
         quizbox.classList.add("hidden");
         scorebox.classList.remove("hidden");
+        scorebox.classList.add("vis");
+
     }
 
 
