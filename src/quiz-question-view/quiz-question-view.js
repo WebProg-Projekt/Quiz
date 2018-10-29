@@ -175,7 +175,7 @@ class QuizQuestionView {
         let scorebox = document.getElementById("score-box");
 
         let score= document.querySelector(".score");
-        score.innerHTML = `Ihr Ergebnis ist: ${this._score}`;
+        score.innerHTML = `Ihr Ergebnis ist: ${this._score}/10`;
 
         //wechseln zwischen Fragen und Score
         quizbox.classList.remove("vis");
