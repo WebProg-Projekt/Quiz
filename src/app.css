@@ -7,7 +7,6 @@
     flex: 1;
 }
 
-
 /*
  * Kopfbereich über dem Inhalt
  */
@@ -83,9 +82,9 @@
  * Hauptinhalt
  */
 #app main {
-    background-image: url(literature.jpg);
+    /*background-image: url(literature.jpg);
     background-size: 100% auto;
-    background-position: bottom center;
+    background-position: bottom center;*/
 }
 
 /*
