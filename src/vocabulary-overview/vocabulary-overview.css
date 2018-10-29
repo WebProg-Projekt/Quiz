@@ -6,20 +6,34 @@
 .vocabulary-overview main {
    color: black !important;
    font-size: 12pt !important;
+   font-family: 'Amatic SC';
 }
 
 
 .vocabulary-overview ul {
-  margin: 0;
+  margin-left: 5em;
   padding: 0;
-  font-size: 130%;
-  margin-top: 5em;
+  font-size: 16pt;
+  margin-top: 2em;
   list-style: none;
   float: left;
-  font-weight: normal;
-  text-align: left;
+
 }
 
+.vocabulary-overview ul button {
+  margin-bottom: 1em;
+  margin-left: 1em;
+}
+
+.vocabulary-overview ul button:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  /*color: rgba(255,255,255, 0.9);*/
+}
+
+.vocabulary-overview div.section-deutsch {
+  font-style: bold;
+}
 
 .vocabulary-overview .no-data {
     color: var(--header-normal-background-color);
@@ -28,17 +42,22 @@
 
 .vocabulary-overview li {
     border: 0px solid var(--overview-heading-background-color);
-    border-bottom-width: 1px;
+    border-bottom-width: 2px;
     width: 300%;
+    color: white;
+}
+
+.vocabulary-overview .entry {
+    background-color: rgba(0,0,0, 0.4);
 }
 
 .vocabulary-overview .entry:hover {
-    background-color: var(--overview-list-hover-color);
-    cursor: pointer;
+    background-color: rgba(0,0,0, 0.5);
+    /*cursor: pointer;*/
 }
 
 .vocabulary-overview li > div {
-    padding: 0 0.5rem 0 0.5rem;
+    padding-left: 1.2rem;
 }
 
 .vocabulary-overview .section-deutsch {

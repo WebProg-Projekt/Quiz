@@ -14,6 +14,7 @@ class VocabularyOverview {
     constructor(app, vokabeln) {
         this._app = app;
         this._vokabeln = vokabeln;
+        this._ulElement = null;
         console.log(this._vokabeln);
     }
 
@@ -30,8 +31,8 @@ class VocabularyOverview {
     async onShow() {
         // Anzuzeigende HTML-Elemente ermitteln
         let section = document.querySelector("#vocabulary-overview").cloneNode(true);
-    	  //let ulElement = section.querySelector("#Liste");
 
+    	  //let ulElement = section.querySelector("#Liste");
         //Vokabeln auslesen und anzeigen
         //let vokabeln = await this._vokabeln.search("");
         //this._showVokabeln(vokabeln, ulElement);
@@ -40,9 +41,17 @@ class VocabularyOverview {
         let query = "";
 
         let vokabeln = await this._vokabeln.searchVokabeln(query, order);
-        let ul = section.querySelector(".Liste");
-        console.log(ul);
-        this.renderList(vokabeln, order, ul);
+        this._ulElement = section.querySelector(".Liste");
+        console.log(this._ulElement);
+        this.showList(vokabeln, order, this._ulElement);
+
+        //Eventlistener zum Sortieren
+        let buttonSort = section.querySelector(".sortieren");
+        buttonSort.addEventListener("click",() => this._sortListe(buttonSort));
+
+        //Eventlistener zum Suchen
+        let searchBox = section.querySelector(".search");
+        searchBox.addEventListener("change",() => this._search(searchBox, order));
 
         return {
           className: "vocabulary-overview",
@@ -114,15 +123,15 @@ class VocabularyOverview {
      * @param {String} groupBy Kriterium für die Zwischenüberschriften
      * @param {HTMLNode} parentNode <ul>-Element der Liste
      */
-    renderList(vokabeln, groupBy, parentNode) {
-        parentNode.innerHtml = "";
+    showList(vokabeln, groupBy, parentNode) {
+        parentNode.innerHTML = "";
 
         if (vokabeln.length < 1) {
-            // Hinweistext, wenn noch keine Songs vorhanden sind
+            // noch keine Vokabeln vorhanden
             parentNode.innerHtml += `
                 <li>
                     <div class="padding no-data">
-                        Noch keine Texte vorhanden
+                        Noch keine Vokabeln vorhanden
                     </div>
                 </li>
             `;
@@ -131,13 +140,7 @@ class VocabularyOverview {
             let currentGroup = "";
 
             vokabeln.forEach(vokabel => {
-                // Zwischenüberschrift zur Gruppierung der Songs
-                //
-                // <li data-section-title="A">
-                //     <div class="section-title">
-                //         A
-                //     </div>
-                // </li>
+                // Zwischenüberschrift zur Gruppierung
                 let vokabelGroup1 = "";
                 let vokabelGroup2 = "";
 
@@ -145,7 +148,7 @@ class VocabularyOverview {
                     vokabelGroup1 = vokabel.deutsch.trim()[0].toUpperCase();
                     vokabelGroup2 = vokabelGroup1;
                 } else {
-                    vokabelGroup1 = vokabel.englisch.trim();
+                    vokabelGroup1 = vokabel.englisch.trim()[0];
                     vokabelGroup2 = vokabelGroup1.toUpperCase();
                 }
 
@@ -155,44 +158,23 @@ class VocabularyOverview {
                     let liGroup = document.createElement("li");
                     liGroup.dataset.sectionDeutsch = currentGroup;
 
-
-
                     let divGroup = document.createElement("div");
                     divGroup.classList.add("section-deutsch");
                     divGroup.textContent = currentGroup;
 
-
-
                     parentNode.appendChild(liGroup);
                     liGroup.appendChild(divGroup);
-                    //liGroup.appendChild(button);
 
-
-
-
-                    console.log(vokabel["id"]);
+                    //console.log(vokabel["id"]);
                     //button.addEventListener("click", () => this._app.showSongDisplayEdit(vokabel["id"], "display" ));
                     //button.addEventListener("click", () => alert ("hallo"));
                 }
 
-                // Der eigentliche Song
-                //
-                // <li class="entry" data-song-title="Another Day In Paradise" data-song-artist="Phil Collins">
-                //     <div class="song-title">
-                //         Another Day In Paradise
-                //     </div>
-                //     <div class="song-artist">
-                //         Phil Collins
-                //     </div>
-                // </li>
+                //Vokabel einfügen in html
                 let liVokabel = document.createElement("li");
                 liVokabel.classList.add("entry");
                 liVokabel.dataset.vokabelDeutsch = vokabel.deutsch.trim();
                 liVokabel.dataset.vokabelEnglisch = vokabel.englisch.trim();
-
-
-
-
 
                 let divDeutsch = document.createElement("div");
                 divDeutsch.classList.add("vokabel-deutsch");
@@ -203,6 +185,7 @@ class VocabularyOverview {
                 divEnglisch.textContent = vokabel.englisch.trim();
 
                 let button = document.createElement("button");
+                button.className = "btn btn-primary";
                 var buttontext = document.createTextNode("anzeigen");
                 button.appendChild(buttontext);
                 liVokabel.classList.add("button-vokabel");
@@ -216,8 +199,34 @@ class VocabularyOverview {
         }
     }
 
+    async _sortListe(buttonSort){
+      if (buttonSort.firstChild.data.trim().toUpperCase() == "SORTIERUNG ENGLISCH"){
+        //Buttontext ändern
+        buttonSort.firstChild.data = "Sortierung deutsch";
 
+        let order = "englisch";
+        let query = "";
+        let vokabeln = await this._vokabeln.searchVokabeln(query, order);
 
+        this.showList(vokabeln, order, this._ulElement);
+      }
+      else {
+        //Buttontext ändern
+        buttonSort.firstChild.data = "Sortierung englisch";
+
+        let order = "deutsch";
+        let query = "";
+        let vokabeln = await this._vokabeln.searchVokabeln(query, order);
+
+        this.showList(vokabeln, order, this._ulElement);
+      }
+    }
+
+    async _search(searchBox, order){
+      let suchtext = searchBox.value;
+      let vokabeln = await this._vokabeln.searchVokabeln(suchtext, order);
+      this.showList(vokabeln, order, this._ulElement);
+    }
 
 }
 
