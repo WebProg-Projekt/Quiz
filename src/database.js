@@ -15,8 +15,8 @@ database.version(1).stores({
 });
 
 /**
- * Datenbankzugriffsklasse für Songtexte. Diese Klasse bietet verschiedene
- * Methoden, um Songtexte zu speichern und wieder auszulesen. Im Hintergrund
+ * Datenbankzugriffsklasse für Vokabeln. Diese Klasse bietet verschiedene
+ * Methoden, um Vokabeln zu speichern und wieder auszulesen. Im Hintergrund
  * wird hierfür Dexie zur lokalen Speicherung im Browser genutzt.
  */
 class Vokabeln {
@@ -60,11 +60,11 @@ class Vokabeln {
         return database.vokabeln.delete(id);
     }
 
-    /**
-     * Löscht alle Songtexte!
+    /** ---> haben wir nicht genutzt
+     * Löscht alle Vokabeln!
      * @return {Promise} Asynchrones Promise-Objekt
     async clear() {
-        return database.songtexts.clear();
+        return database.vokabeln.clear();
     }
     */
 

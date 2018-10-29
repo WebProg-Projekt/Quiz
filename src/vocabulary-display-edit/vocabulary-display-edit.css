@@ -1,5 +1,5 @@
 /*
- * Dieses Stylesheet darf nur Selektoren beinhalten, die mit .song-display-edit
+ * Dieses Stylesheet darf nur Selektoren beinhalten, die mit .vocabulary-display-edit
  * beginnen. Denn wir wollen nicht, dass hier Eigenschaften aus anderen Bereichen
  * der Anwendung überschrieben werden.
  */
@@ -10,18 +10,74 @@
    font-size: 100%;
    font-family: 'Amatic SC', cursive;
    font-weight: bold;
+
+
 }
 
 .vocabulary-display-edit .container{
-    font-size: 70%;
+    font-size: 100%;
     color: black;
     margin-bottom: 5em;
     background-image: url(/paper.jpg);
-    }
+
+    position: absolute;
+    height:100%;
+    left:0%;
+    right: 0%;
+    width:100%;
+
+    border: 1px  grey;
+	border-radius: 5px;
+	box-shadow: 0px 14px 10px -10px black;
+}
 
 .vocabulary-display-edit .row{
     margin-top: 2em;
     font-size: 60%;
     color: black;
     text-align: left;
+
     }
+
+
+
+.vocabulary-display-edit button {
+    position: center;
+    margin-top: 0.2em;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+
+@media screen and (max-width: 768px) {
+    .vocabulary-display-edit main{
+
+        height: 500px;
+        margin-bottom: 10%;
+        padding: 10px;
+    }
+
+    .vocabulary-display-edit .container{
+        font-size: 0.7em;
+
+        margin-bottom: 0.3em;
+
+    }
+
+    .vocabulary-display-edit .container .row{
+        margin-top: 0%;
+
+
+    }
+
+    .vocabulary-display-edit .container input{
+        margin-bottom: 0.2em;
+    }
+
+
+
+    label #vocabulary-display-edit{
+        font-size: 900%;
+    }
+
+}
