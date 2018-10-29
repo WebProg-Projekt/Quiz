@@ -19,6 +19,7 @@ html, body {
 }
 
 body {
+
     /*Font und Text*/
     font-family: 'Amatic SC', cursive;
     font-weight: bold;
@@ -30,6 +31,10 @@ body {
     display: flex;
     align-items: stretch;
     justify-content: center;
+
+    background-image: url(literature.jpg);
+    background-size: 100% auto;
+    background-position: bottom center;
 }
 
 
