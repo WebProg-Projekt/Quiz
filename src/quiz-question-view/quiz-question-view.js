@@ -74,8 +74,8 @@ class QuizQuestionView {
     }
 
     /*Vergleicht die vom Anwender angegebene Antwort mit der richtigen Antwort,
-    * zeigt, ob die Antwort richtig oder falsch war
-    * passt die Score an
+    * zeigt an, ob die Antwort richtig oder falsch war
+    * erhöht die Score, wenn die Antwort richtig ist
     */
     _checkAnswer() {
         // Referenz über HTML Elemente
@@ -84,20 +84,23 @@ class QuizQuestionView {
         let submitbutton = document.querySelector(".submit-button");
         let answerfield = document.querySelector(".answer");
 
+        //Vorbereitung für die neue Frage
         result.classList.remove("true");
 
         //Prüfen ob eine Antwort eingegeben wurde
         if (!answer) {
             alert("Bitte geben Sie Ihre Antwort ein!");
         }
+        //Antworten vergleichen und das Ergebnis anzeigen
         else  {
-            // Button "Prüfen" deaktivieren, damit eine Frage nur einmal geprüft werden kann
+            // Button "Prüfen" deaktivieren und unsichtbar machen, damit eine Frage nur einmal geprüft werden kann
             submitbutton.disabled = true;
             submitbutton.classList.add("invisible");
 
             //Eingabefeld für die Frage deaktivieren
             answerfield.disabled = true;
 
+            //Eingegebene Antworten zum Vergleich vorbereiten
             answer = answer.toLowerCase();
             answer = answer.trim();
             this._questions [this._questionnr-1]["englisch"] = this._questions [this._questionnr-1]["englisch"].toLowerCase();
@@ -143,16 +146,16 @@ class QuizQuestionView {
                 question.innerHTML = `${this._questions[this._questionnr-1]["deutsch"]}` ;
                 questionNr.innerHTML = `Frage ${this._questionnr}`;
 
-                /*Submit Button aktiv machen,
+                /*Submit Button aktiv und sichtbar machen,
                 den Inhalt des Inputfelds und das Ergebnis der vorherigen Frage löschen,
                 Eingabefeld für die Frage wieder aktivieren*/
                 submitbutton.disabled = false;
                 submitbutton.classList.remove("invisible");
                 answer.value ="";
+                answer.disabled = false;
                 result.innerHTML =" ";
-                let answerfield = document.querySelector(".answer");
-                answerfield.disabled = false;
             }
+            //Nach der 10.Frage, zeigt die Score an
             else {
                 this._questionnr++;
                 this._showScore();
@@ -170,30 +173,16 @@ class QuizQuestionView {
         let quizbox = document.querySelector("#quiz-box");
         let scorebox = document.getElementById("score-box");
 
-        console.log(quizbox);
-        console.log(scorebox);
         let score= document.querySelector(".score");
-        score.innerHTML = `Ihr Ergebnis ist: ${this._score} `;
+        score.innerHTML = `Ihr Ergebnis ist: ${this._score}`;
 
         //wechseln zwischen Fragen und Score
         quizbox.classList.remove("vis");
         quizbox.classList.add("hidden");
         scorebox.classList.remove("hidden");
-
-
     }
 
 
 }
-
-
-
-
-
-
-
-
-
-
 
 export default QuizQuestionView;

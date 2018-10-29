@@ -5,19 +5,22 @@
  */
  @import url('https://fonts.googleapis.com/css?family=Amatic+SC:700');
 
+.quiz-question-view #app {
 
+}
  .quiz-question-view main {
+     /*Font*/
     color: white !important;
     font-size: 100%;
     font-family: 'Amatic SC', cursive;
     font-weight: bold;
-    background-image: none;
 
+    /*Die Elemente in main richtig stellen zu können*/
     display: flex;
     justify-content: center;
-    /*align-items: center;*/
-    min-height: 100%;
 
+    /*Die Größe, Marginund Padding*/
+    min-height: 100%;
  }
 
  .quiz-question-view main #quiz-box,
@@ -41,7 +44,7 @@
 
 /*Wenn quiz-box die Klasse vis hat - also visible sein soll
 display:grid für Alignment*/
-.quiz-question-view .vis {
+.quiz-question-view #quiz-box .vis {
     /*Aligment der Elemente im QuizBox*/
     display: grid;
     flex-direction: row;
@@ -108,10 +111,10 @@ display:grid für Alignment*/
 /*Für kleinere Bildschirme*/
 @media screen and (min-width: 85em) {
     .quiz-question-view main #quiz-box{
-        height: 500px;
+        height: 100%;
         margin-top: 10%;
         margin-bottom: 10%;
-        padding: 10px;
+        padding: 5%;
     }
 
     .quiz-question-view .question-number {
