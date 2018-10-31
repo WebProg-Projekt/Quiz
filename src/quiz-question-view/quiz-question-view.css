@@ -5,9 +5,6 @@
  */
  @import url('https://fonts.googleapis.com/css?family=Amatic+SC:700');
 
-.quiz-question-view #app {
-
-}
  .quiz-question-view main {
      /*Font*/
     color: white !important;
@@ -59,21 +56,6 @@ display:grid für Alignment*/
     align-items: center;
 }
 
-
-.quiz-question-view .leo {
-        width: 100%;
-}
-.quiz-question-view .score {
-        font-size: 45pt;
-}
-
-.quiz-question-view .zurück {
-        width: 100%;
-        align-self: flex-end;
-}
-
-
-
  .quiz-question-view .question-number {
      font-size: 35pt;
 
@@ -109,48 +91,47 @@ display:grid für Alignment*/
 .quiz-question-view .quit,
 .quiz-question-view .submit-button,
 .quiz-question-view .next-button {
+    white-space:normal !important;
     color: black;
     background-color: white;
     width: 100%;
     height: 100%;
 }
 
-
-
-.quiz-question-view .congrats {
-
+/*Image beim Score-Ansicht*/
+.quiz-question-view .leo {
+        width: 100%;
+}
+.quiz-question-view .score {
+        font-size: 45pt;
 }
 
+.quiz-question-view .zurück {
+        width: 100%;
+        align-self: flex-end;
+}
 
-
-/*Für kleinere Bildschirme*/
+/*Media Queries*/
 @media screen and (min-width: 85em) {
+    
     .quiz-question-view main #quiz-box{
-        height: 100%;
-        margin-top: 10%;
-        margin-bottom: 10%;
+        height: 80%;
+        margin-top: 5%;
+        margin-bottom: 5%;
         padding: 5%;
     }
 
-    .quiz-question-view .question-number {
-
-
-    }
-    .quiz-question-view .question {
-
-
-
-    }
-    .quiz-question-view .answer {
-
+    .quiz-question-view main  #score-box{
+        height: 80%;
+        margin-top: 5%;
+        align-items: center;
+        padding: 5%;
     }
 
-    .quiz-question-view .quit{
-
+    .quiz-question-view .leo {
+            width: 60%;
+            justify-self: center;
     }
 
-    .quiz-question-view .quit,
-    .quiz-question-view .submit-button,
-    .quiz-question-view .next-button {
-    }
+
 }
