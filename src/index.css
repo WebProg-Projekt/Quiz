@@ -67,7 +67,7 @@ header {
 @media (min-width: 85em) {
     /* Hintergrundbild hinter dem Hauptbereich der App */
     html {
-        background-image: url(literature.jpg);
+        /*background-image: url(literature.jpg);*/
         background-attachment: fixed;
         background-size: cover;
         background-position: center;
