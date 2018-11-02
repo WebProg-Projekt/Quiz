@@ -86,6 +86,7 @@ class QuizQuestionView {
 
         //Vorbereitung für die neue Frage
         result.classList.remove("true");
+        result.classList.remove("invisible");
 
         //Prüfen ob eine Antwort eingegeben wurde
         if (!answer) {
@@ -174,12 +175,14 @@ class QuizQuestionView {
         let scorebox = document.getElementById("score-box");
 
         let score= document.querySelector(".score");
-        score.innerHTML = `Ihr Ergebnis ist: ${this._score}`;
+        score.innerHTML = `Ihr Ergebnis ist: ${this._score}/10`;
 
         //wechseln zwischen Fragen und Score
         quizbox.classList.remove("vis");
         quizbox.classList.add("hidden");
         scorebox.classList.remove("hidden");
+        scorebox.classList.add("vis");
+
     }
 
 
