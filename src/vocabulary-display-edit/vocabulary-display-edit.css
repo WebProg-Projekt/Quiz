@@ -11,20 +11,26 @@
    font-family: 'Amatic SC', cursive;
    font-weight: bold;
 
+   display: flex;
+
+   margin-top: 0.2em;
+
+   /*Die Größe, Marginund Padding
+   min-height: 100%;*/
 
 }
 
 .vocabulary-display-edit .container{
     font-size: 100%;
     color: black;
-    margin-bottom: 5em;
+    margin-bottom: 0.3em;
     background-image: url(/paper.jpg);
 
     position: absolute;
     height:100%;
-    left:0%;
+    left: 0%;
     right: 0%;
-    width:100%;
+    width:96%;
 
     border: 1px  grey;
 	border-radius: 5px;
@@ -32,36 +38,46 @@
 }
 
 .vocabulary-display-edit .row{
-    margin-top: 2em;
+    margin-top: 0.3em;
     font-size: 60%;
     color: black;
     text-align: left;
-
     }
-
-
 
 .vocabulary-display-edit button {
     position: center;
-    margin-top: 0.2em;
+    margin-top: 0.3em;
     padding-left: 2em;
     padding-right: 2em;
+
+    width: 100%;
+    overflow: hidden;
+}
+
+.vocabulary-display-edit .delete {
+    width: 100%;
+    margin-top: -7em;
+}
+
+.vocabulary-display-edit .edit {
+    width: 100%;
+    margin-top: -7em;
+}
+
+.vocabulary-display-edit .save {
+    width: 100%;
+    margin-top: -3em;
 }
 
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 768px) {
     .vocabulary-display-edit main{
 
-        height: 500px;
-        margin-bottom: 10%;
-        padding: 10px;
     }
 
     .vocabulary-display-edit .container{
         font-size: 0.7em;
-
-        margin-bottom: 0.3em;
-
+        height: 60%
     }
 
     .vocabulary-display-edit .container .row{
@@ -70,8 +86,36 @@
 
     }
 
-    .vocabulary-display-edit .container input{
+    .vocabulary-display-edit .container .deutsch{
         margin-bottom: 0.2em;
+        width: 100%;
+    }
+
+    .vocabulary-display-edit button {
+        position: center;
+        margin-top: 2em;
+        padding-left: 2em;
+        padding-right: 2em;
+    }
+
+    .vocabulary-display-edit .save {
+        width: -150%;
+        margin-top: 2em;
+    }
+
+    .vocabulary-display-edit .quit {
+
+        margin-top: 2em;
+    }
+
+    .vocabulary-display-edit .delete {
+        width: 100%;
+        margin-top: 2em;
+    }
+
+    .vocabulary-display-edit .edit {
+        width: 100%;
+        margin-top: 2em;
     }
 
 
