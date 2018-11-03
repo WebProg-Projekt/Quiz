@@ -116,7 +116,7 @@ class QuizQuestionView {
                 }
             else {
                 result.innerHTML = `<p class="false">Falsch! </p>
-                                    <p>Die rictige Antwort ist: ${this._questions[this._questionnr-1]["englisch"]}</p>` ;
+                                    <p>Die richtige Antwort ist: ${this._questions[this._questionnr-1]["englisch"]}</p>` ;
             }
         }
     }
