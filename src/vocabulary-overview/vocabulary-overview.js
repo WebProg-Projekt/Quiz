@@ -4,7 +4,7 @@ import stylesheet from "./vocabulary-overview.css";
 import VocabularyDisplayEdit from "../vocabulary-display-edit/vocabulary-display-edit.js";
 
 /**
- * View mit der Übersicht der vorhandenen Songs.
+ * View mit der Übersicht der vorhandenen Vokabeln.
  */
 class VocabularyOverview {
     /**
@@ -119,9 +119,9 @@ class VocabularyOverview {
      * Im Parameter parentNode muss das <ul>-Element übergeben werden, in
      * welches die Listeneinträge eingefügt werden sollen.
      *
-     * @param {Array} vokabeln Liste der darzustellenden Vokabeln
-     * @param {String} groupBy Kriterium für die Zwischenüberschriften
-     * @param {HTMLNode} parentNode <ul>-Element der Liste
+     * @param {Array} vokabeln: Liste der darzustellenden Vokabeln
+     * @param {String} groupBy: Kriterium für die Zwischenüberschriften
+     * @param {HTMLNode} parentNode: <ul>-Element der Liste
      */
     showList(vokabeln, groupBy, parentNode) {
         parentNode.innerHTML = "";
@@ -136,7 +136,7 @@ class VocabularyOverview {
                 </li>
             `;
         } else {
-            // Zwischenüberschriften und Songtexte
+
             let currentGroup = "";
 
             vokabeln.forEach(vokabel => {
@@ -166,7 +166,6 @@ class VocabularyOverview {
                     liGroup.appendChild(divGroup);
 
                     //console.log(vokabel["id"]);
-                    //button.addEventListener("click", () => this._app.showSongDisplayEdit(vokabel["id"], "display" ));
                     //button.addEventListener("click", () => alert ("hallo"));
                 }
 
