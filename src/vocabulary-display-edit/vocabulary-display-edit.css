@@ -7,7 +7,7 @@
 
 .vocabulary-display-edit main {
    color: orchid !important;
-   font-size: 100%;
+   font-size: 200%;
    font-family: 'Amatic SC', cursive;
    font-weight: bold;
 
@@ -76,8 +76,8 @@
     }
 
     .vocabulary-display-edit .container{
-        font-size: 0.7em;
-        height: 60%
+        font-size: 1.5em;
+        height: 70%
     }
 
     .vocabulary-display-edit .container .row{
