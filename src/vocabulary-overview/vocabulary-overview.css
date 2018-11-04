@@ -17,12 +17,13 @@
   margin-top: 2em;
   list-style: none;
   float: left;
-
 }
 
 .vocabulary-overview ul button {
+  margin-top: 0.3em;
   margin-bottom: 1em;
   margin-left: 1em;
+  font-size: 13pt;
 }
 
 .vocabulary-overview ul button:hover {
@@ -48,6 +49,7 @@
 }
 
 .vocabulary-overview .entry {
+    padding-top: 0.5em;
     background-color: rgba(0,0,0, 0.4);
 }
 
@@ -57,7 +59,7 @@
 }
 
 .vocabulary-overview li > div {
-    padding-left: 1.2rem;
+    padding-left: 1.6rem;
 }
 
 .vocabulary-overview .section-deutsch {
