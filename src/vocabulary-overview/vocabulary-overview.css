@@ -7,11 +7,12 @@
    color: black !important;
    font-size: 12pt !important;
    font-family: 'Amatic SC';
+   display: flex;
 }
 
 
 .vocabulary-overview ul {
-  margin-left: 5em;
+  margin-left: 4em;
   padding: 0;
   font-size: 16pt;
   margin-top: 2em;
@@ -70,4 +71,14 @@
 
 .vocabulary-overview .vokabeln-englisch {
     font-size: 75%;
+}
+
+
+
+@media screen and (max-width: 500px){
+
+  .vocabulary-overview ul {
+    margin-left: 0;
+  }
+
 }
