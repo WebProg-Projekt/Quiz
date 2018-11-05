@@ -78,6 +78,17 @@
     border: 0;
 }
 
+#app header a.sortieren {
+  background-color: #11ffee00;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+}
+
+
+
 /*
  * Hauptinhalt
  */

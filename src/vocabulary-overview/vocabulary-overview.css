@@ -77,6 +77,10 @@
 
 @media screen and (max-width: 500px){
 
+  .vocabulary-overview main {
+
+  }
+
   .vocabulary-overview ul {
     margin-left: 0;
   }
