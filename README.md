@@ -4,9 +4,11 @@ Anwendung "VocabuLearn"
 Kurzbeschreibung
 ----------------
 
-Dies ist B eine Browser App, die ohne einen Server
-im Hintergrund komplett im Browser läuft. Es handelt sich dabei
-um eine so genannte Single Page App.
+Dies ist eine Browser App, die ohne einen Server im Hintergrund komplett im Browser läuft.
+Es handelt sich dabei um eine so genannte Single Page App.
+
+Mit der App kann ein Benutzer Vokabeln lernen.
+Er kann sich eine eigene Vokabelliste zusammenstellen und ein Vokabel-Quiz absolvieren.
 
 
 Verwendete Technologien
